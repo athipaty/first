@@ -218,6 +218,10 @@
     .info-list strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
     .info-list span, .info-list a { color: var(--muted); font-size: 16px; }
     .info-list a:hover { color: var(--accent); }
+    .line-qr { display: flex; align-items: center; gap: 18px; padding: 16px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: #333; }
+    .line-qr img { width: 120px; height: 120px; flex-shrink: 0; image-rendering: pixelated; }
+    .line-qr strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; color: #06c755; }
+    .line-qr span { font-size: 15px; }
     .map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--bg); }
     .map iframe { width: 100%; height: 100%; border: 0; }
 
@@ -535,7 +539,7 @@
       <div class="section-head">
         <div class="eyebrow">จองคิว / ติดต่อเรา</div>
         <h2>นัดเข้ารับบริการ</h2>
-        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะเปิด LINE พร้อมข้อความให้อัตโนมัติ</p>
+        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะคัดลอกข้อความและเปิด LINE ของร้าน วางข้อความในแชทเพื่อส่งได้เลย</p>
       </div>
       <div class="contact-grid">
         <div class="panel">
@@ -589,13 +593,17 @@
             </li>
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
-              <div><strong>LINE</strong><a href="#" class="js-line js-line-text">@direkair</a></div>
+              <div><strong>LINE</strong><a href="#" class="js-line">แอดไลน์ร้าน (กดเพื่อเพิ่มเพื่อน)</a></div>
             </li>
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
               <div><strong>เวลาทำการ</strong><span>เปิดทุกวัน 08:30 – 19:00 น. (ไม่เว้นวันหยุดนักขัตฤกษ์)</span></div>
             </li>
           </ul>
+          <a href="#" class="line-qr js-line">
+            <img src="images/line-qr.png" alt="QR Code LINE ร้านดิเรกแอร์" width="120" height="120" loading="lazy">
+            <div><strong>สแกนเพื่อแอดไลน์</strong><span>สแกน QR หรือกดที่นี่ เพื่อเพิ่มเพื่อนและทักแชทกับร้าน</span></div>
+          </a>
           <div class="map">
             <!-- หจก.ดิเรกแอร์-ดิเรกยนต์ สาขาบางปลาสร้อย (ถ้ามีพิกัดจริง นำ embed code จาก Google Maps มาวางแทนได้) -->
             <iframe src="https://www.google.com/maps?q=62/1-3+%E0%B8%96%E0%B8%99%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%B8%E0%B8%A1%E0%B8%A7%E0%B8%B4%E0%B8%97+%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%9B%E0%B8%A5%E0%B8%B2%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A2+%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ร้าน"></iframe>
@@ -621,16 +629,15 @@
   <script>
     // ===== ตั้งค่าข้อมูลร้าน: แก้ตรงนี้ที่เดียว =====
     const SHOP = {
-      lineId: "@direkair",      // LINE Official Account ID (มี @ นำหน้า)
+      lineUrl: "https://line.me/ti/p/AmpMNXVQ-_", // ลิงก์เพิ่มเพื่อน LINE ของร้าน (จาก QR Code)
       phone: "086-311-3117",   // เบอร์โทรร้าน (สาขาบางปลาสร้อย) — ยืนยันกับเจ้าของอีกครั้ง
     };
 
-    const lineUrl = "https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineId);
+    const lineUrl = SHOP.lineUrl;
     const telUrl = "tel:" + SHOP.phone.replace(/[^0-9+]/g, "");
 
     document.querySelectorAll(".js-line").forEach(a => { a.href = lineUrl; a.target = "_blank"; a.rel = "noopener"; });
     document.querySelectorAll(".js-tel").forEach(a => { a.href = telUrl; });
-    document.querySelectorAll(".js-line-text").forEach(el => el.textContent = SHOP.lineId);
     document.querySelectorAll(".js-tel-text").forEach(el => el.textContent = SHOP.phone);
     document.getElementById("year").textContent = new Date().getFullYear() + 543; // พ.ศ.
 
@@ -649,7 +656,7 @@
     // ห้ามเลือกวันย้อนหลัง
     document.getElementById("date").min = new Date().toISOString().split("T")[0];
 
-    // ส่งฟอร์ม -> เปิด LINE พร้อมข้อความ
+    // ส่งฟอร์ม -> คัดลอกข้อความ แล้วเปิด LINE ของร้าน (บัญชีส่วนตัวเติมข้อความให้อัตโนมัติไม่ได้)
     document.getElementById("bookingForm").addEventListener("submit", e => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
@@ -662,8 +669,12 @@
         "วันที่สะดวก: " + (v("date") || "-"),
         "หมายเหตุ: " + (v("note") || "-"),
       ].join("\n");
-      const url = "https://line.me/R/oaMessage/" + encodeURIComponent(SHOP.lineId) + "/?" + encodeURIComponent(msg);
-      window.open(url, "_blank", "noopener");
+      window.open(lineUrl, "_blank", "noopener");
+      const done = ok => alert(ok
+        ? "คัดลอกข้อมูลการจองแล้ว ✅\nกรุณาวางข้อความในแชท LINE ของร้านเพื่อส่ง"
+        : "กรุณาคัดลอกข้อความนี้แล้วส่งในแชท LINE ของร้าน:\n\n" + msg);
+      if (navigator.clipboard) navigator.clipboard.writeText(msg).then(() => done(true), () => done(false));
+      else done(false);
     });
   </script>
 </body>
