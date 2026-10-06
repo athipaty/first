@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ดิเรกแอร์ (Direk Air) ประดับยนต์ ชลบุรี | แอร์รถยนต์ ฟิล์มกรองแสง เคลือบแก้ว</title>
-  <meta name="description" content="ดิเรกแอร์ (Direk Air) ร้านประดับยนต์และแอร์รถยนต์ครบวงจร ชลบุรี (บางปลาสร้อย) ตั้งแต่ปี 2530 ซ่อมแอร์รถยนต์ ติดฟิล์มกรองแสง เคลือบแก้วเซรามิก ฟิล์มกันรอย PPF เครื่องเสียง กล้องติดรถ โดยช่างผู้ชำนาญ รับประกันงานทุกชิ้น">
+  <title>ดิเรกแอร์ (Direk Air) ประดับยนต์ ชลบุรี | แอร์รถยนต์ ฟิล์มกรองแสง เครื่องเสียง</title>
+  <meta name="description" content="ดิเรกแอร์ (Direk Air) ร้านแอร์รถยนต์และประดับยนต์ ชลบุรี (บางปลาสร้อย) ตั้งแต่ปี 2530 ติดตั้ง ซ่อม ล้างแอร์รถยนต์ ฟิล์มกรองแสง เครื่องเสียง แบตเตอรี่ หลังคา Carryboy และอุปกรณ์ประดับยนต์">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
@@ -129,32 +129,6 @@
     .service-card p { color: var(--muted); font-size: 16px; }
     .service-card .from { margin-top: 16px; font-family: "Kanit", sans-serif; color: var(--accent); font-size: 15px; }
 
-    /* Packages */
-    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-    .package {
-      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
-      padding: 34px 28px; display: flex; flex-direction: column; position: relative;
-    }
-    .package.featured { border: 2px solid var(--accent); background: linear-gradient(180deg, rgba(255,106,26,.08), var(--card) 40%); }
-    .package .tag {
-      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: #fff; font-family: "Kanit", sans-serif; font-size: 14px;
-      padding: 4px 16px; border-radius: 999px; white-space: nowrap;
-    }
-    .package h3 { font-size: 22px; }
-    .package .sub { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
-    .price { font-size: 40px; font-weight: 700; }
-    .price small { font-size: 16px; font-weight: 400; color: var(--muted); }
-    .price-note { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
-    .package ul { list-style: none; margin-bottom: 28px; flex: 1; }
-    .package li { padding: 8px 0 8px 30px; position: relative; font-size: 16px; border-bottom: 1px dashed var(--line); }
-    .package li::before {
-      content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border-radius: 50%;
-      background: rgba(255,106,26,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6a1a' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat;
-    }
-    .package .btn { width: 100%; }
-    .packages-foot { text-align: center; color: var(--muted); font-size: 15px; margin-top: 28px; }
-
     /* Why us */
     .why { background: var(--bg-alt); }
     .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -162,22 +136,6 @@
     .why-item .icon { margin: 0 auto 16px; width: 64px; height: 64px; border-radius: 50%; }
     .why-item h3 { font-size: 19px; margin-bottom: 6px; }
     .why-item p { color: var(--muted); font-size: 15px; }
-
-    /* Gallery */
-    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; }
-    .g-item {
-      border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--line);
-      background: linear-gradient(135deg, #1f242b, #15181d);
-    }
-    .g-item.wide { grid-column: span 2; }
-    .g-item.tall { grid-row: span 2; }
-    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: .4s; }
-    .g-item:hover img { transform: scale(1.05); }
-    .g-item .ph { position: absolute; inset: 0; display: grid; place-items: center; color: #4a515c; font-size: 14px; text-align: center; padding: 10px; }
-    .g-item .cap {
-      position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 14px;
-      background: linear-gradient(transparent, rgba(0,0,0,.75)); font-family: "Kanit", sans-serif;
-    }
 
     /* FAQ */
     .faq-list { max-width: 780px; margin: 0 auto; }
@@ -253,9 +211,8 @@
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .hero-visual { max-width: 560px; }
-      .grid-3, .packages-grid { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
       .why-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
@@ -268,9 +225,7 @@
       }
       .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
       .hero { padding: 64px 0 72px; }
-      .grid-3, .packages-grid, .why-grid { grid-template-columns: 1fr; }
-      .packages-grid { gap: 32px; }
-      .gallery-grid { grid-auto-rows: 150px; }
+      .grid-3, .why-grid { grid-template-columns: 1fr; }
       .field-row { grid-template-columns: 1fr; }
       .panel { padding: 24px 20px; }
       .hero-stats { gap: 24px; }
@@ -286,8 +241,6 @@
       <a href="#" class="logo">ดิเรก<span>แอร์</span></a>
       <nav class="nav" id="nav">
         <a href="#services">บริการ</a>
-        <a href="#packages">แพ็กเกจ</a>
-        <a href="#gallery">ผลงาน</a>
         <a href="#faq">คำถามที่พบบ่อย</a>
         <a href="#contact">ติดต่อเรา</a>
       </nav>
@@ -302,15 +255,15 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="badge"><span class="dot"></span> เปิดทุกวัน 08:30 – 19:00 น.</div>
+        <div class="badge"><span class="dot"></span> ร้านเก่าแก่ของชลบุรี ตั้งแต่ปี 2530</div>
         <h1>ให้รถคุณ<br><em>สวย เย็น ปลอดภัย</em><br>ครบจบที่เดียว</h1>
-        <p class="lead">ดิเรกแอร์ ศูนย์แอร์และประดับยนต์ครบวงจรในชลบุรี ดูแลรถชาวชลบุรีมาตั้งแต่ปี 2530 ซ่อมแอร์รถยนต์ ฟิล์มกรองแสง เคลือบแก้ว ฟิล์มกันรอย PPF เครื่องเสียง และกล้องติดรถ งานเนี๊ยบโดยช่างผู้ชำนาญ รับประกันทุกงาน</p>
+        <p class="lead">ดิเรกแอร์ ร้านแอร์รถยนต์และประดับยนต์ในชลบุรี ดูแลรถชาวชลบุรีมาตั้งแต่ปี 2530 ติดตั้ง ซ่อม ล้างแอร์รถยนต์ ฟิล์มกรองแสง เครื่องเสียง แบตเตอรี่ หลังคา Carryboy และอุปกรณ์ประดับยนต์</p>
         <div class="hero-actions">
           <a href="#" class="btn btn-line js-line">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
             แอดไลน์ปรึกษาฟรี
           </a>
-          <a href="#packages" class="btn btn-ghost">ดูแพ็กเกจ & ราคา</a>
+          <a href="#services" class="btn btn-ghost">ดูบริการของเรา</a>
         </div>
         <div class="hero-stats">
           <div><strong>35+ ปี</strong><span>ให้บริการในชลบุรี</span></div>
@@ -329,7 +282,7 @@
           <path d="M248 55h32c8 0 14 3 20 8l26 25h-78z" opacity=".55"/>
           <path d="M60 105h18M352 108h16" opacity=".7"/>
         </svg>
-        <div class="float-card one"><strong>รับประกันสูงสุด 10 ปี</strong></div>
+        <div class="float-card one"><strong>ถ.สุขุมวิท บางปลาสร้อย</strong>เมืองชลบุรี</div>
       </div>
     </div>
   </section>
@@ -340,102 +293,46 @@
       <div class="section-head">
         <div class="eyebrow">บริการของเรา</div>
         <h2>ดูแลรถคุณครบทุกเรื่อง</h2>
-        <p>ใช้วัสดุแท้ มีใบรับประกันจากแบรนด์ ติดตั้งในห้องปิดปลอดฝุ่น</p>
+        <p>สอบถามราคาและรายละเอียดตามรุ่นรถได้ทาง LINE หรือโทรหาร้าน</p>
       </div>
       <div class="grid-3">
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M4.9 7l14.2 10M19.1 7L4.9 17"/><path d="M9.5 4L12 6l2.5-2M9.5 20l2.5-2 2.5 2"/></svg></div>
-          <h3>ซ่อม / ล้างแอร์รถยนต์</h3>
-          <p>แอร์ไม่เย็น เติมน้ำยา ล้างตู้แอร์ เปลี่ยนคอมเพรสเซอร์ ตรวจเช็กระบบฟรี โดยช่างแอร์เฉพาะทาง</p>
-          <div class="from">ตรวจเช็กฟรี</div>
+          <h3>แอร์รถยนต์</h3>
+          <p>ติดตั้งและซ่อมแอร์รถยนต์ทุกประเภท ล้างแอร์ เติมน้ำยาแอร์</p>
+          <div class="from">สอบถามราคา</div>
         </div>
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div>
           <h3>ฟิล์มกรองแสง</h3>
-          <p>ฟิล์มนาโนเซรามิกกันร้อน กันยูวี 99% มองชัดตอนกลางคืน ไม่รบกวนสัญญาณมือถือ/GPS</p>
-          <div class="from">เริ่มต้น 3,900.-</div>
-        </div>
-        <div class="service-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.9H22l-6 4.5 2.3 7.1L12 16l-6.3 4.5L8 13.4 2 8.9h7.6z"/></svg></div>
-          <h3>เคลือบแก้ว / เซรามิก</h3>
-          <p>สีรถเงาฉ่ำเหมือนรถใหม่ น้ำไม่เกาะ ล้างง่าย ปกป้องสีจากคราบนก ยางมะตอย และแดด</p>
-          <div class="from">เริ่มต้น 5,900.-</div>
-        </div>
-        <div class="service-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg></div>
-          <h3>ฟิล์มกันรอย PPF</h3>
-          <p>ฟิล์มใสกันหินดีด รอยขีดข่วน สมานรอยได้เอง เลือกติดเฉพาะจุดหรือทั้งคัน</p>
-          <div class="from">เริ่มต้น 8,900.-</div>
+          <p>จำหน่ายและติดตั้งฟิล์มกรองแสง ทั้งรถยนต์ บ้าน และอาคาร</p>
+          <div class="from">สอบถามราคา</div>
         </div>
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="4"/><circle cx="12" cy="6.5" r="1.5"/></svg></div>
           <h3>เครื่องเสียงรถยนต์</h3>
-          <p>อัปเกรดลำโพง ซับวูฟเฟอร์ แอมป์ จอแอนดรอยด์ Apple CarPlay จูนเสียงโดยช่างเฉพาะทาง</p>
-          <div class="from">เริ่มต้น 2,500.-</div>
+          <p>จำหน่ายและติดตั้งเครื่องเสียงรถยนต์</p>
+          <div class="from">สอบถามราคา</div>
         </div>
         <div class="service-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-          <h3>กล้องติดรถยนต์</h3>
-          <p>กล้องหน้า-หลัง ความละเอียดสูง เดินสายซ่อนเรียบร้อย พร้อมระบบบันทึกขณะจอด</p>
-          <div class="from">เริ่มต้น 1,990.-</div>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M16 11.5v4M14 13.5h4"/></svg></div>
+          <h3>แบตเตอรี่</h3>
+          <p>จำหน่ายและเปลี่ยนแบตเตอรี่รถยนต์</p>
+          <div class="from">สอบถามราคา</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17V9h11l3-4h4l2 4v8"/><path d="M2 9V6h11v3"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg></div>
+          <h3>หลังคา Carryboy</h3>
+          <p>หลังคาและอุปกรณ์ Carryboy สำหรับรถกระบะ</p>
+          <div class="from">สอบถามราคา</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
+          <h3>อุปกรณ์ประดับยนต์</h3>
+          <p>อะไหล่และอุปกรณ์ตกแต่งรถยนต์ เช่น แร็คหลังคา สคูปฝากระโปรง คิ้วล้อ</p>
+          <div class="from">สอบถามราคา</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= PACKAGES ================= -->
-  <section id="packages">
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">แพ็กเกจยอดนิยม</div>
-        <h2>คุ้มกว่า เมื่อทำเป็นแพ็กเกจ</h2>
-        <p>ราคาสำหรับรถเก๋ง / อีโค่คาร์ — รถ SUV และกระบะ สอบถามราคาเพิ่มเติมได้ทางไลน์</p>
-      </div>
-      <div class="packages-grid">
-        <div class="package">
-          <h3>Basic</h3>
-          <div class="sub">เหมาะกับรถใช้งานทั่วไป</div>
-          <div class="price">5,900<small> บาท</small></div>
-          <div class="price-note">ปกติ 7,500 บาท</div>
-          <ul>
-            <li>ฟิล์มกรองแสงรอบคัน (เกรดมาตรฐาน)</li>
-            <li>รับประกัน 5 ปี</li>
-            <li>ล้างรถ + ดูดฝุ่นภายใน</li>
-            <li>ใช้เวลาประมาณ 3 ชั่วโมง</li>
-          </ul>
-          <a href="#contact" class="btn btn-ghost" data-pkg="Basic">เลือกแพ็กเกจนี้</a>
-        </div>
-        <div class="package featured">
-          <div class="tag">ขายดีที่สุด 🔥</div>
-          <h3>Premium</h3>
-          <div class="sub">ออกรถใหม่ต้องจัด!</div>
-          <div class="price">14,900<small> บาท</small></div>
-          <div class="price-note">ปกติ 19,800 บาท</div>
-          <ul>
-            <li>ฟิล์มนาโนเซรามิกรอบคัน</li>
-            <li>เคลือบแก้ว 9H 1 ชั้น</li>
-            <li>กล้องติดรถหน้า-หลัง</li>
-            <li>พรมปูพื้นรถ</li>
-            <li>รับประกันฟิล์ม 7 ปี</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary" data-pkg="Premium">เลือกแพ็กเกจนี้</a>
-        </div>
-        <div class="package">
-          <h3>Ultimate</h3>
-          <div class="sub">ปกป้องเต็มรูปแบบ</div>
-          <div class="price">39,900<small> บาท</small></div>
-          <div class="price-note">ปกติ 52,000 บาท</div>
-          <ul>
-            <li>ฟิล์มเซรามิกเกรดท็อปรอบคัน</li>
-            <li>PPF กันหินดีด ฝากระโปรง + กันชนหน้า</li>
-            <li>เคลือบแก้ว 9H 2 ชั้น</li>
-            <li>กล้องติดรถ 4K + บันทึกขณะจอด</li>
-            <li>รับประกันฟิล์ม 10 ปี</li>
-          </ul>
-          <a href="#contact" class="btn btn-ghost" data-pkg="Ultimate">เลือกแพ็กเกจนี้</a>
-        </div>
-      </div>
-      <p class="packages-foot">💳 ผ่อน 0% นานสูงสุด 10 เดือน กับบัตรเครดิตที่ร่วมรายการ · รับชำระผ่าน QR พร้อมเพย์</p>
     </div>
   </section>
 
@@ -444,47 +341,29 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">ทำไมต้องเรา</div>
-        <h2>มั่นใจได้ ทุกขั้นตอน</h2>
+        <h2>ทำไมเลือกดิเรกแอร์</h2>
       </div>
       <div class="why-grid">
         <div class="why-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/></svg></div>
-          <h3>ของแท้ 100%</h3>
-          <p>มีบัตรรับประกันจากแบรนด์ ตรวจสอบได้</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>35+ ปี ในชลบุรี</h3>
+          <p>เปิดให้บริการมาตั้งแต่ปี 2530</p>
         </div>
         <div class="why-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-          <h3>ช่างชำนาญ</h3>
-          <p>ร้านเก่าแก่ของชลบุรี เปิดมาตั้งแต่ปี 2530 ผ่านการอบรมจากแบรนด์</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
+          <h3>ครบในที่เดียว</h3>
+          <p>แอร์ ฟิล์ม เครื่องเสียง แบตเตอรี่ และอุปกรณ์ประดับยนต์</p>
         </div>
         <div class="why-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
-          <h3>ห้องติดตั้งปิด</h3>
-          <p>ปลอดฝุ่น งานเรียบเนียน ไม่มีฟองอากาศ</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
+          <h3>เดินทางสะดวก</h3>
+          <p>ติดถนนสุขุมวิท ต.บางปลาสร้อย อ.เมืองชลบุรี</p>
         </div>
         <div class="why-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
-          <h3>ห้องรับรองสบาย</h3>
-          <p>แอร์เย็น Wi-Fi ฟรี กาแฟ ระหว่างรอรถ</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
+          <h3>ปรึกษาก่อนได้</h3>
+          <p>ทัก LINE หรือโทรสอบถามราคาและคิวก่อนเข้าร้าน</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= GALLERY ================= -->
-  <section id="gallery">
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">ผลงานของเรา</div>
-        <h2>งานจริง จากลูกค้าจริง</h2>
-        <p>ติดตามผลงานล่าสุดได้ที่เพจ Facebook และ TikTok ของร้าน</p>
-      </div>
-      <!-- ใส่รูปผลงานจริง: แทนที่ <div class="ph">…</div> ด้วย <img src="images/work1.jpg" alt="…"> -->
-      <div class="gallery-grid">
-        <div class="g-item wide tall"><div class="ph">รูปผลงาน 1<br>(แนะนำ 1200×800)</div><div class="cap">Honda Civic · ฟิล์มเซรามิก + เคลือบแก้ว</div></div>
-        <div class="g-item"><div class="ph">รูปผลงาน 2</div><div class="cap">Toyota Fortuner · PPF</div></div>
-        <div class="g-item"><div class="ph">รูปผลงาน 3</div><div class="cap">Isuzu D-Max · กล้องติดรถ</div></div>
-        <div class="g-item wide"><div class="ph">รูปผลงาน 4</div><div class="cap">BYD Atto 3 · ฟิล์มรอบคัน</div></div>
       </div>
     </div>
   </section>
@@ -498,24 +377,20 @@
       </div>
       <div class="faq-list">
         <details>
-          <summary>ติดฟิล์มใช้เวลานานแค่ไหน?</summary>
-          <p>ฟิล์มรอบคันใช้เวลาประมาณ 3–4 ชั่วโมง ส่วนเคลือบแก้วประมาณ 1 วัน ลูกค้าสามารถนั่งรอในห้องรับรองได้ หรือฝากรถไว้แล้วมารับทีหลังก็ได้ครับ</p>
-        </details>
-        <details>
-          <summary>ฟิล์มเข้มแค่ไหนถึงจะถูกกฎหมาย?</summary>
-          <p>ตามกฎหมายไทย กระจกบังลมหน้าต้องมีค่าแสงส่องผ่านไม่น้อยกว่า 50% ช่างของเราจะแนะนำระดับความเข้มที่ถูกต้องตามกฎหมายและเหมาะกับการใช้งานของคุณ</p>
-        </details>
-        <details>
-          <summary>ติดฟิล์มเสร็จแล้วล้างรถได้เลยไหม?</summary>
-          <p>แนะนำให้งดเลื่อนกระจกลง 3–5 วัน และงดล้างรถ 7 วันหลังติดฟิล์ม เพื่อให้กาวยึดเกาะได้เต็มที่ครับ</p>
+          <summary>ราคาค่าบริการเท่าไหร่?</summary>
+          <p>ราคาขึ้นอยู่กับรุ่นรถและสินค้าที่เลือก ทัก LINE ส่งรุ่นรถและบริการที่สนใจ ทางร้านจะแจ้งราคาให้</p>
         </details>
         <details>
           <summary>ต้องจองคิวล่วงหน้าไหม?</summary>
-          <p>แนะนำให้จองล่วงหน้าอย่างน้อย 1–2 วัน โดยเฉพาะวันเสาร์-อาทิตย์ ทักไลน์หรือกรอกฟอร์มด้านล่างได้เลย ทีมงานจะยืนยันคิวภายใน 30 นาทีในเวลาทำการ</p>
+          <p>แนะนำให้ทัก LINE หรือโทรสอบถามคิวก่อนเข้าร้าน หรือกรอกฟอร์มด้านล่าง ทางร้านจะติดต่อกลับเพื่อยืนยันคิว</p>
         </details>
         <details>
-          <summary>มีบริการผ่อนชำระไหม?</summary>
-          <p>มีครับ ผ่อน 0% นานสูงสุด 10 เดือน กับบัตรเครดิตที่ร่วมรายการ และรับชำระเงินสด โอน หรือ QR พร้อมเพย์</p>
+          <summary>ร้านอยู่ที่ไหน?</summary>
+          <p>62/1-3 ถนนสุขุมวิท ต.บางปลาสร้อย อ.เมืองชลบุรี จ.ชลบุรี 20000 ดูแผนที่ได้ที่ส่วนติดต่อเราด้านล่าง</p>
+        </details>
+        <details>
+          <summary>ติดฟิล์มบ้านหรืออาคารได้ไหม?</summary>
+          <p>ได้ ร้านรับติดตั้งฟิล์มกรองแสงทั้งรถยนต์ บ้าน และอาคาร ติดต่อสอบถามรายละเอียดได้ทาง LINE หรือโทร</p>
         </details>
       </div>
     </div>
@@ -525,9 +400,9 @@
   <div class="cta-band">
     <div class="container">
       <h2>พร้อมให้รถคุณดูดีกว่าเดิมหรือยัง?</h2>
-      <p>ทักไลน์วันนี้ รับส่วนลดเพิ่ม 10% สำหรับลูกค้าใหม่</p>
+      <p>ทักไลน์หรือโทรสอบถามราคาและคิวได้เลย</p>
       <div class="hero-actions">
-        <a href="#" class="btn btn-white js-line">แอดไลน์รับส่วนลด</a>
+        <a href="#" class="btn btn-white js-line">แอดไลน์สอบถาม</a>
         <a href="#" class="btn btn-ghost js-tel">โทรเลย</a>
       </div>
     </div>
@@ -544,7 +419,7 @@
       <div class="contact-grid">
         <div class="panel">
           <h3>ฟอร์มจองคิว</h3>
-          <p>ทีมงานจะติดต่อกลับเพื่อยืนยันคิวภายใน 30 นาที</p>
+          <p>ทางร้านจะติดต่อกลับเพื่อยืนยันคิว</p>
           <form id="bookingForm">
             <div class="field-row">
               <div class="field"><label for="name">ชื่อ</label><input id="name" required placeholder="ชื่อของคุณ"></div>
@@ -557,16 +432,13 @@
             <div class="field">
               <label for="service">บริการที่สนใจ</label>
               <select id="service">
-                <option>แพ็กเกจ Basic</option>
-                <option selected>แพ็กเกจ Premium</option>
-                <option>แพ็กเกจ Ultimate</option>
-                <option>ฟิล์มกรองแสง</option>
-                <option>เคลือบแก้ว / เซรามิก</option>
-                <option>ฟิล์มกันรอย PPF</option>
+                <option>แอร์รถยนต์ (ติดตั้ง / ซ่อม / ล้าง / เติมน้ำยา)</option>
+                <option>ฟิล์มกรองแสงรถยนต์</option>
+                <option>ฟิล์มกรองแสงบ้าน / อาคาร</option>
                 <option>เครื่องเสียงรถยนต์</option>
-                <option>กล้องติดรถยนต์</option>
-                <option>ล้าง ขัดสี ดีเทลลิ่ง</option>
-                <option>ซ่อม / ล้างแอร์รถยนต์</option>
+                <option>แบตเตอรี่</option>
+                <option>หลังคา Carryboy</option>
+                <option>อุปกรณ์ประดับยนต์</option>
                 <option>อื่น ๆ / ขอคำปรึกษา</option>
               </select>
             </div>
@@ -581,7 +453,7 @@
 
         <div class="panel">
           <h3>ข้อมูลร้าน</h3>
-          <p>แวะมาปรึกษาหรือดูตัวอย่างฟิล์มได้ที่ร้าน</p>
+          <p>แวะมาปรึกษาได้ที่ร้าน แนะนำให้โทรสอบถามก่อนเข้ามา</p>
           <ul class="info-list">
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
@@ -594,10 +466,6 @@
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
               <div><strong>LINE</strong><a href="#" class="js-line">แอดไลน์ร้าน (กดเพื่อเพิ่มเพื่อน)</a></div>
-            </li>
-            <li>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <div><strong>เวลาทำการ</strong><span>เปิดทุกวัน 08:30 – 19:00 น. (ไม่เว้นวันหยุดนักขัตฤกษ์)</span></div>
             </li>
           </ul>
           <a href="#" class="line-qr js-line">
@@ -615,7 +483,7 @@
 
   <footer>
     <div class="container foot-wrap">
-      <div>© <span id="year"></span> ดิเรกแอร์ (Direk Air) · แอร์และประดับยนต์ครบวงจร ชลบุรี</div>
+      <div>© <span id="year"></span> ดิเรกแอร์ (Direk Air) · แอร์และประดับยนต์ ชลบุรี</div>
       <div><a href="https://www.facebook.com/p/%E0%B8%AB%E0%B8%88%E0%B8%81%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5-100067207684848/" target="_blank" rel="noopener">Facebook</a></div>
     </div>
   </footer>
@@ -645,13 +513,6 @@
     const nav = document.getElementById("nav");
     document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
     nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
-
-    // กดเลือกแพ็กเกจ -> ตั้งค่าในฟอร์มให้อัตโนมัติ
-    document.querySelectorAll("[data-pkg]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.getElementById("service").value = "แพ็กเกจ " + btn.dataset.pkg;
-      });
-    });
 
     // ห้ามเลือกวันย้อนหลัง
     document.getElementById("date").min = new Date().toISOString().split("T")[0];
