@@ -535,6 +535,7 @@
     <a href="#" class="btn btn-line js-line">แอดไลน์</a>
   </div>
 
+  <script src="config.js"></script>
   <script>
     // ===== ตั้งค่าข้อมูลร้าน: แก้ตรงนี้ที่เดียว =====
     const SHOP = {
@@ -557,7 +558,7 @@
 
     // แกลเลอรีผลงาน: โหลดรูปจากเซิร์ฟเวอร์ (จัดการรูปที่ /admin)
     const GALLERY_INITIAL = 6;
-    fetch("/api/gallery").then(r => r.ok ? r.json() : []).then(photos => {
+    fetch(window.DIREKAIR_API + "/gallery").then(r => r.ok ? r.json() : []).then(photos => {
       if (!Array.isArray(photos) || !photos.length) return;
       const grid = document.getElementById("galleryGrid");
       const box = document.getElementById("lightbox");

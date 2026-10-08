@@ -1,26 +1,24 @@
 # เว็บไซต์ดิเรกแอร์ (Direk Air)
 
-หน้าเว็บร้าน (`public/index.html`) พร้อมหน้าแอดมิน (`/admin`) สำหรับอัปโหลดรูปผลงานลูกค้า
-รูปที่อัปโหลดจะแสดงในส่วน "ผลงานของเรา" บนหน้าเว็บ (ส่วนนี้จะซ่อนไว้จนกว่าจะมีรูป)
+เว็บร้านแบบไฟล์ HTML ล้วน (โฮสต์ฟรีได้ เช่น GitHub Pages, Vercel, Cloudflare Pages)
 
-## รันในเครื่อง
-
-```bash
-npm install
-ADMIN_PASSWORD=รหัสผ่าน npm start   # เปิด http://localhost:3000 และ http://localhost:3000/admin
-npm test
-```
-
-## ตั้งค่า (Environment variables)
-
-| ตัวแปร | ความหมาย |
+| ไฟล์ | หน้าที่ |
 |---|---|
-| `ADMIN_PASSWORD` | รหัสผ่านเข้าหน้าแอดมิน (ต้องตั้ง) |
-| `SESSION_SECRET` | คีย์เซ็นคุกกี้ล็อกอิน ถ้าไม่ตั้ง แอดมินต้องล็อกอินใหม่ทุกครั้งที่เซิร์ฟเวอร์รีสตาร์ท |
-| `DATA_DIR` | โฟลเดอร์เก็บรูปและ `gallery.json` (ค่าเริ่มต้น `./data`) |
+| `index.html` | หน้าเว็บร้าน |
+| `admin.html` | หน้าแอดมิน: ล็อกอินแล้วอัปโหลด / แก้คำอธิบาย / จัดลำดับ / ลบรูปผลงานลูกค้า |
+| `config.js` | ที่อยู่ API |
+| `images/` | รูปประกอบเว็บ (QR LINE) |
 
-## Deploy บน Render
+## Backend
 
-ใช้ `render.yaml` (Dashboard > New > Blueprint) ซึ่งสร้าง web service แพ็กเกจ Starter
-พร้อม persistent disk 1GB ที่ `/var/data` สำหรับเก็บรูป (แพ็กเกจฟรีไม่มี disk รูปจะหายทุกครั้งที่ deploy)
-ระบบจะสุ่ม `SESSION_SECRET` ให้ ส่วน `ADMIN_PASSWORD` ต้องกรอกเองตอนสร้าง
+ส่วนล็อกอินและรูปผลงานใช้ backend ร่วมกับโปรเจกต์อื่นที่
+[center-kitchen-backend](https://github.com/athipaty/center-kitchen-backend) (`/api/direkair`)
+รูปเก็บใน Backblaze B2 ข้อมูลรูปเก็บใน MongoDB
+
+ตั้งค่าบน Render (service `center-kitchen-backend`):
+
+- `DIREKAIR_ADMIN_PASSWORD`: รหัสผ่านแอดมินของร้าน
+- `DIREKAIR_JWT_SECRET`: ข้อความสุ่มยาว ๆ สำหรับเซ็นโทเคนล็อกอิน
+- `DIREKAIR_FRONTEND_URL`: URL ของเว็บนี้ (ถ้ายังไม่ได้ใช้ direkair.com) เพื่อให้ผ่าน CORS
+
+ส่วน "ผลงานของเรา" บนหน้าเว็บจะซ่อนไว้จนกว่าจะมีรูป

@@ -109,9 +109,9 @@
 <body>
   <header>
     <div class="wrap">
-      <a href="/" class="logo">ดิเรก<span>แอร์</span><small>แอดมิน</small></a>
+      <a href="./" class="logo">ดิเรก<span>แอร์</span><small>แอดมิน</small></a>
       <div class="head-links">
-        <a href="/#gallery" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
+        <a href="./#gallery" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
         <button class="btn btn-ghost btn-sm" id="logoutBtn" hidden>ออกจากระบบ</button>
       </div>
     </div>
@@ -161,14 +161,24 @@
 
   <div class="toast" id="toast"></div>
 
+  <script src="config.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
     let photos = [];
 
-    async function api(url, options = {}) {
-      const res = await fetch(url, { credentials: "same-origin", ...options });
+    // โทเคนล็อกอินเก็บในเบราว์เซอร์นี้ (หมดอายุใน 7 วัน)
+    const TOKEN_KEY = "direkair_admin_token";
+    const getToken = () => { try { return localStorage.getItem(TOKEN_KEY); } catch { return null; } };
+    const setToken = (t) => { try { t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY); } catch {} };
+
+    async function api(path, options = {}) {
+      const token = getToken();
+      const headers = { ...(options.headers || {}), ...(token ? { Authorization: "Bearer " + token } : {}) };
+      let res;
+      try { res = await fetch(window.DIREKAIR_API + path, { ...options, headers }); }
+      catch { throw new Error("เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่"); }
       const data = await res.json().catch(() => ({}));
-      if (res.status === 401 && url !== "/api/login") { showLogin(); throw new Error(data.error || "กรุณาเข้าสู่ระบบ"); }
+      if (res.status === 401 && path !== "/login") { setToken(null); showLogin(); throw new Error(data.error || "กรุณาเข้าสู่ระบบ"); }
       if (!res.ok) throw new Error(data.error || "เกิดข้อผิดพลาด กรุณาลองใหม่");
       return data;
     }
@@ -196,13 +206,14 @@
       e.preventDefault();
       $("loginMsg").textContent = "";
       try {
-        await api("/api/login", jsonBody("POST", { password: $("password").value }));
+        const { token } = await api("/login", jsonBody("POST", { password: $("password").value }));
+        setToken(token);
         $("password").value = "";
         showDash();
       } catch (err) { $("loginMsg").textContent = err.message; }
     });
     $("logoutBtn").addEventListener("click", async () => {
-      await api("/api/logout", { method: "POST" }).catch(() => {});
+      setToken(null);
       showLogin();
     });
 
@@ -231,7 +242,7 @@
       $("uploadBtn").disabled = true; $("uploadBtn").textContent = "กำลังอัปโหลด…";
       $("uploadMsg").className = "msg"; $("uploadMsg").textContent = "";
       try {
-        await api("/api/gallery", { method: "POST", body: fd });
+        await api("/gallery", { method: "POST", body: fd });
         resetUpload();
         $("uploadMsg").className = "msg ok"; $("uploadMsg").textContent = "อัปโหลดเรียบร้อย ✅";
         await loadPhotos();
@@ -243,7 +254,7 @@
 
     // ---------- list ----------
     async function loadPhotos() {
-      photos = await api("/api/gallery");
+      photos = await api("/gallery");
       render();
     }
 
@@ -273,14 +284,14 @@
 
         saveBtn.addEventListener("click", async () => {
           try {
-            const updated = await api("/api/gallery/" + p.id, jsonBody("PATCH", { caption: input.value }));
+            const updated = await api("/gallery/" + p.id, jsonBody("PATCH", { caption: input.value }));
             p.caption = updated.caption; input.value = updated.caption; saveBtn.disabled = true;
             toast("บันทึกคำอธิบายแล้ว");
           } catch (err) { toast(err.message); }
         });
         card.querySelector('[data-act="delete"]').addEventListener("click", async () => {
           if (!confirm("ลบรูปนี้ออกจากหน้าเว็บ?")) return;
-          try { await api("/api/gallery/" + p.id, { method: "DELETE" }); toast("ลบรูปแล้ว"); await loadPhotos(); }
+          try { await api("/gallery/" + p.id, { method: "DELETE" }); toast("ลบรูปแล้ว"); await loadPhotos(); }
           catch (err) { toast(err.message); }
         });
         card.querySelector('[data-act="up"]').addEventListener("click", () => move(i, -1));
@@ -293,13 +304,14 @@
       const next = photos.slice();
       [next[i], next[i + dir]] = [next[i + dir], next[i]];
       try {
-        await api("/api/gallery/order", jsonBody("PUT", { ids: next.map((p) => p.id) }));
+        await api("/gallery/order", jsonBody("PUT", { ids: next.map((p) => p.id) }));
         photos = next; render();
       } catch (err) { toast(err.message); await loadPhotos(); }
     }
 
     // ---------- start ----------
-    api("/api/me").then((me) => (me.admin ? showDash() : showLogin())).catch(showLogin);
+    if (getToken()) api("/me").then(showDash).catch(showLogin);
+    else showLogin();
   </script>
 </body>
 </html>
