@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>แอดมิน · ดิเรกแอร์</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --card: #1a1e24;
+      --line: #2a2f37;
+      --text: #f2f3f5;
+      --muted: #a3a9b3;
+      --accent: #ff6a1a;
+      --accent-hover: #ff8540;
+      --danger: #ff5a5f;
+      --ok: #06c755;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Sarabun", sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    h1, h2, h3, .btn { font-family: "Kanit", sans-serif; }
+    a { color: inherit; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+
+    header { border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+    .logo { font-family: "Kanit", sans-serif; font-size: 22px; font-weight: 600; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .logo small { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 6px; }
+    .head-links { display: flex; gap: 10px; align-items: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 20px; border-radius: 999px; font-weight: 500; font-size: 15px;
+      border: 2px solid transparent; cursor: pointer; transition: .2s; background: none; color: var(--text); text-decoration: none;
+    }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+    .btn-ghost { border-color: var(--line); }
+    .btn-ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .btn-sm { padding: 6px 12px; font-size: 14px; }
+    .btn-danger { border-color: var(--line); color: var(--danger); }
+    .btn-danger:hover:not(:disabled) { border-color: var(--danger); }
+
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+    label { display: block; font-size: 15px; color: var(--muted); margin-bottom: 6px; }
+    input[type=password], input[type=text] {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--text); font: inherit;
+    }
+    input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+
+    /* Login */
+    #loginView { display: grid; place-items: center; min-height: calc(100vh - 65px); padding: 24px 0; }
+    #loginView .panel { width: 100%; max-width: 380px; }
+    #loginView h1 { font-size: 24px; margin-bottom: 4px; }
+    #loginView p { color: var(--muted); margin-bottom: 20px; }
+    #loginView .btn { width: 100%; margin-top: 16px; }
+
+    /* Dashboard */
+    main { padding: 32px 0 64px; }
+    main h1 { font-size: 26px; }
+    main > .wrap > p { color: var(--muted); margin-bottom: 24px; }
+    .upload { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; margin-bottom: 32px; }
+    .drop {
+      aspect-ratio: 4/3; border: 2px dashed var(--line); border-radius: 12px; display: grid; place-items: center;
+      text-align: center; color: var(--muted); cursor: pointer; overflow: hidden; position: relative; font-size: 14px; padding: 10px;
+    }
+    .drop:hover, .drop.over { border-color: var(--accent); color: var(--accent); }
+    .drop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .drop input { display: none; }
+    .upload-fields .btn { margin-top: 14px; }
+    .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+    .list-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+    .list-head h2 { font-size: 20px; }
+    .count { color: var(--muted); font-size: 14px; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .photo { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #111; }
+    .photo .body { padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .photo input { padding: 8px 10px; font-size: 15px; }
+    .photo .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .photo .actions .grow { flex: 1; }
+    .empty { color: var(--muted); text-align: center; padding: 40px 16px; border: 1px dashed var(--line); border-radius: 12px; }
+
+    .msg { font-size: 14px; margin-top: 10px; min-height: 1.4em; }
+    .msg.err { color: var(--danger); }
+    .msg.ok { color: var(--ok); }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #000; border: 1px solid var(--line);
+      padding: 10px 18px; border-radius: 999px; font-size: 15px; opacity: 0; transition: .25s; pointer-events: none; max-width: calc(100% - 32px);
+    }
+    .toast.show { opacity: 1; }
+    [hidden] { display: none !important; }
+
+    @media (max-width: 640px) {
+      .upload { grid-template-columns: 1fr; }
+      .drop { max-width: 100%; }
+      .logo small { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="/" class="logo">ดิเรก<span>แอร์</span><small>แอดมิน</small></a>
+      <div class="head-links">
+        <a href="/#gallery" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn" hidden>ออกจากระบบ</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Login ===== -->
+  <section id="loginView" hidden>
+    <form class="panel" id="loginForm">
+      <h1>เข้าสู่ระบบแอดมิน</h1>
+      <p>สำหรับจัดการรูปผลงานบนหน้าเว็บ</p>
+      <label for="password">รหัสผ่าน</label>
+      <input id="password" type="password" autocomplete="current-password" required autofocus>
+      <button class="btn btn-primary" type="submit">เข้าสู่ระบบ</button>
+      <div class="msg err" id="loginMsg"></div>
+    </form>
+  </section>
+
+  <!-- ===== Dashboard ===== -->
+  <main id="dashView" hidden>
+    <div class="wrap">
+      <h1>รูปผลงานลูกค้า</h1>
+      <p>รูปที่อัปโหลดจะแสดงในส่วน "ผลงานของเรา" บนหน้าเว็บทันที รูปบนสุดจะแสดงเป็นรูปแรก</p>
+
+      <form class="panel upload" id="uploadForm">
+        <label class="drop" id="drop">
+          <span id="dropText">กดเพื่อเลือกรูป<br>หรือลากรูปมาวางที่นี่</span>
+          <img id="preview" alt="" hidden>
+          <input type="file" id="photo" accept="image/jpeg,image/png,image/webp">
+        </label>
+        <div class="upload-fields">
+          <label for="caption">คำอธิบายรูป (ไม่บังคับ)</label>
+          <input type="text" id="caption" maxlength="120" placeholder="เช่น Toyota Fortuner · ติดฟิล์มรอบคัน">
+          <div class="hint">รองรับ JPG, PNG, WebP ขนาดไม่เกิน 10MB · ระบบจะย่อรูปและลบข้อมูลตำแหน่ง GPS ออกให้อัตโนมัติ</div>
+          <button class="btn btn-primary" type="submit" id="uploadBtn" disabled>อัปโหลดรูป</button>
+          <div class="msg" id="uploadMsg"></div>
+        </div>
+      </form>
+
+      <div class="list-head">
+        <h2>รูปทั้งหมด</h2>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="photos" id="photos"></div>
+      <div class="empty" id="empty" hidden>ยังไม่มีรูปผลงาน อัปโหลดรูปแรกได้เลย<br>(ส่วน "ผลงานของเรา" จะซ่อนอยู่จนกว่าจะมีรูป)</div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let photos = [];
+
+    async function api(url, options = {}) {
+      const res = await fetch(url, { credentials: "same-origin", ...options });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401 && url !== "/api/login") { showLogin(); throw new Error(data.error || "กรุณาเข้าสู่ระบบ"); }
+      if (!res.ok) throw new Error(data.error || "เกิดข้อผิดพลาด กรุณาลองใหม่");
+      return data;
+    }
+    const jsonBody = (method, body) => ({ method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+
+    let toastTimer;
+    function toast(text) {
+      $("toast").textContent = text;
+      $("toast").classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => $("toast").classList.remove("show"), 2500);
+    }
+
+    function showLogin() {
+      $("loginView").hidden = false; $("dashView").hidden = true; $("logoutBtn").hidden = true;
+      $("password").focus();
+    }
+    async function showDash() {
+      $("loginView").hidden = true; $("dashView").hidden = false; $("logoutBtn").hidden = false;
+      await loadPhotos();
+    }
+
+    // ---------- login ----------
+    $("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      $("loginMsg").textContent = "";
+      try {
+        await api("/api/login", jsonBody("POST", { password: $("password").value }));
+        $("password").value = "";
+        showDash();
+      } catch (err) { $("loginMsg").textContent = err.message; }
+    });
+    $("logoutBtn").addEventListener("click", async () => {
+      await api("/api/logout", { method: "POST" }).catch(() => {});
+      showLogin();
+    });
+
+    // ---------- upload ----------
+    function pickFile(file) {
+      if (!file) return;
+      const dt = new DataTransfer(); dt.items.add(file); $("photo").files = dt.files;
+      $("preview").src = URL.createObjectURL(file); $("preview").hidden = false; $("dropText").hidden = true;
+      $("uploadBtn").disabled = false; $("uploadMsg").textContent = "";
+    }
+    function resetUpload() {
+      $("uploadForm").reset(); $("preview").hidden = true; $("dropText").hidden = false; $("uploadBtn").disabled = true;
+    }
+    $("photo").addEventListener("change", () => pickFile($("photo").files[0]));
+    ["dragover", "dragenter"].forEach((ev) => $("drop").addEventListener(ev, (e) => { e.preventDefault(); $("drop").classList.add("over"); }));
+    ["dragleave", "drop"].forEach((ev) => $("drop").addEventListener(ev, () => $("drop").classList.remove("over")));
+    $("drop").addEventListener("drop", (e) => { e.preventDefault(); pickFile(e.dataTransfer.files[0]); });
+
+    $("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = $("photo").files[0];
+      if (!file) return;
+      const fd = new FormData();
+      fd.append("caption", $("caption").value);
+      fd.append("photo", file);
+      $("uploadBtn").disabled = true; $("uploadBtn").textContent = "กำลังอัปโหลด…";
+      $("uploadMsg").className = "msg"; $("uploadMsg").textContent = "";
+      try {
+        await api("/api/gallery", { method: "POST", body: fd });
+        resetUpload();
+        $("uploadMsg").className = "msg ok"; $("uploadMsg").textContent = "อัปโหลดเรียบร้อย ✅";
+        await loadPhotos();
+      } catch (err) {
+        $("uploadMsg").className = "msg err"; $("uploadMsg").textContent = err.message;
+        $("uploadBtn").disabled = false;
+      } finally { $("uploadBtn").textContent = "อัปโหลดรูป"; }
+    });
+
+    // ---------- list ----------
+    async function loadPhotos() {
+      photos = await api("/api/gallery");
+      render();
+    }
+
+    function render() {
+      $("count").textContent = photos.length ? photos.length + " รูป" : "";
+      $("empty").hidden = photos.length > 0;
+      $("photos").replaceChildren(...photos.map((p, i) => {
+        const card = document.createElement("div");
+        card.className = "photo";
+        card.innerHTML = `
+          <img loading="lazy" alt="">
+          <div class="body">
+            <input type="text" maxlength="120" placeholder="คำอธิบายรูป">
+            <div class="actions">
+              <button class="btn btn-ghost btn-sm" data-act="up" title="เลื่อนขึ้น" ${i === 0 ? "disabled" : ""}>↑</button>
+              <button class="btn btn-ghost btn-sm" data-act="down" title="เลื่อนลง" ${i === photos.length - 1 ? "disabled" : ""}>↓</button>
+              <button class="btn btn-ghost btn-sm grow" data-act="save" disabled>บันทึก</button>
+              <button class="btn btn-danger btn-sm" data-act="delete">ลบ</button>
+            </div>
+          </div>`;
+        card.querySelector("img").src = p.url;
+        const input = card.querySelector("input");
+        const saveBtn = card.querySelector('[data-act="save"]');
+        input.value = p.caption;
+        input.addEventListener("input", () => { saveBtn.disabled = input.value === p.caption; });
+        input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !saveBtn.disabled) saveBtn.click(); });
+
+        saveBtn.addEventListener("click", async () => {
+          try {
+            const updated = await api("/api/gallery/" + p.id, jsonBody("PATCH", { caption: input.value }));
+            p.caption = updated.caption; input.value = updated.caption; saveBtn.disabled = true;
+            toast("บันทึกคำอธิบายแล้ว");
+          } catch (err) { toast(err.message); }
+        });
+        card.querySelector('[data-act="delete"]').addEventListener("click", async () => {
+          if (!confirm("ลบรูปนี้ออกจากหน้าเว็บ?")) return;
+          try { await api("/api/gallery/" + p.id, { method: "DELETE" }); toast("ลบรูปแล้ว"); await loadPhotos(); }
+          catch (err) { toast(err.message); }
+        });
+        card.querySelector('[data-act="up"]').addEventListener("click", () => move(i, -1));
+        card.querySelector('[data-act="down"]').addEventListener("click", () => move(i, 1));
+        return card;
+      }));
+    }
+
+    async function move(i, dir) {
+      const next = photos.slice();
+      [next[i], next[i + dir]] = [next[i + dir], next[i]];
+      try {
+        await api("/api/gallery/order", jsonBody("PUT", { ids: next.map((p) => p.id) }));
+        photos = next; render();
+      } catch (err) { toast(err.message); await loadPhotos(); }
+    }
+
+    // ---------- start ----------
+    api("/api/me").then((me) => (me.admin ? showDash() : showLogin())).catch(showLogin);
+  </script>
+</body>
+</html>

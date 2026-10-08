@@ -34,6 +34,7 @@
       -webkit-font-smoothing: antialiased;
     }
     h1, h2, h3, .btn, .nav a, .price { font-family: "Kanit", sans-serif; line-height: 1.3; }
+    [hidden] { display: none !important; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
@@ -137,6 +138,25 @@
     .why-item h3 { font-size: 19px; margin-bottom: 6px; }
     .why-item p { color: var(--muted); font-size: 15px; }
 
+    /* Gallery (รูปจากหน้าแอดมิน) */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .g-item {
+      border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--line);
+      background: var(--card); aspect-ratio: 4/3; padding: 0; cursor: zoom-in; display: block; width: 100%;
+    }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: .4s; display: block; }
+    .g-item:hover img { transform: scale(1.05); }
+    .g-item .cap {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 15px; color: #fff; text-align: left;
+      background: linear-gradient(transparent, rgba(0,0,0,.75)); font-family: "Kanit", sans-serif;
+    }
+    .gallery-more { text-align: center; margin-top: 24px; }
+    .lightbox { border: 0; padding: 0; background: transparent; max-width: min(1100px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; color: #fff; }
+    .lightbox::backdrop { background: rgba(0,0,0,.85); }
+    .lightbox img { max-width: 100%; max-height: calc(100vh - 120px); display: block; margin: 0 auto; border-radius: 10px; }
+    .lightbox p { text-align: center; margin-top: 12px; font-family: "Kanit", sans-serif; }
+    .lightbox button { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 22px; cursor: pointer; }
+
     /* FAQ */
     .faq-list { max-width: 780px; margin: 0 auto; }
     details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
@@ -213,6 +233,7 @@
       .hero-visual { max-width: 560px; }
       .grid-3 { grid-template-columns: 1fr 1fr; }
       .why-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
@@ -226,6 +247,7 @@
       .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
       .hero { padding: 64px 0 72px; }
       .grid-3, .why-grid { grid-template-columns: 1fr; }
+      .gallery-grid { gap: 10px; }
       .field-row { grid-template-columns: 1fr; }
       .panel { padding: 24px 20px; }
       .hero-stats { gap: 24px; }
@@ -241,6 +263,7 @@
       <a href="#" class="logo">ดิเรก<span>แอร์</span></a>
       <nav class="nav" id="nav">
         <a href="#services">บริการ</a>
+        <a href="#gallery" id="galleryNav" hidden>ผลงาน</a>
         <a href="#faq">คำถามที่พบบ่อย</a>
         <a href="#contact">ติดต่อเรา</a>
       </nav>
@@ -367,6 +390,24 @@
       </div>
     </div>
   </section>
+
+  <!-- ================= GALLERY ================= -->
+  <!-- รูปผลงานจัดการได้ที่หน้า /admin · ส่วนนี้จะซ่อนไว้จนกว่าจะมีรูป -->
+  <section id="gallery" hidden>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ผลงานของเรา</div>
+        <h2>รถลูกค้าที่มาใช้บริการ</h2>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="gallery-more" id="galleryMore" hidden><button class="btn btn-ghost" type="button">ดูรูปเพิ่มเติม</button></div>
+    </div>
+  </section>
+  <dialog class="lightbox" id="lightbox">
+    <form method="dialog"><button aria-label="ปิด">×</button></form>
+    <img alt="">
+    <p></p>
+  </dialog>
 
   <!-- ================= FAQ ================= -->
   <section id="faq">
@@ -513,6 +554,46 @@
     const nav = document.getElementById("nav");
     document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
     nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // แกลเลอรีผลงาน: โหลดรูปจากเซิร์ฟเวอร์ (จัดการรูปที่ /admin)
+    const GALLERY_INITIAL = 6;
+    fetch("/api/gallery").then(r => r.ok ? r.json() : []).then(photos => {
+      if (!Array.isArray(photos) || !photos.length) return;
+      const grid = document.getElementById("galleryGrid");
+      const box = document.getElementById("lightbox");
+      photos.forEach((p, i) => {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "g-item";
+        item.hidden = i >= GALLERY_INITIAL;
+        const img = document.createElement("img");
+        img.src = p.url; img.alt = p.caption || "ผลงานดิเรกแอร์"; img.loading = "lazy";
+        item.append(img);
+        if (p.caption) {
+          const cap = document.createElement("div");
+          cap.className = "cap"; cap.textContent = p.caption;
+          item.append(cap);
+        }
+        item.addEventListener("click", () => {
+          box.querySelector("img").src = p.url;
+          box.querySelector("img").alt = img.alt;
+          box.querySelector("p").textContent = p.caption || "";
+          box.showModal();
+        });
+        grid.append(item);
+      });
+      box.addEventListener("click", e => { if (e.target === box) box.close(); });
+      const more = document.getElementById("galleryMore");
+      if (photos.length > GALLERY_INITIAL) {
+        more.hidden = false;
+        more.querySelector("button").addEventListener("click", () => {
+          grid.querySelectorAll(".g-item[hidden]").forEach(el => el.hidden = false);
+          more.hidden = true;
+        });
+      }
+      document.getElementById("gallery").hidden = false;
+      document.getElementById("galleryNav").hidden = false;
+    }).catch(() => {});
 
     // ห้ามเลือกวันย้อนหลัง
     document.getElementById("date").min = new Date().toISOString().split("T")[0];

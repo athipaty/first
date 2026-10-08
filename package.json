@@ -1,0 +1,23 @@
+{
+  "name": "direkair-site",
+  "version": "1.0.0",
+  "description": "Direk Air website with admin photo gallery",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/athipaty/first.git"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "multer": "^2.4.0",
+    "sharp": "^0.35.5"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
