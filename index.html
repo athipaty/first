@@ -184,6 +184,16 @@
     .lightbox p { text-align: center; margin-top: 12px; font-family: "Kanit", sans-serif; }
     .lightbox button { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 22px; cursor: pointer; }
 
+    /* Press quote */
+    .press {
+      max-width: 780px; margin: 48px auto 0; padding: 28px 32px; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    }
+    .press .label { font-size: 14px; color: var(--accent); font-family: "Kanit", sans-serif; margin-bottom: 8px; }
+    .press blockquote { font-size: 19px; line-height: 1.7; }
+    .press figcaption { margin-top: 12px; color: var(--muted); font-size: 15px; }
+    .press figcaption a { text-decoration: underline; }
+
     /* FAQ */
     .faq-list { max-width: 780px; margin: 0 auto; }
     details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
@@ -415,6 +425,12 @@
           <p>ทัก LINE หรือโทรสอบถามราคาและคิวก่อนเข้าร้าน</p>
         </div>
       </div>
+      <!-- บทความจริงจากนิตยสาร (ไม่ใช่รีวิวลูกค้า) ตัดมาแบบคำต่อคำ -->
+      <figure class="press">
+        <div class="label">สื่อพูดถึงเรา</div>
+        <blockquote>“ดิเรกแอร์ เป็นร้านที่มีมาตรฐาน ด้วยแนวทางการบริหารที่ไม่เอาเปรียบผู้บริโภค เรื่องคุณภาพสินค้ากับราคานั้นสอดคล้องกัน”</blockquote>
+        <figcaption>นิตยสาร Autoinfo ฉบับที่ 409 (กุมภาพันธ์ 2549) คอลัมน์แนะนำร้าน · <a href="https://www.autoinfo.co.th/article/54886" target="_blank" rel="noopener">อ่านบทความ</a></figcaption>
+      </figure>
     </div>
   </section>
 
