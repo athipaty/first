@@ -12,13 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d0f12;
-      --card: #1a1e24;
-      --line: #2a2f37;
-      --text: #f2f3f5;
-      --muted: #a3a9b3;
-      --accent: #ff6a1a;
-      --accent-hover: #ff8540;
+      --bg: #070b12;
+      --card: #0f1824;
+      --line: #1c2a3b;
+      --text: #eef6fc;
+      --muted: #9fb0c3;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --on-accent: #04121d;
       --danger: #ff5a5f;
       --ok: #06c755;
     }
@@ -41,7 +42,7 @@
       border: 2px solid transparent; cursor: pointer; transition: .2s; background: none; color: var(--text); text-decoration: none;
     }
     .btn:disabled { opacity: .5; cursor: not-allowed; }
-    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
     .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
     .btn-ghost { border-color: var(--line); }
     .btn-ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
