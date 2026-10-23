@@ -82,7 +82,7 @@
     .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-line { background: var(--line-green); color: #fff; }
     .btn-line:hover { filter: brightness(1.1); transform: translateY(-2px); }
-    .btn-ghost { border-color: var(--line); color: var(--text); }
+    .btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
     .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
@@ -98,6 +98,17 @@
     .nav { display: flex; gap: 28px; }
     .nav a { color: var(--muted); font-size: 16px; transition: .2s; }
     .nav a:hover { color: var(--text); }
+    .nav .nav-login { display: inline-flex; align-items: center; gap: 6px; }
+    .nav .nav-login svg { width: 16px; height: 16px; }
+
+    /* Login card (เปิดจากเมนู) */
+    .login-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 28px; width: min(380px, calc(100% - 32px)); margin: auto; }
+    .login-card::backdrop { background: rgba(0,0,0,.7); }
+    .login-card h3 { font-size: 22px; margin-bottom: 4px; }
+    .login-card p { color: var(--muted); margin-bottom: 18px; font-size: 15px; }
+    .login-card .actions { display: flex; gap: 10px; margin-top: 16px; }
+    .login-card .actions .btn { flex: 1; padding: 12px 16px; font-size: 16px; }
+    .login-card .msg { color: #ff5a5f; font-size: 14px; margin-top: 10px; min-height: 1.4em; }
     .header-cta { padding: 10px 20px; font-size: 15px; }
     .menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
     .menu-btn svg { width: 28px; height: 28px; }
@@ -282,6 +293,7 @@
         background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
       }
       .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
+      .nav.open .nav-login { border-bottom: 0; color: var(--accent); }
       .hero { padding: 64px 0 72px; }
       .grid-3, .why-grid { grid-template-columns: 1fr; }
       .gallery-grid { gap: 10px; }
@@ -303,6 +315,7 @@
         <a href="#gallery" id="galleryNav" hidden>ผลงาน</a>
         <a href="#faq">คำถามที่พบบ่อย</a>
         <a href="#contact">ติดต่อเรา</a>
+        <a href="/admin.html" class="nav-login" id="loginNav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg><span>เข้าสู่ระบบ</span></a>
       </nav>
       <a href="#contact" class="btn btn-primary header-cta">จองคิวเลย</a>
       <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
@@ -446,6 +459,18 @@
       <div class="gallery-more" id="galleryMore" hidden><button class="btn btn-ghost" type="button">ดูรูปเพิ่มเติม</button></div>
     </div>
   </section>
+  <dialog class="login-card" id="loginDialog" aria-labelledby="loginTitle">
+    <form id="loginCardForm">
+      <h3 id="loginTitle">เข้าสู่ระบบแอดมิน</h3>
+      <p>สำหรับเจ้าของร้าน เพื่อจัดการรูปผลงาน</p>
+      <div class="field"><label for="loginPassword">รหัสผ่าน</label><input id="loginPassword" type="password" autocomplete="current-password" required></div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="loginCancel">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary" id="loginSubmit">เข้าสู่ระบบ</button>
+      </div>
+      <div class="msg" id="loginError" role="alert"></div>
+    </form>
+  </dialog>
   <dialog class="lightbox" id="lightbox">
     <form method="dialog"><button aria-label="ปิด">×</button></form>
     <img alt="">
@@ -646,6 +671,43 @@
       document.getElementById("gallery").hidden = false;
       document.getElementById("galleryNav").hidden = false;
     }).catch(() => {});
+
+    // ปุ่ม "เข้าสู่ระบบ" ในเมนู: เปิดการ์ดล็อกอิน แล้วไปหน้าจัดการรูป (/admin.html)
+    // ใช้ token key เดียวกับ admin.html จึงไม่ต้องล็อกอินซ้ำ
+    const TOKEN_KEY = "direkair_admin_token";
+    const loginNav = document.getElementById("loginNav");
+    const loginDialog = document.getElementById("loginDialog");
+    const loginError = document.getElementById("loginError");
+    let hasToken = false;
+    try { hasToken = !!localStorage.getItem(TOKEN_KEY); } catch {}
+    if (hasToken) loginNav.querySelector("span").textContent = "จัดการรูปผลงาน";
+    loginNav.addEventListener("click", e => {
+      if (hasToken || typeof loginDialog.showModal !== "function") return; // ไปหน้าแอดมินตามลิงก์ปกติ
+      e.preventDefault();
+      loginError.textContent = "";
+      loginDialog.showModal();
+      document.getElementById("loginPassword").focus();
+    });
+    document.getElementById("loginCancel").addEventListener("click", () => loginDialog.close());
+    loginDialog.addEventListener("click", e => { if (e.target === loginDialog) loginDialog.close(); });
+    document.getElementById("loginCardForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = document.getElementById("loginSubmit");
+      btn.disabled = true; loginError.textContent = "";
+      try {
+        const res = await fetch(window.DIREKAIR_API + "/login", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: document.getElementById("loginPassword").value }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.token) throw new Error(data.error || "เข้าสู่ระบบไม่สำเร็จ");
+        try { localStorage.setItem(TOKEN_KEY, data.token); } catch {}
+        location.href = "/admin.html";
+      } catch (err) {
+        loginError.textContent = err.message === "Failed to fetch" ? "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่" : err.message;
+        btn.disabled = false;
+      }
+    });
 
     // ห้ามเลือกวันย้อนหลัง
     document.getElementById("date").min = new Date().toISOString().split("T")[0];
