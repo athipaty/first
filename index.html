@@ -6,7 +6,7 @@
   <title>ดิเรกแอร์ ชลบุรี | ซ่อมแอร์รถยนต์ หลังคาแคร์รี่บอย Carryboy ติดฟิล์มกรองแสง</title>
   <meta name="description" content="ดิเรกแอร์ (Direk Air) ชลบุรี ตั้งแต่ปี 2530 ซ่อมแอร์รถยนต์ แอร์ไม่เย็น ล้างแอร์ เติมน้ำยาแอร์ หลังคาแคร์รี่บอย (Carryboy) หลังคาไฟเบอร์รถกระบะ พร้อมติดฟิล์มกรองแสง เครื่องเสียง แบตเตอรี่ กันขโมย ถ.สุขุมวิท บางปลาสร้อย โทร 038-285-061">
   <link rel="canonical" href="https://www.direkair.com/">
-  <meta name="theme-color" content="#0d0f12">
+  <meta name="theme-color" content="#070b12">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/images/icon-192.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -58,14 +58,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d0f12;
-      --bg-alt: #14171c;
-      --card: #1a1e24;
-      --line: #2a2f37;
-      --text: #f2f3f5;
-      --muted: #a3a9b3;
-      --accent: #ff6a1a;
-      --accent-hover: #ff8540;
+      /* ธีมดำ-ฟ้า โทนเย็น */
+      --bg: #070b12;
+      --bg-alt: #0b111b;
+      --card: #0f1824;
+      --line: #1c2a3b;
+      --text: #eef6fc;
+      --muted: #9fb0c3;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --accent-rgb: 56, 189, 248;
+      --on-accent: #04121d;
       --line-green: #06c755;
       --radius: 14px;
       --max: 1160px;
@@ -99,7 +102,7 @@
       padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 17px;
       border: 2px solid transparent; cursor: pointer; transition: .2s; white-space: nowrap;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
     .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-line { background: var(--line-green); color: #fff; }
     .btn-line:hover { filter: brightness(1.1); transform: translateY(-2px); }
@@ -151,9 +154,9 @@
     .hero {
       position: relative; overflow: hidden; padding: 110px 0 100px;
       background:
-        radial-gradient(ellipse 70% 60% at 85% 20%, rgba(255,106,26,.22), transparent 60%),
-        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(255,106,26,.10), transparent 60%),
-        linear-gradient(180deg, #0d0f12, #111419);
+        radial-gradient(ellipse 70% 60% at 85% 20%, rgba(var(--accent-rgb), .22), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(var(--accent-rgb), .10), transparent 60%),
+        linear-gradient(180deg, #070b12, #0a1220);
     }
     .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
     .badge {
@@ -168,8 +171,8 @@
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .lead b { color: var(--text); font-weight: 600; }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
-    .hero-chips a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: rgba(255,106,26,.12); border: 1px solid rgba(255,106,26,.4); color: var(--text); font-family: "Kanit", sans-serif; font-size: 16px; transition: .2s; }
-    .hero-chips a:hover { background: rgba(255,106,26,.22); }
+    .hero-chips a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: rgba(var(--accent-rgb), .12); border: 1px solid rgba(var(--accent-rgb), .4); color: var(--text); font-family: "Kanit", sans-serif; font-size: 16px; transition: .2s; }
+    .hero-chips a:hover { background: rgba(var(--accent-rgb), .22); }
     .hero-chips svg { width: 18px; height: 18px; color: var(--accent); }
     .hero-stats { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
     .hero-stats strong { display: block; font-family: "Kanit", sans-serif; font-size: 30px; color: var(--text); }
@@ -196,17 +199,17 @@
     .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 48px; }
     .feature {
       position: relative; overflow: hidden; border-radius: var(--radius); padding: 32px;
-      background: linear-gradient(160deg, rgba(255,106,26,.16), var(--card) 55%); border: 1px solid rgba(255,106,26,.45);
+      background: linear-gradient(160deg, rgba(var(--accent-rgb), .16), var(--card) 55%); border: 1px solid rgba(var(--accent-rgb), .45);
       scroll-margin-top: 90px;
     }
-    .feature .tag { display: inline-block; font-family: "Kanit", sans-serif; font-size: 14px; color: var(--accent); border: 1px solid rgba(255,106,26,.5); border-radius: 999px; padding: 3px 12px; margin-bottom: 16px; }
-    .feature .big-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--accent); color: #fff; display: grid; place-items: center; margin-bottom: 16px; }
+    .feature .tag { display: inline-block; font-family: "Kanit", sans-serif; font-size: 14px; color: var(--accent); border: 1px solid rgba(var(--accent-rgb), .5); border-radius: 999px; padding: 3px 12px; margin-bottom: 16px; }
+    .feature .big-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; margin-bottom: 16px; }
     .feature .big-icon svg { width: 32px; height: 32px; }
     .feature h3 { font-size: clamp(26px, 3vw, 32px); margin-bottom: 8px; }
     .feature > p { color: var(--muted); margin-bottom: 16px; }
     .feature ul { list-style: none; margin-bottom: 24px; }
     .feature li { padding: 6px 0 6px 30px; position: relative; font-size: 17px; }
-    .feature li::before { content: ""; position: absolute; left: 0; top: 11px; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,106,26,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6a1a' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat; }
+    .feature li::before { content: ""; position: absolute; left: 0; top: 11px; width: 18px; height: 18px; border-radius: 50%; background: rgba(var(--accent-rgb), .18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat; }
     .feature .actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .feature .actions .btn { padding: 12px 22px; font-size: 16px; }
     .others-head { text-align: center; font-size: 22px; margin-bottom: 20px; }
@@ -221,7 +224,7 @@
     .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .icon {
       width: 54px; height: 54px; border-radius: 12px; display: grid; place-items: center;
-      background: rgba(255,106,26,.12); color: var(--accent); margin-bottom: 18px;
+      background: rgba(var(--accent-rgb), .12); color: var(--accent); margin-bottom: 18px;
     }
     .icon svg { width: 28px; height: 28px; }
     .service-card h3 { font-size: 21px; margin-bottom: 8px; }
@@ -315,14 +318,14 @@
     /* CTA band */
     .cta-band {
       padding: 64px 0; text-align: center;
-      background: linear-gradient(120deg, #ff6a1a, #e0480a);
+      background: linear-gradient(120deg, #0284c7, #0c4a6e);
     }
     .cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
     .cta-band p { opacity: .9; margin-bottom: 26px; }
     .cta-band .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
-    .cta-band .btn-ghost:hover { background: #fff; color: var(--accent); }
+    .cta-band .btn-ghost:hover { background: #fff; color: #0369a1; }
     .cta-band .hero-actions { justify-content: center; }
-    .btn-white { background: #fff; color: #e0480a; }
+    .btn-white { background: #fff; color: #0369a1; }
     .btn-white:hover { transform: translateY(-2px); }
 
     footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
