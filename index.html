@@ -104,6 +104,19 @@
     .nav .nav-login { display: inline-flex; align-items: center; gap: 6px; }
     .nav .nav-login svg { width: 16px; height: 16px; }
 
+    /* การ์ดหลังกดจองคิว */
+    .booking-done { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 24px; width: min(440px, calc(100% - 32px)); margin: auto; }
+    .booking-done::backdrop { background: rgba(0,0,0,.7); }
+    .booking-done h3 { font-size: 21px; margin-bottom: 6px; }
+    .booking-done .status { font-size: 15px; margin-bottom: 14px; color: var(--muted); }
+    .booking-done .status.ok { color: var(--line-green); }
+    .booking-done ol { padding-left: 22px; margin-bottom: 14px; font-size: 16px; }
+    .booking-done ol li { margin-bottom: 4px; }
+    .booking-done textarea { width: 100%; height: 205px; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; resize: none; }
+    .booking-done .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .booking-done .actions .btn { padding: 12px 14px; font-size: 16px; }
+    .booking-done .close { display: block; margin: 12px auto 0; background: none; border: 0; color: var(--muted); font: inherit; cursor: pointer; text-decoration: underline; }
+
     /* Login card (เปิดจากเมนู) */
     .login-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 28px; width: min(380px, calc(100% - 32px)); margin: auto; }
     .login-card::backdrop { background: rgba(0,0,0,.7); }
@@ -463,6 +476,21 @@
       <div class="gallery-more" id="galleryMore" hidden><button class="btn btn-ghost" type="button">ดูรูปเพิ่มเติม</button></div>
     </div>
   </section>
+  <dialog class="booking-done" id="bookingDone" aria-labelledby="bookingDoneTitle">
+    <h3 id="bookingDoneTitle">เกือบเสร็จแล้ว! ส่งข้อความใน LINE</h3>
+    <div class="status" id="bookingCopyStatus"></div>
+    <ol>
+      <li>กด <b>เปิด LINE</b> แล้วกด <b>เพิ่มเพื่อน</b> ร้านดิเรกแอร์</li>
+      <li>ในแชทของร้าน <b>กดค้าง</b> ที่ช่องพิมพ์ แล้วเลือก <b>วาง</b></li>
+      <li>กด <b>ส่ง</b> ทางร้านจะติดต่อกลับเพื่อยืนยันคิว</li>
+    </ol>
+    <textarea id="bookingMsg" readonly aria-label="ข้อความจองคิว"></textarea>
+    <div class="actions">
+      <button type="button" class="btn btn-ghost" id="bookingCopyAgain">คัดลอกข้อความ</button>
+      <a href="#" class="btn btn-line js-line" id="bookingOpenLine" autofocus>เปิด LINE</a>
+    </div>
+    <button type="button" class="close" id="bookingClose">ปิด</button>
+  </dialog>
   <dialog class="login-card" id="loginDialog" aria-labelledby="loginTitle">
     <form id="loginCardForm">
       <h3 id="loginTitle">เข้าสู่ระบบแอดมิน</h3>
@@ -531,7 +559,7 @@
       <div class="section-head">
         <div class="eyebrow">จองคิว / ติดต่อเรา</div>
         <h2>นัดเข้ารับบริการ</h2>
-        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะคัดลอกข้อความและเปิด LINE ของร้าน วางข้อความในแชทเพื่อส่งได้เลย</p>
+        <p>กรอกข้อมูลแล้วกดปุ่มด้านล่าง ระบบจะคัดลอกข้อความจองคิวให้ แล้วส่งในแชท LINE ของร้านได้เลย</p>
       </div>
       <div class="contact-grid">
         <div class="panel">
@@ -563,9 +591,9 @@
             <div class="field"><label for="note">รายละเอียดเพิ่มเติม</label><textarea id="note" rows="3" placeholder="เช่น อยากได้ฟิล์มเข้ม 60%"></textarea></div>
             <button type="submit" class="btn btn-line form-btn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
-              ส่งข้อมูลผ่าน LINE
+              คัดลอกข้อความจองคิว
             </button>
-            <div class="form-note">ข้อมูลของคุณจะถูกส่งให้ร้านทาง LINE เท่านั้น</div>
+            <div class="form-note">ข้อมูลจะถูกส่งให้ร้านเมื่อคุณส่งข้อความในแชท LINE เท่านั้น</div>
           </form>
         </div>
 
@@ -717,7 +745,33 @@
     // ห้ามเลือกวันย้อนหลัง
     document.getElementById("date").min = new Date().toISOString().split("T")[0];
 
-    // ส่งฟอร์ม -> คัดลอกข้อความ แล้วเปิด LINE ของร้าน (บัญชีส่วนตัวเติมข้อความให้อัตโนมัติไม่ได้)
+    // ส่งฟอร์ม -> คัดลอกข้อความทันที (ตอนลูกค้ากดปุ่ม มือถือจึงยอมให้คัดลอก) แล้วแสดงขั้นตอน
+    // ลูกค้ากด "เปิด LINE" เอง (บัญชี LINE ส่วนตัวเติมข้อความในแชทให้อัตโนมัติไม่ได้)
+    function copyText(text) {
+      // วิธีเก่า execCommand ทำงานทันทีภายในการกดปุ่ม ใช้ได้บน iOS/Android ส่วนใหญ่
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.setSelectionRange(0, text.length);
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch {}
+      ta.remove();
+      if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+      return ok;
+    }
+    const bookingDone = document.getElementById("bookingDone");
+    const bookingMsg = document.getElementById("bookingMsg");
+    const copyStatus = document.getElementById("bookingCopyStatus");
+    function showCopyStatus(ok) {
+      copyStatus.className = "status" + (ok ? " ok" : "");
+      copyStatus.textContent = ok
+        ? "✅ คัดลอกข้อความจองคิวแล้ว"
+        : "กด \"คัดลอกข้อความ\" หรือกดค้างที่ข้อความด้านล่างเพื่อคัดลอก";
+    }
+    const thaiDate = d => d ? new Date(d + "T00:00").toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : "-";
     document.getElementById("bookingForm").addEventListener("submit", e => {
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
@@ -727,16 +781,20 @@
         "เบอร์: " + v("phone"),
         "รุ่นรถ: " + (v("car") || "-"),
         "บริการ: " + v("service"),
-        "วันที่สะดวก: " + (v("date") || "-"),
+        "วันที่สะดวก: " + thaiDate(v("date")),
         "หมายเหตุ: " + (v("note") || "-"),
       ].join("\n");
-      window.open(lineUrl, "_blank", "noopener");
-      const done = ok => alert(ok
-        ? "คัดลอกข้อมูลการจองแล้ว ✅\nกรุณาวางข้อความในแชท LINE ของร้านเพื่อส่ง"
-        : "กรุณาคัดลอกข้อความนี้แล้วส่งในแชท LINE ของร้าน:\n\n" + msg);
-      if (navigator.clipboard) navigator.clipboard.writeText(msg).then(() => done(true), () => done(false));
-      else done(false);
+      const ok = copyText(msg);
+      bookingMsg.value = msg;
+      showCopyStatus(ok);
+      if (typeof bookingDone.showModal === "function") { bookingDone.showModal(); bookingMsg.scrollTop = 0; }
+      else alert((ok ? "คัดลอกข้อความแล้ว " : "") + "กรุณาส่งข้อความนี้ในแชท LINE ของร้าน:\n\n" + msg);
     });
+    document.getElementById("bookingCopyAgain").addEventListener("click", () => {
+      showCopyStatus(copyText(bookingMsg.value));
+      bookingMsg.focus(); bookingMsg.select();
+    });
+    document.getElementById("bookingClose").addEventListener("click", () => bookingDone.close());
   </script>
 </body>
 </html>
