@@ -1,0 +1,326 @@
+/* สไตล์ร่วมของเว็บดิเรกแอร์ (ใช้ทั้งหน้าไทย / และหน้าอังกฤษ /en/) */
+:root {
+  /* ธีมดำ-ฟ้า โทนเย็น */
+  --bg: #070b12;
+  --bg-alt: #0b111b;
+  --card: #0f1824;
+  --line: #1c2a3b;
+  --text: #eef6fc;
+  --muted: #9fb0c3;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-rgb: 56, 189, 248;
+  --on-accent: #04121d;
+  --line-green: #06c755;
+  --radius: 14px;
+  --max: 1160px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Sarabun", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .btn, .nav a, .price { font-family: "Kanit", sans-serif; line-height: 1.3; }
+[hidden] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+section { padding: 88px 0; }
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+.eyebrow { color: var(--accent); font-family: "Kanit", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: .5px; }
+.section-head h2 { font-size: clamp(28px, 4vw, 40px); margin: 6px 0 12px; }
+.section-head p { color: var(--muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 17px;
+  border: 2px solid transparent; cursor: pointer; transition: .2s; white-space: nowrap;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-line { background: var(--line-green); color: #fff; }
+.btn-line:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* Header */
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7, 11, 18, .88); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.logo { font-family: "Kanit", sans-serif; font-size: 22px; font-weight: 700; }
+.logo span { color: var(--accent); }
+.nav { display: flex; gap: 28px; }
+.nav a { color: var(--muted); font-size: 16px; transition: .2s; }
+.nav a:hover { color: var(--text); }
+.nav .nav-login { display: inline-flex; align-items: center; gap: 6px; }
+.nav .nav-login svg { width: 16px; height: 16px; }
+
+/* การ์ดหลังกดจองคิว */
+.booking-done { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 24px; width: min(440px, calc(100% - 32px)); margin: auto; }
+.booking-done::backdrop { background: rgba(0,0,0,.7); }
+.booking-done h3 { font-size: 21px; margin-bottom: 6px; }
+.booking-done .status { font-size: 15px; margin-bottom: 14px; color: var(--muted); }
+.booking-done .status.ok { color: var(--line-green); }
+.booking-done ol { padding-left: 22px; margin-bottom: 14px; font-size: 16px; }
+.booking-done ol li { margin-bottom: 4px; }
+.booking-done textarea { width: 100%; height: 205px; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; resize: none; }
+.booking-done .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.booking-done .actions .btn { padding: 12px 14px; font-size: 16px; }
+.booking-done .close { display: block; margin: 12px auto 0; background: none; border: 0; color: var(--muted); font: inherit; cursor: pointer; text-decoration: underline; }
+
+/* Login card (เปิดจากเมนู) */
+.login-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 28px; width: min(380px, calc(100% - 32px)); margin: auto; }
+.login-card::backdrop { background: rgba(0,0,0,.7); }
+.login-card h3 { font-size: 22px; margin-bottom: 4px; }
+.login-card p { color: var(--muted); margin-bottom: 18px; font-size: 15px; }
+.login-card .actions { display: flex; gap: 10px; margin-top: 16px; }
+.login-card .actions .btn { flex: 1; padding: 12px 16px; font-size: 16px; }
+.login-card .msg { color: #ff5a5f; font-size: 14px; margin-top: 10px; min-height: 1.4em; }
+.menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
+.menu-btn svg { width: 28px; height: 28px; }
+
+/* Hero */
+.hero {
+  position: relative; overflow: hidden; padding: 110px 0 100px;
+  background:
+    radial-gradient(ellipse 70% 60% at 85% 20%, rgba(var(--accent-rgb), .22), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(var(--accent-rgb), .10), transparent 60%),
+    linear-gradient(180deg, #070b12, #0a1220);
+}
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+  border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--muted);
+  background: var(--bg-alt); margin-bottom: 20px;
+}
+.badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-green); box-shadow: 0 0 10px var(--line-green); }
+.hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 700; margin-bottom: 18px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { color: var(--muted); font-size: 19px; max-width: 540px; margin-bottom: 32px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.lead b { color: var(--text); font-weight: 600; }
+.hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+.hero-chips a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: rgba(var(--accent-rgb), .12); border: 1px solid rgba(var(--accent-rgb), .4); color: var(--text); font-family: "Kanit", sans-serif; font-size: 16px; transition: .2s; }
+.hero-chips a:hover { background: rgba(var(--accent-rgb), .22); }
+.hero-chips svg { width: 18px; height: 18px; color: var(--accent); }
+.hero-stats { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
+.hero-stats strong { display: block; font-family: "Kanit", sans-serif; font-size: 30px; color: var(--text); }
+.hero-stats span { color: var(--muted); font-size: 15px; }
+
+.hero-visual {
+  aspect-ratio: 4/3.4; border-radius: 24px; border: 1px solid var(--line);
+  background: linear-gradient(145deg, #1d2229, #121519);
+  display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+}
+/* แทนที่ด้วยรูปรถจริงของร้าน: ใส่ <img src="images/hero.jpg"> ใน .hero-visual */
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+.hero-visual .car-svg { width: 86%; color: var(--accent); }
+.float-card {
+  position: absolute; background: rgba(26,30,36,.92); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 16px; font-size: 14px; backdrop-filter: blur(8px);
+}
+.float-card strong { font-family: "Kanit", sans-serif; display: block; font-size: 16px; }
+.float-card.one { top: 20px; left: 20px; }
+
+/* Services */
+.services { background: var(--bg-alt); }
+/* บริการหลัก: แอร์ & Carryboy */
+.featured { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 48px; }
+.feature {
+  position: relative; overflow: hidden; border-radius: var(--radius); padding: 32px;
+  background: linear-gradient(160deg, rgba(var(--accent-rgb), .16), var(--card) 55%); border: 1px solid rgba(var(--accent-rgb), .45);
+  scroll-margin-top: 90px;
+}
+.feature .tag { display: inline-block; font-family: "Kanit", sans-serif; font-size: 14px; color: var(--accent); border: 1px solid rgba(var(--accent-rgb), .5); border-radius: 999px; padding: 3px 12px; margin-bottom: 16px; }
+.feature .big-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; margin-bottom: 16px; }
+.feature .big-icon svg { width: 32px; height: 32px; }
+.feature h3 { font-size: clamp(26px, 3vw, 32px); margin-bottom: 8px; }
+.feature > p { color: var(--muted); margin-bottom: 16px; }
+.feature ul { list-style: none; margin-bottom: 24px; }
+.feature li { padding: 6px 0 6px 30px; position: relative; font-size: 17px; }
+.feature li::before { content: ""; position: absolute; left: 0; top: 11px; width: 18px; height: 18px; border-radius: 50%; background: rgba(var(--accent-rgb), .18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat; }
+.feature .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.feature .actions .btn { padding: 12px 22px; font-size: 16px; }
+.others-head { text-align: center; font-size: 22px; margin-bottom: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.grid-4 .service-card { padding: 22px; }
+.grid-4 .service-card h3 { font-size: 19px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 30px 26px; transition: .25s;
+}
+.service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.icon {
+  width: 54px; height: 54px; border-radius: 12px; display: grid; place-items: center;
+  background: rgba(var(--accent-rgb), .12); color: var(--accent); margin-bottom: 18px;
+}
+.icon svg { width: 28px; height: 28px; }
+.service-card h3 { font-size: 21px; margin-bottom: 8px; }
+.service-card p { color: var(--muted); font-size: 16px; }
+.service-card .from { margin-top: 16px; font-family: "Kanit", sans-serif; color: var(--accent); font-size: 15px; }
+
+/* Why us */
+.why { background: var(--bg-alt); }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.why-item { text-align: center; padding: 20px 10px; }
+.why-item .icon { margin: 0 auto 16px; width: 64px; height: 64px; border-radius: 50%; }
+.why-item h3 { font-size: 19px; margin-bottom: 6px; }
+.why-item p { color: var(--muted); font-size: 15px; }
+
+/* Gallery (รูปจากหน้าแอดมิน) */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.g-item {
+  border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--line);
+  background: var(--card); aspect-ratio: 4/3; padding: 0; cursor: zoom-in; display: block; width: 100%;
+}
+.g-item img { width: 100%; height: 100%; object-fit: cover; transition: .4s; display: block; }
+.g-item:hover img { transform: scale(1.05); }
+.g-item .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 15px; color: #fff; text-align: left;
+  background: linear-gradient(transparent, rgba(0,0,0,.75)); font-family: "Kanit", sans-serif;
+}
+.gallery-more { text-align: center; margin-top: 24px; }
+.lightbox { border: 0; padding: 0; background: transparent; max-width: min(1100px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; color: #fff; }
+.lightbox::backdrop { background: rgba(0,0,0,.85); }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 120px); display: block; margin: 0 auto; border-radius: 10px; }
+.lightbox p { text-align: center; margin-top: 12px; font-family: "Kanit", sans-serif; }
+.lightbox button { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 22px; cursor: pointer; }
+
+/* Press quote */
+.press {
+  max-width: 780px; margin: 48px auto 0; padding: 28px 32px; border-radius: var(--radius);
+  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+}
+.press .label { font-size: 14px; color: var(--accent); font-family: "Kanit", sans-serif; margin-bottom: 8px; }
+.press blockquote { font-size: 19px; line-height: 1.7; }
+.press figcaption { margin-top: 12px; color: var(--muted); font-size: 15px; }
+.press figcaption a { text-decoration: underline; }
+
+/* FAQ */
+.faq-list { max-width: 780px; margin: 0 auto; }
+details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
+summary {
+  cursor: pointer; list-style: none; padding: 20px 56px 20px 22px; position: relative;
+  font-family: "Kanit", sans-serif; font-size: 18px; font-weight: 500;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+  font-size: 26px; color: var(--accent); transition: .2s;
+}
+details[open] summary::after { content: "−"; }
+details p { padding: 0 22px 20px; color: var(--muted); }
+
+/* Booking / Contact */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px; }
+.panel h3 { font-size: 24px; margin-bottom: 6px; }
+.panel > p { color: var(--muted); margin-bottom: 22px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 15px; margin-bottom: 6px; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--text); font: inherit; font-size: 16px;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-btn { width: 100%; margin-top: 6px; }
+.form-note { font-size: 13px; color: var(--muted); text-align: center; margin-top: 10px; }
+
+.info-list { list-style: none; margin-bottom: 22px; }
+.info-list li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.info-list li:last-child { border-bottom: 0; }
+.info-list .icon { width: 44px; height: 44px; margin: 0; flex-shrink: 0; }
+.info-list .icon svg { width: 22px; height: 22px; }
+.info-list strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+.info-list span, .info-list a { color: var(--muted); font-size: 16px; }
+.info-list a:hover { color: var(--accent); }
+.line-qr { display: flex; align-items: center; gap: 18px; padding: 16px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: #333; }
+.line-qr img { width: 120px; height: 120px; flex-shrink: 0; image-rendering: pixelated; }
+.line-qr strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; color: #06c755; }
+.line-qr span { font-size: 15px; }
+.map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--bg); }
+.map-link { width: 100%; margin-top: 12px; padding: 12px 16px; font-size: 16px; }
+.map iframe { width: 100%; height: 100%; border: 0; }
+
+/* CTA band */
+.cta-band {
+  padding: 64px 0; text-align: center;
+  background: linear-gradient(120deg, #0284c7, #0c4a6e);
+}
+.cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+.cta-band p { opacity: .9; margin-bottom: 26px; }
+.cta-band .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
+.cta-band .btn-ghost:hover { background: #fff; color: #0369a1; }
+.cta-band .hero-actions { justify-content: center; }
+.btn-white { background: #fff; color: #0369a1; }
+.btn-white:hover { transform: translateY(-2px); }
+
+footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.foot-wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Mobile sticky bar */
+.mobile-bar {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(13,15,18,.95); border-top: 1px solid var(--line); gap: 10px;
+}
+.mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: 16px; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 560px; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .featured { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  section { padding: 64px 0; }
+  .nav { display: none; }
+  .menu-btn { display: block; }
+  .nav.open {
+    display: flex; flex-direction: column; gap: 0; position: absolute; top: 70px; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+  }
+  .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
+  .nav.open .nav-login { border-bottom: 0; color: var(--accent); }
+  .hero { padding: 64px 0 72px; }
+  .grid-3, .why-grid { grid-template-columns: 1fr; }
+  .feature { padding: 24px 20px; }
+  .grid-4 { gap: 12px; }
+  .grid-4 .service-card { padding: 18px; }
+  .gallery-grid { gap: 10px; }
+  .field-row { grid-template-columns: 1fr; }
+  .panel { padding: 24px 20px; }
+  .hero-stats { gap: 24px; }
+  .mobile-bar { display: flex; }
+}
+
+/* สลับภาษา */
+.nav { margin-left: auto; }
+.head-right { display: flex; align-items: center; gap: 14px; margin-left: 24px; }
+.lang-switch {
+  font-family: "Kanit", sans-serif; font-size: 14px; padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--text); transition: .2s;
+}
+.lang-switch:hover { border-color: var(--accent); color: var(--accent); }
+
+/* คำแปลใต้คำพูดจากนิตยสาร (หน้าภาษาอังกฤษ) */
+.press .translation { margin-top: 10px; color: var(--muted); font-size: 17px; font-style: italic; }
