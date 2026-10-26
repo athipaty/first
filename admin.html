@@ -261,6 +261,7 @@
         <button class="btn btn-ghost btn-sm" id="bkRefresh">รีเฟรช</button>
       </div>
       <div class="bookings" id="bookings"></div>
+      <p class="stats-note" id="bkRetention"></p>
       <div class="empty" id="bkEmpty" hidden></div>
       </section>
 
@@ -566,6 +567,7 @@
       try {
         const d = await api("/bookings" + (bkFilter ? "?status=" + bkFilter : ""));
         bkCounts = d.counts; renderChips(); renderBookings(d.bookings);
+        if (d.retentionDays) $("bkRetention").textContent = `การจองจะถูกลบอัตโนมัติเมื่อครบ ${d.retentionDays} วันนับจากวันที่ส่ง (ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล) · ตัวเลขในแท็บสถิติยังอยู่ครบ`;
       } catch (err) { toast(err.message); }
     }
     function renderBookings(list) {
