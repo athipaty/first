@@ -74,6 +74,15 @@
   }
   function remember(id) { try { localStorage.setItem(STORE_KEY, id); } catch {} }
 
+  // โหมดตัวอย่าง (กรอบพรีวิวในหน้าแอดมิน): ?theme-preview=<id>
+  // ใช้ธีมที่ส่งมา ไม่ถาม backend และไม่จำค่าในเบราว์เซอร์
+  const previewId = new URLSearchParams(location.search).get("theme-preview");
+  if (previewId !== null) {
+    apply(previewId);
+    window.DirekairThemes = { list: THEMES, apply, remember() {}, get current() { return current; }, DEFAULT, preview: true };
+    return;
+  }
+
   // 1) ใช้ธีมที่จำไว้ทันที (กันสีกระพริบ) 2) ถามธีมล่าสุดจาก backend
   let saved = null;
   try { saved = localStorage.getItem(STORE_KEY); } catch {}
