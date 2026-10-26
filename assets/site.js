@@ -9,6 +9,13 @@ const T = {
     wrongPw: "รหัสผ่านไม่ถูกต้อง",
     tooMany: "ใส่รหัสผิดหลายครั้งเกินไป กรุณารอ 15 นาที",
     netErr: "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่",
+    sending: "กำลังส่งข้อมูลการจอง…",
+    savedTitle: "✅ ส่งข้อมูลการจองถึงร้านแล้ว",
+    savedBody: p => `ทางร้านจะติดต่อกลับที่เบอร์ ${p} เพื่อยืนยันคิว`,
+    failTitle: "ส่งข้อมูลไม่สำเร็จ",
+    failBody: "กรุณาส่งข้อความใน LINE ตามขั้นตอนด้านล่าง หรือโทร 038-285-061",
+    lineOptional: "อยากได้คำตอบเร็วขึ้น? ส่งข้อความใน LINE ด้วยก็ได้",
+    lineRequired: "ส่งข้อความจองคิวใน LINE",
     copied: "✅ คัดลอกข้อความจองคิวแล้ว",
     copyHint: "กด \"คัดลอกข้อความ\" หรือกดค้างที่ข้อความด้านล่างเพื่อคัดลอก",
     copiedShort: "คัดลอกข้อความแล้ว ",
@@ -24,6 +31,13 @@ const T = {
     wrongPw: "Wrong password",
     tooMany: "Too many wrong attempts. Please wait 15 minutes.",
     netErr: "Can't reach the server. Please try again.",
+    sending: "Sending your booking…",
+    savedTitle: "✅ Your booking has been sent to the shop",
+    savedBody: p => `The shop will contact you on ${p} to confirm.`,
+    failTitle: "Couldn't send your booking",
+    failBody: "Please send the message on LINE using the steps below, or call 038-285-061.",
+    lineOptional: "Want a faster reply? You can also message us on LINE.",
+    lineRequired: "Send your booking on LINE",
     copied: "✅ Booking message copied",
     copyHint: "Tap \"Copy message\" or long-press the text below to copy it",
     copiedShort: "Message copied. ",
@@ -182,12 +196,42 @@ document.getElementById("bookingForm").addEventListener("submit", e => {
     L[5] + ": " + fmtDate(v("date")),
     L[6] + ": " + (v("note") || "-"),
   ].join("\n");
+  // คัดลอกก่อน (ต้องอยู่ในจังหวะที่ลูกค้ากดปุ่ม มือถือจึงยอมให้คัดลอก) แล้วค่อยส่งข้อมูลถึงร้าน
   const ok = copyText(msg);
   bookingMsg.value = msg;
   showCopyStatus(ok);
-  if (typeof bookingDone.showModal === "function") { bookingDone.showModal(); bookingMsg.scrollTop = 0; }
-  else alert((ok ? T.copiedShort : "") + T.sendThis + msg);
+  const hasDialog = typeof bookingDone.showModal === "function";
+  if (hasDialog) {
+    showSaveState("sending");
+    bookingDone.showModal(); bookingMsg.scrollTop = 0;
+  }
+  const form = e.target, btn = form.querySelector("[type=submit]");
+  btn.disabled = true;
+  const phone = v("phone");
+  fetch(window.DIREKAIR_API + "/bookings", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: v("name"), phone, car: v("car"), service: serviceText(), date: v("date"), note: v("note"),
+      lang: LANG, website: v("website"),
+    }),
+  })
+    .then(r => { if (!r.ok) throw new Error(r.status); })
+    .then(() => { showSaveState("saved", phone); form.reset(); })
+    .catch(() => {
+      showSaveState("failed");
+      if (!hasDialog) alert((ok ? T.copiedShort : "") + T.sendThis + msg);
+    })
+    .finally(() => { btn.disabled = false; });
 });
+function showSaveState(state, phone) {
+  const title = document.getElementById("bookingDoneTitle");
+  const body = document.getElementById("bookingSaveStatus");
+  const lineHead = document.getElementById("bookingLineHead");
+  bookingDone.dataset.state = state;
+  if (state === "sending") { title.textContent = T.sending; body.textContent = ""; lineHead.textContent = T.lineOptional; }
+  if (state === "saved") { title.textContent = T.savedTitle; body.textContent = T.savedBody(phone); lineHead.textContent = T.lineOptional; }
+  if (state === "failed") { title.textContent = T.failTitle; body.textContent = T.failBody; lineHead.textContent = T.lineRequired; }
+}
 document.getElementById("bookingCopyAgain").addEventListener("click", () => {
   showCopyStatus(copyText(bookingMsg.value));
   bookingMsg.focus(); bookingMsg.select();
