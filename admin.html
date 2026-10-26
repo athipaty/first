@@ -80,6 +80,15 @@
     .drop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .drop input { display: none; }
     .upload-fields .btn { margin-top: 14px; }
+    .up-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .up-row select, .photo select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
+    .up-row input[type=file] { width: 100%; font-size: 14px; color: var(--muted); padding: 8px 0; }
+    .photo .thumb { position: relative; }
+    .photo .flag { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .photo .flag span { background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+    .photo .flag span.alt { background: rgba(0,0,0,.65); color: #fff; }
+    .photo .hero-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 640px) { .up-row { grid-template-columns: 1fr; } }
     .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
     .list-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
@@ -314,6 +323,10 @@
         <div class="upload-fields">
           <label for="caption">คำอธิบายรูป (ไม่บังคับ)</label>
           <input type="text" id="caption" maxlength="120" placeholder="เช่น Toyota Fortuner · ติดฟิล์มรอบคัน">
+          <div class="up-row">
+            <div><label for="category">ประเภทงาน</label><select id="category"></select></div>
+            <div><label for="before">รูป "ก่อนทำ" (ไม่บังคับ)</label><input type="file" id="before" accept="image/jpeg,image/png,image/webp"></div>
+          </div>
           <div class="hint">รองรับ JPG, PNG, WebP ขนาดไม่เกิน 10MB · ระบบจะย่อรูปและลบข้อมูลตำแหน่ง GPS ออกให้อัตโนมัติ</div>
           <button class="btn btn-primary" type="submit" id="uploadBtn" disabled>อัปโหลดรูป</button>
           <div class="msg" id="uploadMsg"></div>
@@ -711,7 +724,9 @@
       if (!file) return;
       const fd = new FormData();
       fd.append("caption", $("caption").value);
+      fd.append("category", $("category").value);
       fd.append("photo", file);
+      if ($("before").files[0]) fd.append("before", $("before").files[0]);
       $("uploadBtn").disabled = true; $("uploadBtn").textContent = "กำลังอัปโหลด…";
       $("uploadMsg").className = "msg"; $("uploadMsg").textContent = "";
       try {
@@ -726,8 +741,13 @@
     });
 
     // ---------- list ----------
+    // ประเภทงานของรูป (ใช้กรองแกลเลอรีบนหน้าเว็บ) และรูปที่ใช้เป็นรูปหลักหน้าแรก
+    const CATS = [["aircon", "แอร์รถยนต์"], ["carryboy", "หลังคา Carryboy"], ["tint", "ฟิล์มกรองแสง"], ["audio", "เครื่องเสียง"], ["other", "อื่น ๆ"]];
+    let heroId = "";
+    $("category").replaceChildren(...CATS.map(([v, l]) => Object.assign(document.createElement("option"), { value: v, textContent: l })));
     async function loadPhotos() {
-      photos = await api("/gallery");
+      const [list, settings] = await Promise.all([api("/gallery"), api("/settings").catch(() => ({}))]);
+      photos = list; heroId = settings.heroPhoto ? settings.heroPhoto.id : "";
       render();
     }
 
@@ -738,9 +758,11 @@
         const card = document.createElement("div");
         card.className = "photo";
         card.innerHTML = `
-          <img loading="lazy" alt="">
+          <div class="thumb"><img loading="lazy" alt=""><div class="flag"></div></div>
           <div class="body">
             <input type="text" maxlength="120" placeholder="คำอธิบายรูป">
+            <select aria-label="ประเภทงาน"></select>
+            <button class="btn btn-ghost btn-sm hero-btn" data-act="hero"></button>
             <div class="actions">
               <button class="btn btn-ghost btn-sm" data-act="up" title="เลื่อนขึ้น" ${i === 0 ? "disabled" : ""}>↑</button>
               <button class="btn btn-ghost btn-sm" data-act="down" title="เลื่อนลง" ${i === photos.length - 1 ? "disabled" : ""}>↓</button>
@@ -749,6 +771,28 @@
             </div>
           </div>`;
         card.querySelector("img").src = p.url;
+        const flag = card.querySelector(".flag");
+        if (p.id === heroId) { const f = document.createElement("span"); f.textContent = "รูปหน้าแรก"; flag.append(f); }
+        if (p.beforeUrl) { const f = document.createElement("span"); f.className = "alt"; f.textContent = "มีรูปก่อน/หลัง"; flag.append(f); }
+        const cat = card.querySelector("select");
+        CATS.forEach(([v, l]) => { const o = document.createElement("option"); o.value = v; o.textContent = l; o.selected = (p.category || "other") === v; cat.append(o); });
+        cat.addEventListener("change", async () => {
+          try { const u = await api("/gallery/" + p.id, jsonBody("PATCH", { category: cat.value })); p.category = u.category; toast("เปลี่ยนประเภทแล้ว"); }
+          catch (err) { toast(err.message); cat.value = p.category || "other"; }
+        });
+        const heroBtn = card.querySelector('[data-act="hero"]');
+        const isHero = p.id === heroId;
+        heroBtn.textContent = isHero ? "★ รูปหน้าแรก · เลิกใช้" : "☆ ใช้เป็นรูปหน้าแรก";
+        heroBtn.title = isHero ? "กดเพื่อกลับไปใช้ภาพวาดรถ" : "ใช้รูปนี้เป็นรูปหลักด้านบนของหน้าเว็บ";
+        heroBtn.setAttribute("aria-pressed", String(isHero));
+        heroBtn.addEventListener("click", async () => {
+          try {
+            const d = await api("/settings", jsonBody("PUT", { heroPhotoId: isHero ? "" : p.id }));
+            heroId = d.heroPhoto ? d.heroPhoto.id : "";
+            toast(isHero ? "เลิกใช้รูปหน้าแรกแล้ว (กลับไปใช้ภาพวาดรถ)" : "ตั้งเป็นรูปหน้าแรกแล้ว ✅");
+            render();
+          } catch (err) { toast(err.message); }
+        });
         const input = card.querySelector("input");
         const saveBtn = card.querySelector('[data-act="save"]');
         input.value = p.caption;
