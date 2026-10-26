@@ -91,7 +91,11 @@
     fetch(window.DIREKAIR_API + "/settings")
       .then(r => (r.ok ? r.json() : null))
       .then(d => {
-        if (!d || !byId(d.theme)) return;
+        if (!d) return;
+        // ข้อมูลร้าน (เบอร์ เวลาทำการ ประกาศ) ให้ site.js ใช้ต่อ
+        window.DirekairSettings = d;
+        document.dispatchEvent(new CustomEvent("direkair:settings", { detail: d }));
+        if (!byId(d.theme)) return;
         if (d.theme !== current) apply(d.theme);
         remember(d.theme);
         document.dispatchEvent(new CustomEvent("direkair:theme", { detail: d.theme }));

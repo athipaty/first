@@ -13,7 +13,9 @@ const T = {
     savedTitle: "✅ ส่งข้อมูลการจองถึงร้านแล้ว",
     savedBody: p => `ทางร้านจะติดต่อกลับที่เบอร์ ${p} เพื่อยืนยันคิว`,
     failTitle: "ส่งข้อมูลไม่สำเร็จ",
-    failBody: "กรุณาส่งข้อความใน LINE ตามขั้นตอนด้านล่าง หรือโทร 038-285-061",
+    failBody: () => `กรุณาส่งข้อความใน LINE ตามขั้นตอนด้านล่าง หรือโทร ${SHOP.phone}`,
+    mobile: "มือถือ",
+    closeAnnounce: "ปิดประกาศ",
     lineOptional: "อยากได้คำตอบเร็วขึ้น? ส่งข้อความใน LINE ด้วยก็ได้",
     lineRequired: "ส่งข้อความจองคิวใน LINE",
     copied: "✅ คัดลอกข้อความจองคิวแล้ว",
@@ -35,7 +37,9 @@ const T = {
     savedTitle: "✅ Your booking has been sent to the shop",
     savedBody: p => `The shop will contact you on ${p} to confirm.`,
     failTitle: "Couldn't send your booking",
-    failBody: "Please send the message on LINE using the steps below, or call 038-285-061.",
+    failBody: () => `Please send the message on LINE using the steps below, or call ${SHOP.phone}.`,
+    mobile: "mobile",
+    closeAnnounce: "Close announcement",
     lineOptional: "Want a faster reply? You can also message us on LINE.",
     lineRequired: "Send your booking on LINE",
     copied: "✅ Booking message copied",
@@ -56,10 +60,10 @@ const SHOP = {
 };
 
 const lineUrl = SHOP.lineUrl;
-const telUrl = "tel:" + SHOP.phone.replace(/[^0-9+]/g, "");
+const telHref = n => "tel:" + n.replace(/[^0-9+]/g, "");
 
 document.querySelectorAll(".js-line").forEach(a => { a.href = lineUrl; a.target = "_blank"; a.rel = "noopener"; });
-document.querySelectorAll(".js-tel").forEach(a => { a.href = telUrl; });
+document.querySelectorAll(".js-tel").forEach(a => { a.href = telHref(SHOP.phone); });
 document.getElementById("year").textContent = new Date().getFullYear() + T.yearOffset;
 
 // เมนูมือถือ
@@ -230,10 +234,83 @@ function showSaveState(state, phone) {
   bookingDone.dataset.state = state;
   if (state === "sending") { title.textContent = T.sending; body.textContent = ""; lineHead.textContent = T.lineOptional; }
   if (state === "saved") { title.textContent = T.savedTitle; body.textContent = T.savedBody(phone); lineHead.textContent = T.lineOptional; }
-  if (state === "failed") { title.textContent = T.failTitle; body.textContent = T.failBody; lineHead.textContent = T.lineRequired; }
+  if (state === "failed") { title.textContent = T.failTitle; body.textContent = T.failBody(); lineHead.textContent = T.lineRequired; }
 }
 document.getElementById("bookingCopyAgain").addEventListener("click", () => {
   showCopyStatus(copyText(bookingMsg.value));
   bookingMsg.focus(); bookingMsg.select();
 });
 document.getElementById("bookingClose").addEventListener("click", () => bookingDone.close());
+
+// ===== ข้อมูลร้านที่แก้ได้จากหน้าแอดมิน (เบอร์ เวลาทำการ ประกาศ) =====
+// ถ้ายังไม่ได้ตั้งค่า หน้าเว็บใช้ข้อความเดิมใน HTML
+const thaiToday = () => new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
+function applyShopInfo(d) {
+  if (!d) return;
+  if (Array.isArray(d.phones) && d.phones.length) {
+    SHOP.phone = d.phones[0].number;
+    document.querySelectorAll(".js-tel").forEach(a => { a.href = telHref(SHOP.phone); });
+    document.querySelectorAll('[data-shop="phone"]').forEach(el => { el.textContent = SHOP.phone; });
+    const shops = d.phones.filter(p => p.type !== "mobile"), mobiles = d.phones.filter(p => p.type === "mobile");
+    const link = p => { const a = document.createElement("a"); a.href = telHref(p.number); a.textContent = p.number; return a; };
+    document.querySelectorAll('[data-shop="phones"]').forEach(box => {
+      const parts = [];
+      shops.forEach((p, i) => { if (i) parts.push(", "); parts.push(link(p)); });
+      mobiles.forEach((p, i) => {
+        if (parts.length || i) parts.push(document.createElement("br"));
+        const lab = document.createElement("span"); lab.textContent = " (" + T.mobile + ")";
+        parts.push(link(p), lab);
+      });
+      box.replaceChildren(...parts);
+    });
+  }
+  if (d.hours && d.hours.th) {
+    const h = LANG === "en" ? (d.hours.en || d.hours.th) : d.hours.th;
+    document.querySelectorAll('[data-shop="hours"]').forEach(el => { el.textContent = h; });
+  }
+  const bar = document.getElementById("announce");
+  const a = d.announcement;
+  if (bar && a && a.enabled) {
+    const text = LANG === "en" ? (a.en || a.th) : a.th;
+    const key = text + "|" + a.until;
+    let closed = null;
+    try { closed = localStorage.getItem("direkair_announce_closed"); } catch {}
+    if (text && (!a.until || thaiToday() <= a.until) && closed !== key) {
+      document.getElementById("announceText").textContent = text;
+      const btn = document.getElementById("announceClose");
+      btn.setAttribute("aria-label", T.closeAnnounce);
+      btn.onclick = () => { bar.hidden = true; try { localStorage.setItem("direkair_announce_closed", key); } catch {} };
+      bar.hidden = false;
+    }
+  }
+}
+if (window.DirekairSettings) applyShopInfo(window.DirekairSettings);
+document.addEventListener("direkair:settings", e => applyShopInfo(e.detail));
+
+// ===== สถิติ (นับจำนวนอย่างเดียว ไม่เก็บข้อมูลส่วนตัว) =====
+// ไม่นับตอนแอดมินล็อกอินอยู่ และไม่นับในกรอบตัวอย่างของหน้าแอดมิน
+function track(event) {
+  if (hasToken || (window.DirekairThemes && window.DirekairThemes.preview)) return;
+  const url = window.DIREKAIR_API + "/track";
+  const body = JSON.stringify({ event, lang: LANG });
+  try {
+    if (navigator.sendBeacon && navigator.sendBeacon(url, new Blob([body], { type: "text/plain" }))) return;
+  } catch {}
+  fetch(url, { method: "POST", headers: { "Content-Type": "text/plain" }, body, keepalive: true }).catch(() => {});
+}
+(() => {
+  // นับผู้เข้าชมครั้งเดียวต่อเบราว์เซอร์ต่อวัน
+  let last = null;
+  try { last = localStorage.getItem("direkair_visit_day"); } catch {}
+  if (last !== thaiToday()) {
+    try { localStorage.setItem("direkair_visit_day", thaiToday()); } catch {}
+    track("visit");
+  }
+})();
+document.addEventListener("click", e => {
+  const el = e.target.closest("a");
+  if (!el) return;
+  if (el.matches('.js-tel, a[href^="tel:"]')) track("call");
+  else if (el.matches(".js-line")) track("line");
+  else if (el.matches(".map-link")) track("map");
+});
