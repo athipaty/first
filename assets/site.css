@@ -349,3 +349,16 @@ footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--
   position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%;
   border: 0; background: rgba(0,0,0,.12); color: inherit; font-size: 20px; line-height: 1; cursor: pointer;
 }
+
+/* หน้านโยบายความเป็นส่วนตัว */
+.legal { padding: 48px 0 80px; }
+.legal .container { max-width: 760px; }
+.legal .back { color: var(--accent); font-size: 15px; }
+.legal h1 { font-size: clamp(28px, 4vw, 38px); margin: 14px 0 4px; }
+.legal .updated { color: var(--muted); font-size: 14px; margin-bottom: 26px; }
+.legal h2 { font-size: 21px; margin: 30px 0 10px; }
+.legal p, .legal li { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.legal b { color: var(--text); font-weight: 600; }
+.legal ul { padding-left: 22px; margin: 8px 0; }
+.form-note a, .foot-wrap a.privacy { text-decoration: underline; }
+.legal p + p, .legal ul + p { margin-top: 10px; }
