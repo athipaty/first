@@ -15,6 +15,9 @@ const T = {
     failTitle: "ส่งข้อมูลไม่สำเร็จ",
     failBody: () => `กรุณาส่งข้อความใน LINE ตามขั้นตอนด้านล่าง หรือโทร ${SHOP.phone}`,
     mobile: "มือถือ",
+    cats: { all: "ทั้งหมด", aircon: "แอร์รถยนต์", carryboy: "หลังคา Carryboy", tint: "ฟิล์ม", audio: "เครื่องเสียง", other: "อื่น ๆ" },
+    before: "ก่อนทำ", after: "หลังทำ", beforeAfter: "ก่อน / หลัง",
+    heroAlt: "ผลงานของร้านดิเรกแอร์",
     closeAnnounce: "ปิดประกาศ",
     lineOptional: "อยากได้คำตอบเร็วขึ้น? ส่งข้อความใน LINE ด้วยก็ได้",
     lineRequired: "ส่งข้อความจองคิวใน LINE",
@@ -39,6 +42,9 @@ const T = {
     failTitle: "Couldn't send your booking",
     failBody: () => `Please send the message on LINE using the steps below, or call ${SHOP.phone}.`,
     mobile: "mobile",
+    cats: { all: "All", aircon: "Car air-con", carryboy: "Carryboy", tint: "Tint", audio: "Audio", other: "Other" },
+    before: "Before", after: "After", beforeAfter: "Before / after",
+    heroAlt: "Work by Direk Air",
     closeAnnounce: "Close announcement",
     lineOptional: "Want a faster reply? You can also message us on LINE.",
     lineRequired: "Send your booking on LINE",
@@ -72,41 +78,75 @@ document.getElementById("menuBtn").addEventListener("click", () => nav.classList
 nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
 // แกลเลอรีผลงาน: โหลดรูปจากเซิร์ฟเวอร์ (จัดการรูปที่ /admin)
+// กรองตามประเภทงานได้ และรูปที่มี "ก่อนทำ" สลับดูก่อน/หลังในหน้าต่างรูปใหญ่
 const GALLERY_INITIAL = 6;
+const CAT_ORDER = ["aircon", "carryboy", "tint", "audio", "other"];
 fetch(window.DIREKAIR_API + "/gallery").then(r => r.ok ? r.json() : []).then(photos => {
   if (!Array.isArray(photos) || !photos.length) return;
   const grid = document.getElementById("galleryGrid");
   const box = document.getElementById("lightbox");
-  photos.forEach((p, i) => {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "g-item";
-    item.hidden = i >= GALLERY_INITIAL;
-    const img = document.createElement("img");
-    img.src = p.url; img.alt = p.caption || T.workAlt; img.loading = "lazy";
-    item.append(img);
-    if (p.caption) {
-      const cap = document.createElement("div");
-      cap.className = "cap"; cap.textContent = p.caption;
-      item.append(cap);
-    }
-    item.addEventListener("click", () => {
-      box.querySelector("img").src = p.url;
-      box.querySelector("img").alt = img.alt;
-      box.querySelector("p").textContent = p.caption || "";
-      box.showModal();
-    });
-    grid.append(item);
-  });
-  box.addEventListener("click", e => { if (e.target === box) box.close(); });
+  const boxImg = box.querySelector("img"), boxCap = box.querySelector("p");
+  const ba = document.getElementById("lightboxBA");
   const more = document.getElementById("galleryMore");
-  if (photos.length > GALLERY_INITIAL) {
-    more.hidden = false;
-    more.querySelector("button").addEventListener("click", () => {
-      grid.querySelectorAll(".g-item[hidden]").forEach(el => el.hidden = false);
-      more.hidden = true;
-    });
+  let filter = "all", expanded = false;
+
+  function openPhoto(p, alt) {
+    const show = which => {
+      boxImg.src = which === "before" ? p.beforeUrl : p.url;
+      ba.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ba === which)));
+    };
+    boxImg.alt = alt;
+    boxCap.textContent = p.caption || "";
+    ba.hidden = !p.beforeUrl;
+    ba.querySelectorAll("button").forEach(b => { b.onclick = () => show(b.dataset.ba); });
+    show("after");
+    box.showModal();
   }
+  function render() {
+    const list = photos.filter(p => filter === "all" || (p.category || "other") === filter);
+    grid.replaceChildren(...list.map((p, i) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "g-item";
+      item.hidden = !expanded && i >= GALLERY_INITIAL;
+      const img = document.createElement("img");
+      img.src = p.url; img.alt = p.caption || T.workAlt; img.loading = "lazy";
+      item.append(img);
+      if (p.beforeUrl) {
+        const tag = document.createElement("span");
+        tag.className = "ba-tag"; tag.textContent = T.beforeAfter;
+        item.append(tag);
+      }
+      if (p.caption) {
+        const cap = document.createElement("div");
+        cap.className = "cap"; cap.textContent = p.caption;
+        item.append(cap);
+      }
+      item.addEventListener("click", () => openPhoto(p, img.alt));
+      return item;
+    }));
+    more.hidden = expanded || list.length <= GALLERY_INITIAL;
+  }
+  // ปุ่มกรอง: แสดงเฉพาะเมื่อมีรูปมากกว่า 1 ประเภท
+  const used = CAT_ORDER.filter(c => photos.some(p => (p.category || "other") === c));
+  const bar = document.getElementById("galleryFilters");
+  if (used.length > 1) {
+    bar.replaceChildren(...["all", ...used].map(c => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = T.cats[c];
+      b.setAttribute("aria-pressed", String(c === filter));
+      b.addEventListener("click", () => {
+        filter = c; expanded = false;
+        bar.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+        render();
+      });
+      return b;
+    }));
+    bar.hidden = false;
+  }
+  box.addEventListener("click", e => { if (e.target === box) box.close(); });
+  more.querySelector("button").addEventListener("click", () => { expanded = true; render(); });
+  render();
   document.getElementById("gallery").hidden = false;
   document.getElementById("galleryNav").hidden = false;
 }).catch(() => {});
@@ -267,6 +307,18 @@ function applyShopInfo(d) {
   if (d.hours && d.hours.th) {
     const h = LANG === "en" ? (d.hours.en || d.hours.th) : d.hours.th;
     document.querySelectorAll('[data-shop="hours"]').forEach(el => { el.textContent = h; });
+  }
+  // รูปหลักด้านบนของหน้า (เลือกจากรูปผลงานในหน้าแอดมิน) แทนภาพวาดรถ
+  const hero = document.querySelector(".hero-visual");
+  if (hero && d.heroPhoto && d.heroPhoto.url) {
+    let img = hero.querySelector("img.hero-photo");
+    if (!img) {
+      img = document.createElement("img");
+      img.className = "hero-photo"; img.alt = T.heroAlt; img.decoding = "async";
+      hero.prepend(img);
+    }
+    img.src = d.heroPhoto.url;
+    hero.classList.add("has-photo");
   }
   const bar = document.getElementById("announce");
   const a = d.announcement;

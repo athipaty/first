@@ -54,13 +54,13 @@
       "opens": "08:00",
       "closes": "18:00"
     }],
-    "sameAs": ["https://www.facebook.com/p/%E0%B8%AB%E0%B8%88%E0%B8%81%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5-100067207684848/"]
+    "sameAs": ["https://www.google.com/maps?cid=3062035745457644778", "https://www.facebook.com/p/%E0%B8%AB%E0%B8%88%E0%B8%81%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5-100067207684848/"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=5">
+  <link rel="stylesheet" href="/assets/site.css?v=6">
   <script src="/config.js"></script>
   <script src="/assets/themes.js?v=2"></script>
 </head>
@@ -235,6 +235,7 @@
         <div class="label">สื่อพูดถึงเรา</div>
         <blockquote>“ดิเรกแอร์ เป็นร้านที่มีมาตรฐาน ด้วยแนวทางการบริหารที่ไม่เอาเปรียบผู้บริโภค เรื่องคุณภาพสินค้ากับราคานั้นสอดคล้องกัน”</blockquote>
         <figcaption>นิตยสาร Autoinfo ฉบับที่ 409 (กุมภาพันธ์ 2549) คอลัมน์แนะนำร้าน · <a href="https://www.autoinfo.co.th/article/54886" target="_blank" rel="noopener">อ่านบทความ</a></figcaption>
+        <a href="https://www.google.com/maps?cid=3062035745457644778" class="review-cta" target="_blank" rel="noopener">อ่านและเขียนรีวิวของลูกค้าบน Google →</a>
       </figure>
     </div>
   </section>
@@ -247,6 +248,7 @@
         <div class="eyebrow">ผลงานของเรา</div>
         <h2>รถลูกค้าที่มาใช้บริการ</h2>
       </div>
+      <div class="gallery-filters" id="galleryFilters" hidden></div>
       <div class="gallery-grid" id="galleryGrid"></div>
       <div class="gallery-more" id="galleryMore" hidden><button class="btn btn-ghost" type="button">ดูรูปเพิ่มเติม</button></div>
     </div>
@@ -282,6 +284,7 @@
   </dialog>
   <dialog class="lightbox" id="lightbox">
     <form method="dialog"><button aria-label="ปิด">×</button></form>
+    <div class="ba" id="lightboxBA" hidden><button type="button" data-ba="before">ก่อนทำ</button><button type="button" data-ba="after">หลังทำ</button></div>
     <img alt="">
     <p></p>
   </dialog>
@@ -405,6 +408,7 @@
             <iframe src="https://www.google.com/maps?q=Direk+Air,+62/1-2-3+Ban+Suan-Sukhumvit+20+Alley,+Bang+Pla+Soi,+Chon+Buri+20000&amp;ftid=0x311d4878e8a0d75d:0x2a7e8949818d24ea&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ร้าน"></iframe>
           </div>
           <a href="https://maps.app.goo.gl/rMBAzkuiuvV6tQLK8" class="btn btn-ghost map-link" target="_blank" rel="noopener">เปิดใน Google Maps / นำทาง</a>
+          <a href="https://www.google.com/maps?cid=3062035745457644778" class="btn btn-ghost review-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>ดูรีวิว / รีวิวเราบน Google</a>
         </div>
       </div>
     </div>
@@ -423,6 +427,6 @@
     <a href="#" class="btn btn-line js-line">แอดไลน์</a>
   </div>
 
-  <script src="/assets/site.js?v=4"></script>
+  <script src="/assets/site.js?v=5"></script>
 </body>
 </html>
