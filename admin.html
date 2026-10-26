@@ -71,7 +71,19 @@
     main { padding: 32px 0 64px; }
     main h1 { font-size: 26px; }
     main > .wrap > p { color: var(--muted); margin-bottom: 24px; }
-    .upload { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; margin-bottom: 32px; }
+    .upload { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 24px; align-items: start; margin-bottom: 32px; }
+    /* อัปโหลด: ช่อง "ก่อนทำ" กับ "หลังทำ" วางคู่กัน */
+    .pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: start; }
+    .pair .arrow { align-self: center; color: var(--muted); font-size: 22px; margin-top: 26px; }
+    .slot-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; font-size: 15px; }
+    .slot-head small { color: var(--muted); font-size: 12px; }
+    .slot-head small.req { color: var(--accent); }
+    .slot .drop.has { border-style: solid; border-color: var(--accent); }
+    .slot .clear { margin-top: 8px; width: 100%; }
+    .tag { position: absolute; top: 8px; left: 8px; z-index: 1; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: rgba(0,0,0,.7); color: #fff; pointer-events: none; }
+    .tag.after { background: var(--accent); color: var(--on-accent); }
+    .up-summary { font-size: 14px; color: var(--muted); margin-top: 12px; }
+    .up-summary b { color: var(--text); }
     .drop {
       aspect-ratio: 4/3; border: 2px dashed var(--line); border-radius: 12px; display: grid; place-items: center;
       text-align: center; color: var(--muted); cursor: pointer; overflow: hidden; position: relative; font-size: 14px; padding: 10px;
@@ -81,14 +93,23 @@
     .drop input { display: none; }
     .upload-fields .btn { margin-top: 14px; }
     .up-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
-    .up-row select, .photo select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
-    .up-row input[type=file] { width: 100%; font-size: 14px; color: var(--muted); padding: 8px 0; }
-    .photo .thumb { position: relative; }
-    .photo .flag { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .cat-select, .photo select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
+    .photo .thumb { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); }
+    .photo .half { position: relative; aspect-ratio: 1; background: #111; overflow: hidden; }
+    .photo .half img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+    .photo .half .tools { position: absolute; left: 6px; right: 6px; bottom: 6px; display: flex; gap: 4px; }
+    .photo .half .tools button { flex: 1; font: inherit; font-size: 12px; padding: 4px 0; border: 0; border-radius: 6px; background: rgba(0,0,0,.72); color: #fff; cursor: pointer; }
+    .photo .half .tools button:hover { background: rgba(0,0,0,.9); }
+    .photo .add-before { width: 100%; height: 100%; display: grid; place-content: center; gap: 4px; text-align: center; font: inherit; font-size: 13px; line-height: 1.4;
+      color: var(--muted); background: var(--bg); border: 2px dashed var(--line); cursor: pointer; padding: 8px; }
+    .photo .add-before:hover { color: var(--accent); border-color: var(--accent); }
+    .photo .add-before b { font-size: 22px; font-weight: 400; }
+    .photo .half.busy::after { content: "กำลังอัปโหลด…"; position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); color: #fff; font-size: 13px; }
+    .photo .flag { display: flex; gap: 6px; flex-wrap: wrap; }
+    .photo .flag:empty { display: none; }
     .photo .flag span { background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
     .photo .flag span.alt { background: rgba(0,0,0,.65); color: #fff; }
     .photo .hero-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-    @media (max-width: 640px) { .up-row { grid-template-columns: 1fr; } }
     .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
     .list-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
@@ -224,6 +245,8 @@
       .swatch .live { font-size: 11px; }
       .upload { grid-template-columns: 1fr; }
       .drop { max-width: 100%; }
+      .pair { grid-template-columns: 1fr 1fr; }
+      .pair .arrow { display: none; }
       .logo small { display: none; }
     }
   </style>
@@ -315,19 +338,37 @@
       <p class="tab-intro">รูปที่อัปโหลดจะแสดงในส่วน "ผลงานของเรา" บนหน้าเว็บทันที รูปบนสุดจะแสดงเป็นรูปแรก</p>
 
       <form class="panel upload" id="uploadForm">
-        <label class="drop" id="drop">
-          <span id="dropText">กดเพื่อเลือกรูป<br>หรือลากรูปมาวางที่นี่</span>
-          <img id="preview" alt="" hidden>
-          <input type="file" id="photo" accept="image/jpeg,image/png,image/webp">
-        </label>
+        <div class="pair">
+          <div class="slot">
+            <div class="slot-head"><b>① รูปก่อนทำ</b><small>ไม่บังคับ</small></div>
+            <label class="drop" id="dropBefore">
+              <span class="tag">ก่อน</span>
+              <span id="dropTextBefore">กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
+              <img id="previewBefore" alt="" hidden>
+              <input type="file" id="before" accept="image/jpeg,image/png,image/webp">
+            </label>
+            <button class="btn btn-ghost btn-sm clear" type="button" id="clearBefore" hidden>เอารูปนี้ออก</button>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="slot">
+            <div class="slot-head"><b>② รูปหลังทำ</b><small class="req">ต้องมี</small></div>
+            <label class="drop" id="drop">
+              <span class="tag after">หลัง</span>
+              <span id="dropText">กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
+              <img id="preview" alt="" hidden>
+              <input type="file" id="photo" accept="image/jpeg,image/png,image/webp">
+            </label>
+            <button class="btn btn-ghost btn-sm clear" type="button" id="clearPhoto" hidden>เอารูปนี้ออก</button>
+          </div>
+        </div>
         <div class="upload-fields">
           <label for="caption">คำอธิบายรูป (ไม่บังคับ)</label>
           <input type="text" id="caption" maxlength="120" placeholder="เช่น Toyota Fortuner · ติดฟิล์มรอบคัน">
-          <div class="up-row">
-            <div><label for="category">ประเภทงาน</label><select id="category"></select></div>
-            <div><label for="before">รูป "ก่อนทำ" (ไม่บังคับ)</label><input type="file" id="before" accept="image/jpeg,image/png,image/webp"></div>
-          </div>
+          <label for="category" style="margin-top:12px">ประเภทงาน</label>
+          <select id="category" class="cat-select"></select>
+          <div class="hint">รูปหลังทำคือรูปผลงานที่โชว์บนเว็บ · ถ้าใส่รูปก่อนทำด้วย ลูกค้าจะกดสลับดู ก่อน/หลัง ได้ · เพิ่มรูปก่อนทำทีหลังได้ที่การ์ดรูปด้านล่าง</div>
           <div class="hint">รองรับ JPG, PNG, WebP ขนาดไม่เกิน 10MB · ระบบจะย่อรูปและลบข้อมูลตำแหน่ง GPS ออกให้อัตโนมัติ</div>
+          <div class="up-summary" id="upSummary"></div>
           <button class="btn btn-primary" type="submit" id="uploadBtn" disabled>อัปโหลดรูป</button>
           <div class="msg" id="uploadMsg"></div>
         </div>
@@ -704,19 +745,46 @@
     });
 
     // ---------- upload ----------
-    function pickFile(file) {
+    // ช่องเลือกรูป 2 ช่อง: ก่อนทำ (ไม่บังคับ) และ หลังทำ (ต้องมี)
+    const SLOTS = {
+      before: { input: "before", drop: "dropBefore", preview: "previewBefore", text: "dropTextBefore", clear: "clearBefore" },
+      after:  { input: "photo",  drop: "drop",       preview: "preview",       text: "dropText",       clear: "clearPhoto" },
+    };
+    function showSlot(slot) {
+      const ids = SLOTS[slot], file = $(ids.input).files[0];
+      if ($(ids.preview).src.startsWith("blob:")) URL.revokeObjectURL($(ids.preview).src);
+      $(ids.preview).hidden = !file; $(ids.text).hidden = !!file; $(ids.clear).hidden = !file;
+      $(ids.drop).classList.toggle("has", !!file);
+      if (file) $(ids.preview).src = URL.createObjectURL(file); else $(ids.preview).removeAttribute("src");
+      updateSummary();
+    }
+    function updateSummary() {
+      const hasAfter = !!$("photo").files[0], hasBefore = !!$("before").files[0];
+      $("uploadBtn").disabled = !hasAfter;
+      $("uploadBtn").textContent = hasBefore && hasAfter ? "อัปโหลดรูปก่อน + หลัง" : "อัปโหลดรูป";
+      $("upSummary").innerHTML = !hasAfter && !hasBefore ? "ยังไม่ได้เลือกรูป"
+        : !hasAfter ? "เลือกรูปก่อนทำแล้ว · <b>ยังต้องเลือกรูปหลังทำ</b>"
+        : hasBefore ? "จะอัปโหลด: <b>รูปก่อนทำ + รูปหลังทำ</b> (ลูกค้ากดสลับดูได้)"
+        : "จะอัปโหลด: <b>รูปหลังทำอย่างเดียว</b> (ไม่มีรูปก่อนทำ)";
+    }
+    function pickFile(slot, file) {
       if (!file) return;
-      const dt = new DataTransfer(); dt.items.add(file); $("photo").files = dt.files;
-      $("preview").src = URL.createObjectURL(file); $("preview").hidden = false; $("dropText").hidden = true;
-      $("uploadBtn").disabled = false; $("uploadMsg").textContent = "";
+      const dt = new DataTransfer(); dt.items.add(file); $(SLOTS[slot].input).files = dt.files;
+      $("uploadMsg").textContent = "";
+      showSlot(slot);
     }
     function resetUpload() {
-      $("uploadForm").reset(); $("preview").hidden = true; $("dropText").hidden = false; $("uploadBtn").disabled = true;
+      $("uploadForm").reset(); showSlot("before"); showSlot("after");
     }
-    $("photo").addEventListener("change", () => pickFile($("photo").files[0]));
-    ["dragover", "dragenter"].forEach((ev) => $("drop").addEventListener(ev, (e) => { e.preventDefault(); $("drop").classList.add("over"); }));
-    ["dragleave", "drop"].forEach((ev) => $("drop").addEventListener(ev, () => $("drop").classList.remove("over")));
-    $("drop").addEventListener("drop", (e) => { e.preventDefault(); pickFile(e.dataTransfer.files[0]); });
+    Object.entries(SLOTS).forEach(([slot, ids]) => {
+      const drop = $(ids.drop);
+      $(ids.input).addEventListener("change", () => showSlot(slot));
+      $(ids.clear).addEventListener("click", () => { $(ids.input).value = ""; showSlot(slot); });
+      ["dragover", "dragenter"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+      ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, () => drop.classList.remove("over")));
+      drop.addEventListener("drop", (e) => { e.preventDefault(); pickFile(slot, e.dataTransfer.files[0]); });
+    });
+    updateSummary();
 
     $("uploadForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -737,7 +805,7 @@
       } catch (err) {
         $("uploadMsg").className = "msg err"; $("uploadMsg").textContent = err.message;
         $("uploadBtn").disabled = false;
-      } finally { $("uploadBtn").textContent = "อัปโหลดรูป"; }
+      } finally { updateSummary(); }
     });
 
     // ---------- list ----------
@@ -751,15 +819,63 @@
       render();
     }
 
+    // ครึ่งซ้ายของการ์ด: รูปก่อนทำ (มีปุ่มเปลี่ยน/ลบ) หรือปุ่มเพิ่มรูปก่อนทำ
+    function renderBefore(card, p) {
+      const half = card.querySelector(".half.before");
+      const fileInput = card.querySelector(".before-file");
+      half.querySelectorAll(":scope > :not(.tag)").forEach((el) => el.remove());
+      if (p.beforeUrl) {
+        const img = document.createElement("img");
+        img.loading = "lazy"; img.alt = "รูปก่อนทำ"; img.src = p.beforeUrl;
+        const tools = document.createElement("div");
+        tools.className = "tools";
+        tools.innerHTML = '<button type="button" data-b="change">เปลี่ยน</button><button type="button" data-b="remove">ลบ</button>';
+        tools.querySelector('[data-b="change"]').onclick = () => fileInput.click();
+        tools.querySelector('[data-b="remove"]').onclick = async () => {
+          if (!confirm("ลบรูปก่อนทำของงานนี้? (รูปหลังทำยังอยู่)")) return;
+          try { const u = await api("/gallery/" + p.id + "/before", { method: "DELETE" }); p.beforeUrl = u.beforeUrl; renderBefore(card, p); toast("ลบรูปก่อนทำแล้ว"); }
+          catch (err) { toast(err.message); }
+        };
+        half.append(img, tools);
+      } else {
+        const add = document.createElement("button");
+        add.type = "button"; add.className = "add-before";
+        add.innerHTML = "<b>+</b>เพิ่มรูปก่อนทำ<small>(ไม่บังคับ)</small>";
+        add.onclick = () => fileInput.click();
+        half.append(add);
+      }
+      fileInput.onchange = async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const fd = new FormData(); fd.append("before", file);
+        half.classList.add("busy");
+        try {
+          const had = !!p.beforeUrl;
+          const u = await api("/gallery/" + p.id + "/before", { method: "PUT", body: fd });
+          p.beforeUrl = u.beforeUrl; renderBefore(card, p);
+          toast(had ? "เปลี่ยนรูปก่อนทำแล้ว ✅" : "เพิ่มรูปก่อนทำแล้ว ✅");
+        } catch (err) { toast(err.message); }
+        finally { half.classList.remove("busy"); fileInput.value = ""; }
+      };
+      updateCount();
+    }
+    function updateCount() {
+      const pairs = photos.filter((p) => p.beforeUrl).length;
+      $("count").textContent = photos.length ? `${photos.length} งาน · มีรูปก่อน/หลัง ${pairs} งาน` : "";
+    }
     function render() {
-      $("count").textContent = photos.length ? photos.length + " รูป" : "";
       $("empty").hidden = photos.length > 0;
       $("photos").replaceChildren(...photos.map((p, i) => {
         const card = document.createElement("div");
         card.className = "photo";
         card.innerHTML = `
-          <div class="thumb"><img loading="lazy" alt=""><div class="flag"></div></div>
+          <div class="thumb">
+            <div class="half before"><span class="tag">ก่อน</span></div>
+            <div class="half after"><span class="tag after">หลัง</span><img loading="lazy" alt="รูปหลังทำ"></div>
+          </div>
+          <input type="file" class="before-file" accept="image/jpeg,image/png,image/webp" hidden>
           <div class="body">
+            <div class="flag"></div>
             <input type="text" maxlength="120" placeholder="คำอธิบายรูป">
             <select aria-label="ประเภทงาน"></select>
             <button class="btn btn-ghost btn-sm hero-btn" data-act="hero"></button>
@@ -770,10 +886,10 @@
               <button class="btn btn-danger btn-sm" data-act="delete">ลบ</button>
             </div>
           </div>`;
-        card.querySelector("img").src = p.url;
+        card.querySelector(".after img").src = p.url;
         const flag = card.querySelector(".flag");
-        if (p.id === heroId) { const f = document.createElement("span"); f.textContent = "รูปหน้าแรก"; flag.append(f); }
-        if (p.beforeUrl) { const f = document.createElement("span"); f.className = "alt"; f.textContent = "มีรูปก่อน/หลัง"; flag.append(f); }
+        if (p.id === heroId) { const f = document.createElement("span"); f.textContent = "★ รูปหน้าแรก"; flag.append(f); }
+        renderBefore(card, p);
         const cat = card.querySelector("select");
         CATS.forEach(([v, l]) => { const o = document.createElement("option"); o.value = v; o.textContent = l; o.selected = (p.category || "other") === v; cat.append(o); });
         cat.addEventListener("change", async () => {
@@ -793,7 +909,7 @@
             render();
           } catch (err) { toast(err.message); }
         });
-        const input = card.querySelector("input");
+        const input = card.querySelector('.body input[type="text"]');
         const saveBtn = card.querySelector('[data-act="save"]');
         input.value = p.caption;
         input.addEventListener("input", () => { saveBtn.disabled = input.value === p.caption; });
@@ -807,7 +923,7 @@
           } catch (err) { toast(err.message); }
         });
         card.querySelector('[data-act="delete"]').addEventListener("click", async () => {
-          if (!confirm("ลบรูปนี้ออกจากหน้าเว็บ?")) return;
+          if (!confirm(p.beforeUrl ? "ลบงานนี้ออกจากหน้าเว็บ? (ลบทั้งรูปก่อนและหลังทำ)" : "ลบรูปนี้ออกจากหน้าเว็บ?")) return;
           try { await api("/gallery/" + p.id, { method: "DELETE" }); toast("ลบรูปแล้ว"); await loadPhotos(); }
           catch (err) { toast(err.message); }
         });
