@@ -11,6 +11,11 @@
   --accent-hover: #7dd3fc;
   --accent-rgb: 56, 189, 248;
   --on-accent: #04121d;
+  /* ค่าที่ธีมเปลี่ยนได้ (ดู /assets/themes.js) */
+  --header-bg: rgba(7, 11, 18, .88);
+  --hero-end: #0a1220;
+  --cta-from: #0284c7;
+  --cta-to: #0c4a6e;
   --line-green: #06c755;
   --radius: 14px;
   --max: 1160px;
@@ -55,7 +60,7 @@ section { padding: 88px 0; }
 /* Header */
 header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(7, 11, 18, .88); backdrop-filter: blur(12px);
+  background: var(--header-bg); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
 .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
@@ -97,7 +102,7 @@ header {
   background:
     radial-gradient(ellipse 70% 60% at 85% 20%, rgba(var(--accent-rgb), .22), transparent 60%),
     radial-gradient(ellipse 50% 50% at 10% 90%, rgba(var(--accent-rgb), .10), transparent 60%),
-    linear-gradient(180deg, #070b12, #0a1220);
+    linear-gradient(180deg, var(--bg), var(--hero-end));
 }
 .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
 .badge {
@@ -121,14 +126,14 @@ header {
 
 .hero-visual {
   aspect-ratio: 4/3.4; border-radius: 24px; border: 1px solid var(--line);
-  background: linear-gradient(145deg, #1d2229, #121519);
+  background: linear-gradient(145deg, var(--card), var(--bg-alt));
   display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
 }
 /* แทนที่ด้วยรูปรถจริงของร้าน: ใส่ <img src="images/hero.jpg"> ใน .hero-visual */
 .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
 .hero-visual .car-svg { width: 86%; color: var(--accent); }
 .float-card {
-  position: absolute; background: rgba(26,30,36,.92); border: 1px solid var(--line);
+  position: absolute; background: var(--card); border: 1px solid var(--line);
   border-radius: 12px; padding: 12px 16px; font-size: 14px; backdrop-filter: blur(8px);
 }
 .float-card strong { font-family: "Kanit", sans-serif; display: block; font-size: 16px; }
@@ -259,14 +264,14 @@ details p { padding: 0 22px 20px; color: var(--muted); }
 /* CTA band */
 .cta-band {
   padding: 64px 0; text-align: center;
-  background: linear-gradient(120deg, #0284c7, #0c4a6e);
+  background: linear-gradient(120deg, var(--cta-from), var(--cta-to));
 }
 .cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
 .cta-band p { opacity: .9; margin-bottom: 26px; }
 .cta-band .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
-.cta-band .btn-ghost:hover { background: #fff; color: #0369a1; }
+.cta-band .btn-ghost:hover { background: #fff; color: var(--cta-to); }
 .cta-band .hero-actions { justify-content: center; }
-.btn-white { background: #fff; color: #0369a1; }
+.btn-white { background: #fff; color: var(--cta-to); }
 .btn-white:hover { transform: translateY(-2px); }
 
 footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
@@ -276,7 +281,7 @@ footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--
 .mobile-bar {
   display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(13,15,18,.95); border-top: 1px solid var(--line); gap: 10px;
+  background: var(--header-bg); border-top: 1px solid var(--line); gap: 10px;
 }
 .mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: 16px; }
 
