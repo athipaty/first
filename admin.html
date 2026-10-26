@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@400;500&display=swap" rel="stylesheet">
+  <script src="/config.js"></script>
+  <script src="/assets/themes.js?v=1"></script>
   <style>
     :root {
       --bg: #070b12;
@@ -92,6 +94,20 @@
     .photo .actions .grow { flex: 1; }
     .empty { color: var(--muted); text-align: center; padding: 40px 16px; border: 1px dashed var(--line); border-radius: 12px; }
 
+    /* ธีมสี */
+    .theme-panel { margin-top: 40px; }
+    .theme-panel h2 { font-size: 20px; margin-bottom: 4px; }
+    .theme-panel > p { color: var(--muted); margin-bottom: 18px; font-size: 15px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .swatch {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; cursor: pointer;
+      border: 2px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; text-align: left;
+    }
+    .swatch:hover { border-color: var(--muted); }
+    .swatch[aria-pressed="true"] { border-color: var(--accent); }
+    .swatch .dot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 3px rgba(0,0,0,.25); }
+    .swatch .live { display: block; font-size: 12px; color: var(--accent); }
+    .theme-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
     .msg { font-size: 14px; margin-top: 10px; min-height: 1.4em; }
     .msg.err { color: var(--danger); }
     .msg.ok { color: var(--ok); }
@@ -159,12 +175,23 @@
       </div>
       <div class="photos" id="photos"></div>
       <div class="empty" id="empty" hidden>ยังไม่มีรูปผลงาน อัปโหลดรูปแรกได้เลย<br>(ส่วน "ผลงานของเรา" จะซ่อนอยู่จนกว่าจะมีรูป)</div>
+
+      <section class="panel theme-panel">
+        <h2>ธีมสีของเว็บ</h2>
+        <p>เลือกสีแล้วดูตัวอย่างบนหน้านี้ได้ทันที กด "บันทึกธีมนี้" เพื่อเปลี่ยนสีหน้าเว็บสำหรับลูกค้าทุกคน</p>
+        <div class="swatches" id="swatches"></div>
+        <div class="theme-actions">
+          <button class="btn btn-primary" id="themeSave" disabled>บันทึกธีมนี้</button>
+          <button class="btn btn-ghost" id="themeReset" disabled>ยกเลิก</button>
+          <a href="/" class="btn btn-ghost" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
+          <span class="msg" id="themeMsg"></span>
+        </div>
+      </section>
     </div>
   </main>
 
   <div class="toast" id="toast"></div>
 
-  <script src="/config.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
     let photos = [];
@@ -201,8 +228,48 @@
     }
     async function showDash() {
       $("loginView").hidden = true; $("dashView").hidden = false; $("logoutBtn").hidden = false;
+      renderSwatches();
       await loadPhotos();
     }
+
+    // ---------- theme ----------
+    const TH = window.DirekairThemes;
+    let liveTheme = TH.current;   // ธีมที่ลูกค้าเห็นอยู่ตอนนี้
+    let pickedTheme = liveTheme;  // ธีมที่เลือกดูตัวอย่าง
+    function renderSwatches() {
+      $("swatches").replaceChildren(...TH.list.map(t => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "swatch";
+        b.setAttribute("aria-pressed", String(t.id === pickedTheme));
+        const dot = document.createElement("span");
+        dot.className = "dot"; dot.style.background = t.accent;
+        const label = document.createElement("span");
+        label.textContent = t.th;
+        if (t.id === liveTheme) { const live = document.createElement("span"); live.className = "live"; live.textContent = "ใช้อยู่"; label.append(live); }
+        b.append(dot, label);
+        b.title = t.en;
+        b.addEventListener("click", () => { pickedTheme = t.id; TH.apply(t.id); $("themeMsg").textContent = ""; renderSwatches(); });
+        return b;
+      }));
+      const dirty = pickedTheme !== liveTheme;
+      $("themeSave").disabled = !dirty; $("themeReset").disabled = !dirty;
+    }
+    $("themeReset").addEventListener("click", () => { pickedTheme = liveTheme; TH.apply(liveTheme); renderSwatches(); });
+    $("themeSave").addEventListener("click", async () => {
+      $("themeSave").disabled = true; $("themeMsg").className = "msg"; $("themeMsg").textContent = "กำลังบันทึก…";
+      try {
+        const d = await api("/settings", jsonBody("PUT", { theme: pickedTheme }));
+        liveTheme = pickedTheme = d.theme; TH.remember(d.theme);
+        $("themeMsg").className = "msg ok"; $("themeMsg").textContent = "บันทึกแล้ว ✅ หน้าเว็บเปลี่ยนสีแล้ว";
+      } catch (err) { $("themeMsg").className = "msg err"; $("themeMsg").textContent = err.message; }
+      renderSwatches();
+    });
+    // ธีมจาก backend มาถึงหลังโหลดหน้า: อัปเดตถ้ายังไม่ได้เลือกดูตัวอย่างอื่น
+    document.addEventListener("direkair:theme", e => {
+      const wasClean = pickedTheme === liveTheme;
+      liveTheme = e.detail; if (wasClean) pickedTheme = liveTheme;
+      if (!$("dashView").hidden) renderSwatches();
+    });
 
     // ---------- login ----------
     $("loginForm").addEventListener("submit", async (e) => {
