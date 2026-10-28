@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เย็นฉ่ำแอร์ (YenCham Air) ล้างแอร์ ซ่อมแอร์บ้าน ศรีราชา | ติดตั้งแอร์ ชลบุรี</title>
+  <meta name="description" content="เย็นฉ่ำแอร์ บริการล้างแอร์บ้าน ซ่อมแอร์ เติมน้ำยา ติดตั้งและย้ายแอร์ ศรีราชา ชลบุรี ช่างมาถึงบ้าน ตรงเวลา ราคาชัดเจนก่อนเริ่มงาน รับประกันงานทุกครั้ง">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071521;
+      --bg-alt: #0b1d2c;
+      --card: #102638;
+      --line: #1d3a52;
+      --text: #eef6fb;
+      --muted: #9fb6c7;
+      --accent: #22b8f0;
+      --accent-hover: #4cc9f5;
+      --accent-soft: rgba(34,184,240,.13);
+      --accent-dark: #0b8fc4;
+      --on-accent: #04202e;
+      --header-bg: rgba(7,21,33,.88);
+      --line-green: #06c755;
+      --radius: 14px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Sarabun", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .btn, .nav a, .price { font-family: "Kanit", sans-serif; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    section { padding: 88px 0; }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .eyebrow { color: var(--accent); font-family: "Kanit", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: .5px; }
+    .section-head h2 { font-size: clamp(28px, 4vw, 40px); margin: 6px 0 12px; }
+    .section-head p { color: var(--muted); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 17px;
+      border: 2px solid transparent; cursor: pointer; transition: .2s; white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-line { background: var(--line-green); color: #fff; }
+    .btn-line:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .btn-ghost { border-color: var(--line); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { font-family: "Kanit", sans-serif; font-size: 22px; font-weight: 700; }
+    .logo span { color: var(--accent); }
+    .nav { display: flex; gap: 28px; }
+    .nav a { color: var(--muted); font-size: 16px; transition: .2s; }
+    .nav a:hover { color: var(--text); }
+    .header-cta { padding: 10px 20px; font-size: 15px; }
+    .menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
+    .menu-btn svg { width: 28px; height: 28px; }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden; padding: 110px 0 100px;
+      background:
+        radial-gradient(ellipse 70% 60% at 85% 20%, rgba(34,184,240,.22), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(34,184,240,.10), transparent 60%),
+        linear-gradient(180deg, #071521, #0a1a28);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+      border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--muted);
+      background: var(--bg-alt); margin-bottom: 20px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-green); box-shadow: 0 0 10px var(--line-green); }
+    .hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 700; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.lead { color: var(--muted); font-size: 19px; max-width: 540px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
+    .hero-stats strong { display: block; font-family: "Kanit", sans-serif; font-size: 30px; color: var(--text); }
+    .hero-stats span { color: var(--muted); font-size: 15px; }
+
+    .hero-visual {
+      aspect-ratio: 4/3.4; border-radius: 24px; border: 1px solid var(--line);
+      background: linear-gradient(145deg, #12304a, #0b1d2c);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    /* แทนที่ด้วยรูปช่างหน้างานจริง: ใส่ <img src="images/hero.jpg"> ใน .hero-visual */
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-visual .hero-svg { width: 78%; color: var(--accent); }
+    .float-card {
+      position: absolute; background: rgba(16,38,56,.92); border: 1px solid var(--line);
+      border-radius: 12px; padding: 12px 16px; font-size: 14px; backdrop-filter: blur(8px);
+    }
+    .float-card strong { font-family: "Kanit", sans-serif; display: block; font-size: 16px; }
+    .float-card.one { top: 20px; left: 20px; }
+    .float-card.two { bottom: 20px; right: 20px; }
+    .stars { color: #ffc531; letter-spacing: 2px; }
+
+    /* Services */
+    .services { background: var(--bg-alt); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 26px; transition: .25s;
+    }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .icon {
+      width: 54px; height: 54px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 18px;
+    }
+    .icon svg { width: 28px; height: 28px; }
+    .service-card h3 { font-size: 21px; margin-bottom: 8px; }
+    .service-card p { color: var(--muted); font-size: 16px; }
+    .service-card .from { margin-top: 16px; font-family: "Kanit", sans-serif; color: var(--accent); font-size: 15px; }
+
+    /* Packages */
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+    .package {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 34px 28px; display: flex; flex-direction: column; position: relative;
+    }
+    .package.featured { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--card) 40%); }
+    .package .tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--on-accent); font-family: "Kanit", sans-serif; font-size: 14px;
+      padding: 4px 16px; border-radius: 999px; white-space: nowrap;
+    }
+    .package h3 { font-size: 22px; }
+    .package .sub { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+    .price { font-size: 40px; font-weight: 700; }
+    .price small { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .price-note { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+    .package ul { list-style: none; margin-bottom: 28px; flex: 1; }
+    .package li { padding: 8px 0 8px 30px; position: relative; font-size: 16px; border-bottom: 1px dashed var(--line); }
+    .package li::before {
+      content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322b8f0' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat;
+    }
+    .package .btn { width: 100%; }
+    .packages-foot { text-align: center; color: var(--muted); font-size: 15px; margin-top: 28px; }
+
+    /* Why us */
+    .why { background: var(--bg-alt); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .why-item { text-align: center; padding: 20px 10px; }
+    .why-item .icon { margin: 0 auto 16px; width: 64px; height: 64px; border-radius: 50%; }
+    .why-item h3 { font-size: 19px; margin-bottom: 6px; }
+    .why-item p { color: var(--muted); font-size: 15px; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; }
+    .g-item {
+      border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--line);
+      background: linear-gradient(135deg, #12304a, #0b1d2c);
+    }
+    .g-item.wide { grid-column: span 2; }
+    .g-item.tall { grid-row: span 2; }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: .4s; }
+    .g-item:hover img { transform: scale(1.05); }
+    .g-item .ph { position: absolute; inset: 0; display: grid; place-items: center; color: #4d6a80; font-size: 14px; text-align: center; padding: 10px; }
+    .g-item .cap {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 14px; color: #fff;
+      background: linear-gradient(transparent, rgba(0,0,0,.75)); font-family: "Kanit", sans-serif;
+    }
+
+    /* Reviews */
+    .reviews { background: var(--bg-alt); }
+    .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .review p { margin: 12px 0 18px; font-size: 16px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "Kanit", sans-serif; font-weight: 600; }
+    .reviewer strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .reviewer span { color: var(--muted); font-size: 14px; }
+
+    /* FAQ */
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
+    summary {
+      cursor: pointer; list-style: none; padding: 20px 56px 20px 22px; position: relative;
+      font-family: "Kanit", sans-serif; font-size: 18px; font-weight: 500;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+      font-size: 26px; color: var(--accent); transition: .2s;
+    }
+    details[open] summary::after { content: "−"; }
+    details p { padding: 0 22px 20px; color: var(--muted); }
+
+    /* Booking / Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px; }
+    .panel h3 { font-size: 24px; margin-bottom: 6px; }
+    .panel > p { color: var(--muted); margin-bottom: 22px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 15px; margin-bottom: 6px; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--text); font: inherit; font-size: 16px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-btn { width: 100%; margin-top: 6px; }
+    .form-note { font-size: 13px; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    .info-list { list-style: none; margin-bottom: 22px; }
+    .info-list li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .info-list li:last-child { border-bottom: 0; }
+    .info-list .icon { width: 44px; height: 44px; margin: 0; flex-shrink: 0; }
+    .info-list .icon svg { width: 22px; height: 22px; }
+    .info-list strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .info-list span, .info-list a { color: var(--muted); font-size: 16px; }
+    .info-list a:hover { color: var(--accent); }
+    .map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--bg); }
+    .map iframe { width: 100%; height: 100%; border: 0; }
+
+    /* CTA band */
+    .cta-band {
+      padding: 64px 0; text-align: center; color: #fff;
+      background: linear-gradient(120deg, #22b8f0, #0b6fa8);
+    }
+    .cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+    .cta-band p { opacity: .9; margin-bottom: 26px; }
+    .cta-band .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
+    .cta-band .btn-ghost:hover { background: #fff; color: var(--accent-dark); }
+    .cta-band .hero-actions { justify-content: center; }
+    .btn-white { background: #fff; color: var(--accent-dark); }
+    .btn-white:hover { transform: translateY(-2px); }
+
+    footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    .foot-wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* Mobile sticky bar */
+    .mobile-bar {
+      display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: var(--header-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--line); gap: 10px;
+    }
+    .mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: 16px; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { max-width: 560px; }
+      .grid-3, .packages-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      section { padding: 64px 0; }
+      .nav, .header-cta { display: none; }
+      .menu-btn { display: block; }
+      .nav.open {
+        display: flex; flex-direction: column; gap: 0; position: absolute; top: 70px; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+      }
+      .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
+      .hero { padding: 64px 0 72px; }
+      .grid-3, .packages-grid, .why-grid { grid-template-columns: 1fr; }
+      .packages-grid { gap: 32px; }
+      .gallery-grid { grid-auto-rows: 150px; }
+      .field-row { grid-template-columns: 1fr; }
+      .panel { padding: 24px 20px; }
+      .hero-stats { gap: 24px; }
+      .mobile-bar { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">เย็นฉ่ำ<span>แอร์</span></a>
+      <nav class="nav" id="nav">
+        <a href="#services">บริการ</a>
+        <a href="#packages">ราคา</a>
+        <a href="#gallery">ผลงาน</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary header-cta">นัดช่าง</a>
+      <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> รับงานทุกวัน 08:00 – 18:00 น. · ศรีราชา และใกล้เคียง</div>
+        <h1>แอร์ไม่เย็น?<br><em>ช่างไปถึงบ้าน</em><br>ภายในวันเดียว</h1>
+        <p class="lead">เย็นฉ่ำแอร์ รับล้างแอร์บ้าน ซ่อมแอร์ เติมน้ำยา ติดตั้งและย้ายแอร์ ทุกยี่ห้อ ทุกขนาด แจ้งราคาก่อนเริ่มงานทุกครั้ง ไม่มีบวกเพิ่มหน้างาน ปูผ้ากันเปื้อน เก็บกวาดเรียบร้อย</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-line js-line">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+            แอดไลน์นัดช่าง
+          </a>
+          <a href="#packages" class="btn btn-ghost">ดูราคาล้างแอร์</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>8,000+</strong><span>เครื่องที่ดูแล</span></div>
+          <div><strong>90 วัน</strong><span>รับประกันงานซ่อม</span></div>
+          <div><strong>4.9 ★</strong><span>คะแนนรีวิว</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <!-- แทนที่ SVG นี้ด้วยรูปจริงได้: <img src="images/hero.jpg" alt="ช่างกำลังล้างแอร์"> -->
+        <svg class="hero-svg" viewBox="0 0 320 220" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="20" y="30" width="280" height="90" rx="14"/>
+          <path d="M40 92h240" opacity=".55"/>
+          <path d="M40 104h240" opacity=".55"/>
+          <circle cx="262" cy="56" r="5"/>
+          <path d="M214 56h30" opacity=".7"/>
+          <path d="M70 140c-10 14 10 22 0 36M120 140c-10 14 10 22 0 36M170 140c-10 14 10 22 0 36M220 140c-10 14 10 22 0 36" opacity=".6"/>
+          <path d="M150 192l10 8 10-8M160 186v14" opacity=".4"/>
+        </svg>
+        <div class="float-card one"><span class="stars">★★★★★</span><strong>ช่างมีประกันอุบัติเหตุ</strong></div>
+        <div class="float-card two"><strong>ประหยัดไฟสูงสุด 30%</strong>หลังล้างแอร์ใหญ่</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">บริการของเรา</div>
+        <h2>ดูแลแอร์บ้านครบทุกปัญหา</h2>
+        <p>แอร์ผนัง แอร์สี่ทิศทาง แอร์แขวน แอร์ตั้งพื้น ทุกยี่ห้อ ทั้งบ้าน คอนโด ร้านค้า และสำนักงาน</p>
+      </div>
+      <div class="grid-3">
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7c3 3.6 6 7 6 10.3a6 6 0 01-12 0c0-3.3 3-6.7 6-10.3z"/></svg></div>
+          <h3>ล้างแอร์ธรรมดา</h3>
+          <p>ฉีดล้างแผงคอยล์เย็น ถาดน้ำทิ้ง ฟิลเตอร์ และคอยล์ร้อน แนะนำทุก 6 เดือน</p>
+          <div class="from">เริ่มต้น 500.- / เครื่อง</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></div>
+          <h3>ล้างแอร์ใหญ่ (ถอดล้าง)</h3>
+          <p>ถอดชิ้นส่วนล้างละเอียด ขจัดเชื้อราและกลิ่นอับ แก้ปัญหาน้ำหยด แนะนำปีละครั้ง</p>
+          <div class="from">เริ่มต้น 1,200.- / เครื่อง</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>ซ่อมแอร์ / ตรวจเช็ก</h3>
+          <p>แอร์ไม่เย็น เปิดไม่ติด มีเสียงดัง ตรวจหาสาเหตุ แจ้งราคาอะไหล่ก่อนซ่อมทุกครั้ง</p>
+          <div class="from">ค่าตรวจเช็ก 300.- (หักคืนเมื่อซ่อม)</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M4.9 7l14.2 10M19.1 7L4.9 17"/><path d="M9.5 4L12 6l2.5-2M9.5 20l2.5-2 2.5 2"/></svg></div>
+          <h3>เติมน้ำยาแอร์</h3>
+          <p>R32 / R410A / R22 ตรวจหารอยรั่วก่อนเติม วัดแรงดันด้วยเกจมาตรฐาน</p>
+          <div class="from">เริ่มต้น 800.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 13h6"/></svg></div>
+          <h3>ติดตั้งแอร์ใหม่</h3>
+          <p>ติดตั้งมาตรฐาน เดินท่อซ่อนเรียบร้อย ทำแวคคั่มทุกครั้ง รับประกันงานติดตั้ง 1 ปี</p>
+          <div class="from">เริ่มต้น 2,500.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>ย้าย / ถอดแอร์</h3>
+          <p>ย้ายห้อง ย้ายบ้าน เก็บน้ำยากลับคอยล์ร้อน ไม่เสียน้ำยา พร้อมติดตั้งจุดใหม่</p>
+          <div class="from">เริ่มต้น 1,800.-</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PACKAGES ================= -->
+  <section id="packages">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">แพ็กเกจยอดนิยม</div>
+        <h2>ราคาชัดเจน ไม่มีบวกเพิ่ม</h2>
+        <p>ราคาสำหรับแอร์ผนังไม่เกิน 18,000 BTU — แอร์ขนาดใหญ่หรือแบบสี่ทิศทาง สอบถามทางไลน์</p>
+      </div>
+      <div class="packages-grid">
+        <div class="package">
+          <h3>ล้างธรรมดา</h3>
+          <div class="sub">ดูแลประจำทุก 6 เดือน</div>
+          <div class="price">500<small> บาท / เครื่อง</small></div>
+          <div class="price-note">3 เครื่องขึ้นไป เหลือ 450 บาท</div>
+          <ul>
+            <li>ล้างคอยล์เย็น + คอยล์ร้อน</li>
+            <li>ล้างฟิลเตอร์ และถาดน้ำทิ้ง</li>
+            <li>เช็กแรงดันน้ำยาฟรี</li>
+            <li>ใช้เวลาประมาณ 45 นาที / เครื่อง</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="ล้างธรรมดา">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package featured">
+          <div class="tag">คุ้มที่สุด ❄️</div>
+          <h3>ล้างใหญ่ + ฆ่าเชื้อ</h3>
+          <div class="sub">แก้กลิ่นอับ น้ำหยด แอร์ไม่เย็น</div>
+          <div class="price">1,200<small> บาท / เครื่อง</small></div>
+          <div class="price-note">ปกติ 1,500 บาท</div>
+          <ul>
+            <li>ถอดล้างละเอียดทุกชิ้นส่วน</li>
+            <li>พ่นน้ำยาฆ่าเชื้อรา-แบคทีเรีย</li>
+            <li>ล้างใบพัดโพรงกระรอก</li>
+            <li>เช็กแรงดันน้ำยา + กระแสไฟ</li>
+            <li>รับประกันน้ำไม่หยด 30 วัน</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" data-pkg="ล้างใหญ่ + ฆ่าเชื้อ">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package">
+          <h3>สมาชิกรายปี</h3>
+          <div class="sub">สำหรับบ้าน / ออฟฟิศที่มีหลายเครื่อง</div>
+          <div class="price">1,690<small> บาท / เครื่อง / ปี</small></div>
+          <div class="price-note">ขั้นต่ำ 3 เครื่อง</div>
+          <ul>
+            <li>ล้างธรรมดา 1 ครั้ง + ล้างใหญ่ 1 ครั้ง</li>
+            <li>ช่างโทรนัดให้เมื่อถึงรอบ</li>
+            <li>ค่าตรวจเช็กฟรีตลอดปี</li>
+            <li>ส่วนลดค่าอะไหล่ 10%</li>
+            <li>ได้คิวด่วนก่อนลูกค้าทั่วไป</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="สมาชิกรายปี">เลือกแพ็กเกจนี้</a>
+        </div>
+      </div>
+      <p class="packages-foot">🚐 ไม่มีค่าเดินทางในเขตศรีราชา บางพระ แหลมฉบัง · รับชำระเงินสด โอน หรือ QR พร้อมเพย์ · ออกใบกำกับภาษีได้</p>
+    </div>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section class="why">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ทำไมต้องเรา</div>
+        <h2>เรียกช่างครั้งเดียว สบายใจ</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>ตรงเวลา</h3>
+          <p>นัดเป็นช่วงเวลาชัดเจน ช่างโทรแจ้งก่อนถึง 30 นาที</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <h3>แจ้งราคาก่อนทำ</h3>
+          <p>ลูกค้าอนุมัติก่อนทุกครั้ง ไม่มีบวกเพิ่มหน้างาน</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+          <h3>บ้านสะอาด</h3>
+          <p>ปูผ้ากันเปื้อน ใช้ถุงคลุมเครื่อง เก็บกวาดก่อนกลับ</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg></div>
+          <h3>รับประกันงาน</h3>
+          <p>งานซ่อม 90 วัน งานติดตั้ง 1 ปี มีใบรับประกันทุกงาน</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ผลงานของเรา</div>
+        <h2>ก่อน–หลัง ล้างแอร์</h2>
+        <p>ติดตามคลิปหน้างานจริงได้ที่เพจ Facebook และ TikTok ของร้าน</p>
+      </div>
+      <!-- ใส่รูปผลงานจริง: แทนที่ <div class="ph">…</div> ด้วย <img src="images/work1.jpg" alt="…"> -->
+      <div class="gallery-grid">
+        <div class="g-item wide tall"><div class="ph">รูปผลงาน 1<br>(แนะนำ 1200×800)</div><div class="cap">คอนโด ศรีราชา · ล้างใหญ่ 3 เครื่อง</div></div>
+        <div class="g-item"><div class="ph">รูปผลงาน 2</div><div class="cap">ก่อนล้าง · คอยล์เย็นอุดตัน</div></div>
+        <div class="g-item"><div class="ph">รูปผลงาน 3</div><div class="cap">หลังล้าง · สะอาดเหมือนใหม่</div></div>
+        <div class="g-item wide"><div class="ph">รูปผลงาน 4</div><div class="cap">ร้านค้า บางพระ · ติดตั้งแอร์สี่ทิศทาง</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <!-- ⚠️ รีวิวด้านล่างเป็นข้อความตัวอย่าง กรุณาแทนที่ด้วยรีวิวจริงของลูกค้าก่อนเผยแพร่ -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">เสียงจากลูกค้า</div>
+        <h2>ลูกค้าพูดถึงเรา</h2>
+      </div>
+      <div class="grid-3">
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ทักไลน์ตอนเช้า ช่างมาถึงบ่ายวันเดียวกัน ล้างเสร็จแอร์เย็นขึ้นทันที กลิ่นอับหายเลย”</p>
+          <div class="reviewer"><div class="avatar">ก</div><div><strong>คุณ ก.</strong><span>คอนโด ศรีราชา</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ช่างสุภาพ ปูผ้าคลุมเฟอร์นิเจอร์ให้ แจ้งราคาก่อนทำ ไม่มีบวกเพิ่มจริง ๆ”</p>
+          <div class="reviewer"><div class="avatar">ข</div><div><strong>คุณ ข.</strong><span>บ้านเดี่ยว บางพระ</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ใช้แพ็กเกจรายปีที่ออฟฟิศ 8 เครื่อง ช่างโทรนัดเองทุกรอบ ไม่ต้องจำ สะดวกมาก”</p>
+          <div class="reviewer"><div class="avatar">ค</div><div><strong>คุณ ค.</strong><span>สำนักงาน แหลมฉบัง</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">คำถามที่พบบ่อย</div>
+        <h2>มีข้อสงสัย? เรามีคำตอบ</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>ควรล้างแอร์บ่อยแค่ไหน?</summary>
+          <p>บ้านทั่วไปแนะนำล้างธรรมดาทุก 6 เดือน และล้างใหญ่ปีละครั้ง ถ้าเปิดแอร์ทั้งวันหรืออยู่ใกล้ถนน/ไซต์ก่อสร้าง ควรล้างทุก 3–4 เดือนครับ</p>
+        </details>
+        <details>
+          <summary>ล้างธรรมดากับล้างใหญ่ต่างกันอย่างไร?</summary>
+          <p>ล้างธรรมดาจะฉีดล้างโดยไม่ถอดเครื่อง เหมาะกับการดูแลประจำ ส่วนล้างใหญ่จะถอดฝาครอบ ถาดน้ำ และใบพัดออกมาล้าง เหมาะกับแอร์ที่มีกลิ่นอับ น้ำหยด หรือไม่ได้ล้างมานาน</p>
+        </details>
+        <details>
+          <summary>มีค่าเดินทางไหม?</summary>
+          <p>ไม่มีค่าเดินทางในเขตศรีราชา บางพระ และแหลมฉบัง พื้นที่อื่นในชลบุรีคิดตามระยะทาง สอบถามได้ทางไลน์ก่อนนัดครับ</p>
+        </details>
+        <details>
+          <summary>ต้องเตรียมอะไรก่อนช่างมาไหม?</summary>
+          <p>แค่เคลียร์พื้นที่ใต้แอร์ประมาณ 1 เมตร และเตรียมจุดใช้น้ำใกล้ ๆ ช่างจะนำผ้าคลุม ถุงรองน้ำ และอุปกรณ์มาเองทั้งหมด</p>
+        </details>
+        <details>
+          <summary>ถ้าซ่อมแล้วยังเสียอีกทำอย่างไร?</summary>
+          <p>งานซ่อมรับประกัน 90 วัน หากอาการเดิมกลับมาในช่วงรับประกัน ช่างจะเข้าไปแก้ไขให้ฟรีไม่มีค่าใช้จ่ายครับ</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BAND ================= -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>หน้าร้อนนี้ ให้แอร์เย็นฉ่ำเหมือนใหม่</h2>
+      <p>ทักไลน์วันนี้ ล้างแอร์ 3 เครื่องขึ้นไป ลดทันทีเครื่องละ 50 บาท</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-white js-line">แอดไลน์นัดช่าง</a>
+        <a href="#" class="btn btn-ghost js-tel">โทรเลย</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">นัดช่าง / ติดต่อเรา</div>
+        <h2>นัดช่างเข้าบ้าน</h2>
+        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะเปิด LINE พร้อมข้อความให้อัตโนมัติ</p>
+      </div>
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>ฟอร์มนัดช่าง</h3>
+          <p>ทีมงานจะติดต่อกลับเพื่อยืนยันเวลาภายใน 30 นาที</p>
+          <form id="bookingForm">
+            <div class="field-row">
+              <div class="field"><label for="name">ชื่อ</label><input id="name" required placeholder="ชื่อของคุณ"></div>
+              <div class="field"><label for="phone">เบอร์โทร</label><input id="phone" type="tel" required placeholder="08x-xxx-xxxx" inputmode="tel"></div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="units">จำนวนเครื่อง</label>
+                <select id="units">
+                  <option>1 เครื่อง</option>
+                  <option>2 เครื่อง</option>
+                  <option>3 เครื่อง</option>
+                  <option>4 เครื่องขึ้นไป</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="time">ช่วงเวลาที่สะดวก</label>
+                <select id="time">
+                  <option>เช้า (08:00–12:00)</option>
+                  <option>บ่าย (13:00–18:00)</option>
+                  <option>ได้ทั้งวัน</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="date">วันที่สะดวก</label><input id="date" type="date"></div>
+              <div class="field"><label for="area">พื้นที่</label><input id="area" placeholder="เช่น ศรีราชา ซ.สุขุมวิท 8"></div>
+            </div>
+            <div class="field">
+              <label for="service">บริการที่ต้องการ</label>
+              <select id="service">
+                <option>แพ็กเกจ ล้างธรรมดา</option>
+                <option selected>แพ็กเกจ ล้างใหญ่ + ฆ่าเชื้อ</option>
+                <option>แพ็กเกจ สมาชิกรายปี</option>
+                <option>ซ่อมแอร์ / ตรวจเช็ก</option>
+                <option>เติมน้ำยาแอร์</option>
+                <option>ติดตั้งแอร์ใหม่</option>
+                <option>ย้าย / ถอดแอร์</option>
+                <option>อื่น ๆ / ขอคำปรึกษา</option>
+              </select>
+            </div>
+            <div class="field"><label for="note">อาการ / รายละเอียดเพิ่มเติม</label><textarea id="note" rows="3" placeholder="เช่น แอร์ Daikin 12,000 BTU มีน้ำหยด"></textarea></div>
+            <button type="submit" class="btn btn-line form-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+              ส่งข้อมูลผ่าน LINE
+            </button>
+            <div class="form-note">ข้อมูลของคุณจะถูกส่งให้ร้านทาง LINE เท่านั้น</div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>ข้อมูลร้าน</h3>
+          <p>พื้นที่ให้บริการ: ศรีราชา บางพระ แหลมฉบัง หนองขาม บ่อวิน</p>
+          <ul class="info-list">
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
+              <div><strong>ที่อยู่</strong><span>(ใส่ที่อยู่เต็ม) อ.ศรีราชา จ.ชลบุรี 20110</span></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div>
+              <div><strong>โทรศัพท์</strong><a href="#" class="js-tel js-tel-text">08x-xxx-xxxx</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
+              <div><strong>LINE</strong><a href="#" class="js-line js-line-text">@yenchamair</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><strong>เวลาทำการ</strong><span>รับงานทุกวัน 08:00 – 18:00 น. (ตอบไลน์ถึง 21:00 น.)</span></div>
+            </li>
+          </ul>
+          <div class="map">
+            <!-- เปลี่ยน q= เป็นชื่อร้าน/พิกัดจริง หรือนำ embed code จาก Google Maps มาวางแทน -->
+            <iframe src="https://www.google.com/maps?q=Si+Racha+Chonburi&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ร้าน"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot-wrap">
+      <div>© <span id="year"></span> เย็นฉ่ำแอร์ (YenCham Air) · ล้าง ซ่อม ติดตั้งแอร์บ้าน ศรีราชา ชลบุรี</div>
+      <div>Facebook · TikTok · LINE</div>
+    </div>
+  </footer>
+
+  <!-- ปุ่มลอยด้านล่างบนมือถือ -->
+  <div class="mobile-bar">
+    <a href="#" class="btn btn-ghost js-tel">📞 โทร</a>
+    <a href="#" class="btn btn-line js-line">แอดไลน์</a>
+  </div>
+
+  <script>
+    // ===== ตั้งค่าข้อมูลร้าน: แก้ตรงนี้ที่เดียว =====
+    const SHOP = {
+      lineId: "@yenchamair",    // LINE Official Account ID (มี @ นำหน้า)
+      phone: "08x-xxx-xxxx",   // เบอร์โทรร้าน
+    };
+
+    const lineUrl = "https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineId);
+    const telUrl = "tel:" + SHOP.phone.replace(/[^0-9+]/g, "");
+
+    document.querySelectorAll(".js-line").forEach(a => { a.href = lineUrl; a.target = "_blank"; a.rel = "noopener"; });
+    document.querySelectorAll(".js-tel").forEach(a => { a.href = telUrl; });
+    document.querySelectorAll(".js-line-text").forEach(el => el.textContent = SHOP.lineId);
+    document.querySelectorAll(".js-tel-text").forEach(el => el.textContent = SHOP.phone);
+    document.getElementById("year").textContent = new Date().getFullYear() + 543; // พ.ศ.
+
+    // เมนูมือถือ
+    const nav = document.getElementById("nav");
+    document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // กดเลือกแพ็กเกจ -> ตั้งค่าในฟอร์มให้อัตโนมัติ
+    document.querySelectorAll("[data-pkg]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("service").value = "แพ็กเกจ " + btn.dataset.pkg;
+      });
+    });
+
+    // ห้ามเลือกวันย้อนหลัง
+    document.getElementById("date").min = new Date().toISOString().split("T")[0];
+
+    // ส่งฟอร์ม -> เปิด LINE พร้อมข้อความ
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const msg = [
+        "🛠️ นัดช่างแอร์",
+        "ชื่อ: " + v("name"),
+        "เบอร์: " + v("phone"),
+        "บริการ: " + v("service"),
+        "จำนวน: " + v("units"),
+        "วันที่: " + (v("date") || "-") + " · " + v("time"),
+        "พื้นที่: " + (v("area") || "-"),
+        "รายละเอียด: " + (v("note") || "-"),
+      ].join("\n");
+      const url = "https://line.me/R/oaMessage/" + encodeURIComponent(SHOP.lineId) + "/?" + encodeURIComponent(msg);
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
