@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ขนนุ่ม Pet Spa บางแสน | อาบน้ำ ตัดขนสุนัข แมว รับฝากเลี้ยง ชลบุรี</title>
+  <meta name="description" content="ขนนุ่ม Pet Spa บางแสน ชลบุรี อาบน้ำ ตัดขนสุนัขและแมว สปาแก้คัน ตัดเล็บ เช็ดหู รับฝากเลี้ยง และบริการรับ-ส่งถึงบ้าน โดยช่างกรูมมิ่งใจเย็น ใช้แชมพูอ่อนโยน">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffaf5;
+      --bg-alt: #fdf0e6;
+      --card: #ffffff;
+      --line: #f0dccd;
+      --text: #3a2a24;
+      --muted: #7d665b;
+      --accent: #e8506e;
+      --accent-hover: #d63c5b;
+      --accent-soft: rgba(232,80,110,.11);
+      --accent-dark: #c2304e;
+      --on-accent: #ffffff;
+      --header-bg: rgba(255,250,245,.9);
+      --line-green: #06c755;
+      --radius: 18px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Sarabun", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .btn, .nav a, .price { font-family: "Kanit", sans-serif; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    section { padding: 88px 0; }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .eyebrow { color: var(--accent); font-family: "Kanit", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: .5px; }
+    .section-head h2 { font-size: clamp(28px, 4vw, 40px); margin: 6px 0 12px; }
+    .section-head p { color: var(--muted); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 17px;
+      border: 2px solid transparent; cursor: pointer; transition: .2s; white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-line { background: var(--line-green); color: #fff; }
+    .btn-line:hover { filter: brightness(1.05); transform: translateY(-2px); }
+    .btn-ghost { border-color: var(--line); color: var(--text); background: var(--card); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { font-family: "Kanit", sans-serif; font-size: 22px; font-weight: 700; }
+    .logo span { color: var(--accent); }
+    .nav { display: flex; gap: 28px; }
+    .nav a { color: var(--muted); font-size: 16px; transition: .2s; }
+    .nav a:hover { color: var(--text); }
+    .header-cta { padding: 10px 20px; font-size: 15px; }
+    .menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
+    .menu-btn svg { width: 28px; height: 28px; }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden; padding: 110px 0 100px;
+      background:
+        radial-gradient(ellipse 60% 60% at 85% 20%, rgba(232,80,110,.14), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(255,184,77,.18), transparent 60%),
+        var(--bg);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+      border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--muted);
+      background: var(--card); margin-bottom: 20px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-green); box-shadow: 0 0 10px var(--line-green); }
+    .hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 700; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.lead { color: var(--muted); font-size: 19px; max-width: 540px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
+    .hero-stats strong { display: block; font-family: "Kanit", sans-serif; font-size: 30px; color: var(--text); }
+    .hero-stats span { color: var(--muted); font-size: 15px; }
+
+    .hero-visual {
+      aspect-ratio: 4/3.4; border-radius: 32px; border: 1px solid var(--line);
+      background: linear-gradient(145deg, #ffe3e8, #ffeccc);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    /* แทนที่ด้วยรูปน้องหมาน้องแมวหลังอาบน้ำ: ใส่ <img src="images/hero.jpg"> ใน .hero-visual */
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-visual .hero-svg { width: 62%; color: var(--accent); }
+    .float-card {
+      position: absolute; background: rgba(255,255,255,.94); border: 1px solid var(--line);
+      border-radius: 14px; padding: 12px 16px; font-size: 14px; backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(120,60,40,.08);
+    }
+    .float-card strong { font-family: "Kanit", sans-serif; display: block; font-size: 16px; }
+    .float-card.one { top: 20px; left: 20px; }
+    .float-card.two { bottom: 20px; right: 20px; }
+    .stars { color: #f5a623; letter-spacing: 2px; }
+
+    /* Services */
+    .services { background: var(--bg-alt); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 26px; transition: .25s;
+    }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(120,60,40,.08); }
+    .icon {
+      width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 18px;
+    }
+    .icon svg { width: 28px; height: 28px; }
+    .service-card h3 { font-size: 21px; margin-bottom: 8px; }
+    .service-card p { color: var(--muted); font-size: 16px; }
+    .service-card .from { margin-top: 16px; font-family: "Kanit", sans-serif; color: var(--accent-dark); font-size: 15px; }
+
+    /* Packages */
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+    .package {
+      background: var(--card); border: 1px solid var(--line); border-radius: 22px;
+      padding: 34px 28px; display: flex; flex-direction: column; position: relative;
+    }
+    .package.featured { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--card) 40%); }
+    .package .tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--on-accent); font-family: "Kanit", sans-serif; font-size: 14px;
+      padding: 4px 16px; border-radius: 999px; white-space: nowrap;
+    }
+    .package h3 { font-size: 22px; }
+    .package .sub { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+    .price { font-size: 40px; font-weight: 700; }
+    .price small { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .price-note { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+    .package ul { list-style: none; margin-bottom: 28px; flex: 1; }
+    .package li { padding: 8px 0 8px 30px; position: relative; font-size: 16px; border-bottom: 1px dashed var(--line); }
+    .package li::before {
+      content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8506e' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat;
+    }
+    .package .btn { width: 100%; }
+    .packages-foot { text-align: center; color: var(--muted); font-size: 15px; margin-top: 28px; }
+
+    /* Why us */
+    .why { background: var(--bg-alt); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .why-item { text-align: center; padding: 20px 10px; }
+    .why-item .icon { margin: 0 auto 16px; width: 64px; height: 64px; border-radius: 50%; }
+    .why-item h3 { font-size: 19px; margin-bottom: 6px; }
+    .why-item p { color: var(--muted); font-size: 15px; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; }
+    .g-item {
+      border-radius: 18px; overflow: hidden; position: relative; border: 1px solid var(--line);
+      background: linear-gradient(135deg, #ffe3e8, #ffeccc);
+    }
+    .g-item.wide { grid-column: span 2; }
+    .g-item.tall { grid-row: span 2; }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: .4s; }
+    .g-item:hover img { transform: scale(1.05); }
+    .g-item .ph { position: absolute; inset: 0; display: grid; place-items: center; color: #c39a8a; font-size: 14px; text-align: center; padding: 10px; }
+    .g-item .cap {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 14px; color: #fff;
+      background: linear-gradient(transparent, rgba(58,42,36,.7)); font-family: "Kanit", sans-serif;
+    }
+
+    /* Reviews */
+    .reviews { background: var(--bg-alt); }
+    .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .review p { margin: 12px 0 18px; font-size: 16px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "Kanit", sans-serif; font-weight: 600; }
+    .reviewer strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .reviewer span { color: var(--muted); font-size: 14px; }
+
+    /* FAQ */
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    details { border: 1px solid var(--line); border-radius: 14px; background: var(--card); margin-bottom: 12px; }
+    summary {
+      cursor: pointer; list-style: none; padding: 20px 56px 20px 22px; position: relative;
+      font-family: "Kanit", sans-serif; font-size: 18px; font-weight: 500;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+      font-size: 26px; color: var(--accent); transition: .2s;
+    }
+    details[open] summary::after { content: "−"; }
+    details p { padding: 0 22px 20px; color: var(--muted); }
+
+    /* Booking / Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 32px; }
+    .panel h3 { font-size: 24px; margin-bottom: 6px; }
+    .panel > p { color: var(--muted); margin-bottom: 22px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 15px; margin-bottom: 6px; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--text); font: inherit; font-size: 16px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-btn { width: 100%; margin-top: 6px; }
+    .form-note { font-size: 13px; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    .info-list { list-style: none; margin-bottom: 22px; }
+    .info-list li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .info-list li:last-child { border-bottom: 0; }
+    .info-list .icon { width: 44px; height: 44px; margin: 0; flex-shrink: 0; border-radius: 12px; }
+    .info-list .icon svg { width: 22px; height: 22px; }
+    .info-list strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .info-list span, .info-list a { color: var(--muted); font-size: 16px; }
+    .info-list a:hover { color: var(--accent); }
+    .map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--bg-alt); }
+    .map iframe { width: 100%; height: 100%; border: 0; }
+
+    /* CTA band */
+    .cta-band {
+      padding: 64px 0; text-align: center; color: #fff;
+      background: linear-gradient(120deg, #e8506e, #f08a4b);
+    }
+    .cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+    .cta-band p { opacity: .92; margin-bottom: 26px; }
+    .cta-band .btn-ghost { border-color: rgba(255,255,255,.7); color: #fff; background: transparent; }
+    .cta-band .btn-ghost:hover { background: #fff; color: var(--accent-dark); }
+    .cta-band .hero-actions { justify-content: center; }
+    .btn-white { background: #fff; color: var(--accent-dark); }
+    .btn-white:hover { transform: translateY(-2px); }
+
+    footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    .foot-wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* Mobile sticky bar */
+    .mobile-bar {
+      display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: var(--header-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--line); gap: 10px;
+    }
+    .mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: 16px; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { max-width: 560px; }
+      .grid-3, .packages-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      section { padding: 64px 0; }
+      .nav, .header-cta { display: none; }
+      .menu-btn { display: block; }
+      .nav.open {
+        display: flex; flex-direction: column; gap: 0; position: absolute; top: 70px; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+      }
+      .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
+      .hero { padding: 64px 0 72px; }
+      .grid-3, .packages-grid, .why-grid { grid-template-columns: 1fr; }
+      .packages-grid { gap: 32px; }
+      .gallery-grid { grid-auto-rows: 150px; }
+      .field-row { grid-template-columns: 1fr; }
+      .panel { padding: 24px 20px; }
+      .hero-stats { gap: 24px; }
+      .mobile-bar { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">ขนนุ่ม <span>Pet Spa</span></a>
+      <nav class="nav" id="nav">
+        <a href="#services">บริการ</a>
+        <a href="#packages">ราคา</a>
+        <a href="#gallery">น้องๆ ที่มาสปา</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary header-cta">จองคิวอาบน้ำ</a>
+      <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> เปิด 09:00 – 18:00 น. · หยุดทุกวันพุธ</div>
+        <h1>อาบน้ำ ตัดขน<br><em>แบบใจเย็น</em><br>น้องหอม เจ้าของสบายใจ</h1>
+        <p class="lead">ขนนุ่ม Pet Spa บางแสน ดูแลน้องหมาน้องแมวทุกสายพันธุ์ อาบน้ำ ตัดขน สปาแก้คัน ตัดเล็บ เช็ดหู ใช้แชมพูสูตรอ่อนโยน ไม่ใช้ยาซึม ส่งรูปให้ดูระหว่างทำทุกขั้นตอน</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-line js-line">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+            แอดไลน์จองคิว
+          </a>
+          <a href="#packages" class="btn btn-ghost">ดูราคาตามขนาดตัว</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>3,000+</strong><span>น้องที่มาสปา</span></div>
+          <div><strong>1 ต่อ 1</strong><span>ช่างดูแลทีละตัว</span></div>
+          <div><strong>4.9 ★</strong><span>คะแนนรีวิว</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <!-- แทนที่ SVG นี้ด้วยรูปจริงได้: <img src="images/hero.jpg" alt="น้องหมาหลังอาบน้ำตัดขน"> -->
+        <svg class="hero-svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="100" cy="128" rx="38" ry="34"/>
+          <ellipse cx="54" cy="70" rx="17" ry="22"/>
+          <ellipse cx="86" cy="46" rx="17" ry="22"/>
+          <ellipse cx="124" cy="46" rx="17" ry="22"/>
+          <ellipse cx="152" cy="74" rx="17" ry="22"/>
+          <path d="M168 132l8-8M176 140h10M168 148l8 8" opacity=".5"/>
+          <path d="M22 118l10 4M18 136h12M24 152l9-5" opacity=".5"/>
+        </svg>
+        <div class="float-card one"><span class="stars">★★★★★</span><strong>ส่งรูประหว่างทำทาง LINE</strong></div>
+        <div class="float-card two"><strong>แชมพูออร์แกนิก</strong>อ่อนโยนต่อผิวแพ้ง่าย</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">บริการของเรา</div>
+        <h2>ครบทุกเรื่องความหอมของน้อง</h2>
+        <p>รับทั้งน้องหมาและน้องแมว ทุกขนาด ทุกสายพันธุ์ แยกโซนหมา-แมว ไม่เครียด ไม่ปะปน</p>
+      </div>
+      <div class="grid-3">
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16v3a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M6 12V6a2 2 0 014 0"/><path d="M14 6h.01M17 4h.01M17 8h.01"/></svg></div>
+          <h3>อาบน้ำ + เป่าขน</h3>
+          <p>อาบน้ำ 2 รอบ ครีมนวดขน เป่าแห้งสนิท แปรงขนพันกัน ตัดเล็บ เช็ดหู บีบต่อมก้น</p>
+          <div class="from">เริ่มต้น 250.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg></div>
+          <h3>ตัดขนทรงแฟชั่น</h3>
+          <p>ทรงหมีพูห์ ทรงเกาหลี ทรงสิงโต หรือตัดสั้นคลายร้อน ส่งรูปตัวอย่างมาได้เลย</p>
+          <div class="from">เริ่มต้น 450.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7c3 3.6 6 7 6 10.3a6 6 0 01-12 0c0-3.3 3-6.7 6-10.3z"/><path d="M9.5 14a2.5 2.5 0 002.5 2.5"/></svg></div>
+          <h3>สปาแก้คัน / ผิวแพ้</h3>
+          <p>สปาโคลนและแชมพูเฉพาะทาง ช่วยลดอาการคัน รังแค กลิ่นสาบ เหมาะกับน้องผิวแพ้ง่าย</p>
+          <div class="from">+ 150.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M9 12h6M12 9v6"/></svg></div>
+          <h3>กำจัดเห็บหมัด</h3>
+          <p>อาบน้ำยากำจัดเห็บหมัด หวีเก็บตัวเห็บ แนะนำการป้องกันต่อเนื่องที่บ้าน</p>
+          <div class="from">+ 200.-</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-5a2 2 0 014 0v5"/></svg></div>
+          <h3>รับฝากเลี้ยง (Pet Hotel)</h3>
+          <p>ห้องแอร์ กล้องวงจรปิดดูผ่านมือถือ พาเดินเล่นวันละ 2 รอบ อัปเดตรูปทุกวัน</p>
+          <div class="from">เริ่มต้น 350.- / คืน</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>รับ-ส่งถึงบ้าน</h3>
+          <p>รถแอร์พร้อมกรงนิรภัย ไม่ต้องเสียเวลาพาน้องมาเอง บริการในบางแสนและใกล้เคียง</p>
+          <div class="from">เริ่มต้น 100.- / เที่ยว</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PACKAGES ================= -->
+  <section id="packages">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ราคาตามขนาดตัว</div>
+        <h2>อาบน้ำ + ตัดขน ราคาเดียวจบ</h2>
+        <p>ราคานี้รวมตัดเล็บ เช็ดหู บีบต่อมก้นแล้ว — น้องขนพันกันมากอาจมีค่าสางขนเพิ่ม แจ้งก่อนทำทุกครั้ง</p>
+      </div>
+      <div class="packages-grid">
+        <div class="package">
+          <h3>ไซซ์เล็ก</h3>
+          <div class="sub">ไม่เกิน 5 กก. · ชิวาวา ปอม ชิสุ แมว</div>
+          <div class="price">450<small> บาท</small></div>
+          <div class="price-note">อาบน้ำอย่างเดียว 250 บาท</div>
+          <ul>
+            <li>อาบน้ำ 2 รอบ + ครีมนวด</li>
+            <li>ตัดขนทรงที่ชอบ</li>
+            <li>ตัดเล็บ เช็ดหู บีบต่อมก้น</li>
+            <li>ใช้เวลาประมาณ 1.5 ชั่วโมง</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="ไซซ์เล็ก">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package featured">
+          <div class="tag">ยอดนิยม 🐾</div>
+          <h3>ไซซ์กลาง</h3>
+          <div class="sub">5–15 กก. · พุดเดิ้ล คอร์กี้ บีเกิ้ล</div>
+          <div class="price">650<small> บาท</small></div>
+          <div class="price-note">อาบน้ำอย่างเดียว 400 บาท</div>
+          <ul>
+            <li>อาบน้ำ 2 รอบ + ครีมนวด</li>
+            <li>ตัดขนทรงที่ชอบ</li>
+            <li>ตัดเล็บ เช็ดหู บีบต่อมก้น</li>
+            <li>แปรงฟัน + น้ำหอมสำหรับสัตว์</li>
+            <li>ใช้เวลาประมาณ 2 ชั่วโมง</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" data-pkg="ไซซ์กลาง">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package">
+          <h3>ไซซ์ใหญ่</h3>
+          <div class="sub">15 กก. ขึ้นไป · โกลเด้น ไซบีเรียน</div>
+          <div class="price">950<small> บาท</small></div>
+          <div class="price-note">อาบน้ำอย่างเดียว 600 บาท</div>
+          <ul>
+            <li>อาบน้ำ 2 รอบ + ครีมนวด</li>
+            <li>สางขนชั้นในด้วยเครื่องเป่าแรงสูง</li>
+            <li>ตัดแต่งขน / ตัดสั้นคลายร้อน</li>
+            <li>ตัดเล็บ เช็ดหู บีบต่อมก้น</li>
+            <li>ใช้เวลาประมาณ 3 ชั่วโมง</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="ไซซ์ใหญ่">เลือกแพ็กเกจนี้</a>
+        </div>
+      </div>
+      <p class="packages-foot">🎁 สะสมแต้มครบ 10 ครั้ง อาบน้ำฟรี 1 ครั้ง · รับชำระเงินสด โอน หรือ QR พร้อมเพย์</p>
+    </div>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section class="why">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ทำไมต้องเรา</div>
+        <h2>ดูแลน้องเหมือนลูกของเราเอง</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></svg></div>
+          <h3>ไม่ใช้ยาซึม</h3>
+          <p>ช่างใจเย็น ค่อย ๆ ทำ พักให้น้องหายเครียดเป็นระยะ</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <h3>ส่งรูปทุกขั้นตอน</h3>
+          <p>อัปเดตรูปก่อน-ระหว่าง-หลัง ให้เจ้าของดูทาง LINE</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7c3 3.6 6 7 6 10.3a6 6 0 01-12 0c0-3.3 3-6.7 6-10.3z"/></svg></div>
+          <h3>ฆ่าเชื้อทุกรอบ</h3>
+          <p>อุปกรณ์และอ่างอาบน้ำฆ่าเชื้อหลังใช้งานทุกตัว</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <h3>ช่างผ่านการอบรม</h3>
+          <p>มีใบรับรองหลักสูตรกรูมมิ่ง และการปฐมพยาบาลสัตว์เลี้ยง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">น้องๆ ที่มาสปา</div>
+        <h2>หล่อ สวย หอม ทุกตัว</h2>
+        <p>ดูรูปน้อง ๆ เพิ่มเติมได้ที่ Instagram และ TikTok ของร้าน</p>
+      </div>
+      <!-- ใส่รูปจริง: แทนที่ <div class="ph">…</div> ด้วย <img src="images/pet1.jpg" alt="…"> -->
+      <div class="gallery-grid">
+        <div class="g-item wide tall"><div class="ph">รูปน้อง 1<br>(แนะนำ 1200×800)</div><div class="cap">น้องโมจิ · พุดเดิ้ล · ทรงหมีพูห์</div></div>
+        <div class="g-item"><div class="ph">รูปน้อง 2</div><div class="cap">น้องส้มโอ · แมวเปอร์เซีย</div></div>
+        <div class="g-item"><div class="ph">รูปน้อง 3</div><div class="cap">น้องบัตเตอร์ · คอร์กี้</div></div>
+        <div class="g-item wide"><div class="ph">รูปน้อง 4</div><div class="cap">น้องไข่ตุ๋น · ปอมเมอเรเนียน · ทรงเกาหลี</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <!-- ⚠️ รีวิวด้านล่างเป็นข้อความตัวอย่าง กรุณาแทนที่ด้วยรีวิวจริงของลูกค้าก่อนเผยแพร่ -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">เสียงจากลูกค้า</div>
+        <h2>เจ้าของน้องพูดถึงเรา</h2>
+      </div>
+      <div class="grid-3">
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“น้องขี้กลัวมาก ไปร้านอื่นต้องใช้ยาซึม ที่นี่ช่างใจเย็นมาก ค่อย ๆ ทำ ส่งรูปมาให้ดูตลอด”</p>
+          <div class="reviewer"><div class="avatar">ก</div><div><strong>คุณ ก.</strong><span>เจ้าของน้องชิสุ</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ตัดทรงหมีพูห์ออกมาน่ารักตรงตามรูปที่ส่งไปเลย หอมติดตัวหลายวัน”</p>
+          <div class="reviewer"><div class="avatar">ข</div><div><strong>คุณ ข.</strong><span>เจ้าของน้องพุดเดิ้ล</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ใช้บริการรับ-ส่งถึงคอนโด สะดวกมาก ไม่ต้องลางาน น้องกลับมาอารมณ์ดีด้วย”</p>
+          <div class="reviewer"><div class="avatar">ค</div><div><strong>คุณ ค.</strong><span>เจ้าของน้องแมวสก็อตติช</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">คำถามที่พบบ่อย</div>
+        <h2>มีข้อสงสัย? เรามีคำตอบ</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>น้องต้องฉีดวัคซีนก่อนมาไหม?</summary>
+          <p>น้องต้องได้รับวัคซีนพื้นฐานครบ และไม่มีอาการป่วยหรือโรคผิวหนังติดต่อ เพื่อความปลอดภัยของน้องทุกตัวในร้าน กรุณาถ่ายรูปสมุดวัคซีนส่งมาตอนจองคิวครับ</p>
+        </details>
+        <details>
+          <summary>ใช้เวลานานแค่ไหน ต้องรอที่ร้านไหม?</summary>
+          <p>ประมาณ 1.5–3 ชั่วโมงตามขนาดตัวและทรงขน เจ้าของสามารถฝากน้องไว้แล้วกลับมารับได้ เราจะแจ้งทาง LINE เมื่อพร้อมรับ</p>
+        </details>
+        <details>
+          <summary>น้องดุ หรือกลัวการอาบน้ำ รับไหม?</summary>
+          <p>รับครับ ช่างจะค่อย ๆ ทำและพักเป็นระยะ ไม่ใช้ยาซึม หากน้องเครียดมากเราจะโทรปรึกษาเจ้าของก่อนทำต่อทุกครั้ง</p>
+        </details>
+        <details>
+          <summary>รับน้องแมวด้วยไหม?</summary>
+          <p>รับครับ เรามีโซนแมวแยกจากหมา เงียบกว่าและไม่มีเสียงเห่ารบกวน ช่วยให้น้องแมวไม่ตื่นตกใจ</p>
+        </details>
+        <details>
+          <summary>บริการรับ-ส่งครอบคลุมพื้นที่ไหนบ้าง?</summary>
+          <p>บางแสน แสนสุข อ่างศิลา ห้วยกะปิ และในเมืองชลบุรี เริ่มต้นเที่ยวละ 100 บาท พื้นที่อื่นสอบถามทางไลน์ได้เลย</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BAND ================= -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>ถึงเวลาพาน้องมาหอมแล้วหรือยัง?</h2>
+      <p>จองครั้งแรกทางไลน์ รับฟรีสปาแก้คัน 1 ครั้ง (มูลค่า 150 บาท)</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-white js-line">แอดไลน์จองคิว</a>
+        <a href="#" class="btn btn-ghost js-tel">โทรเลย</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">จองคิว / ติดต่อเรา</div>
+        <h2>จองคิวให้น้อง</h2>
+        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะเปิด LINE พร้อมข้อความให้อัตโนมัติ</p>
+      </div>
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>ฟอร์มจองคิว</h3>
+          <p>ทีมงานจะติดต่อกลับเพื่อยืนยันคิวภายใน 30 นาที</p>
+          <form id="bookingForm">
+            <div class="field-row">
+              <div class="field"><label for="name">ชื่อเจ้าของ</label><input id="name" required placeholder="ชื่อของคุณ"></div>
+              <div class="field"><label for="phone">เบอร์โทร</label><input id="phone" type="tel" required placeholder="08x-xxx-xxxx" inputmode="tel"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="pet">ชื่อน้อง / สายพันธุ์</label><input id="pet" required placeholder="เช่น โมจิ / พุดเดิ้ล"></div>
+              <div class="field"><label for="weight">น้ำหนักโดยประมาณ</label><input id="weight" placeholder="เช่น 6 กก."></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="date">วันที่สะดวก</label><input id="date" type="date"></div>
+              <div class="field">
+                <label for="pickup">การเดินทาง</label>
+                <select id="pickup">
+                  <option>พาน้องมาเองที่ร้าน</option>
+                  <option>ต้องการรถรับ-ส่ง</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="service">บริการที่ต้องการ</label>
+              <select id="service">
+                <option>แพ็กเกจ ไซซ์เล็ก</option>
+                <option selected>แพ็กเกจ ไซซ์กลาง</option>
+                <option>แพ็กเกจ ไซซ์ใหญ่</option>
+                <option>อาบน้ำ + เป่าขน อย่างเดียว</option>
+                <option>สปาแก้คัน / ผิวแพ้</option>
+                <option>กำจัดเห็บหมัด</option>
+                <option>รับฝากเลี้ยง (Pet Hotel)</option>
+                <option>อื่น ๆ / ขอคำปรึกษา</option>
+              </select>
+            </div>
+            <div class="field"><label for="note">ทรงที่ต้องการ / ข้อควรระวัง</label><textarea id="note" rows="3" placeholder="เช่น ตัดทรงหมีพูห์ น้องกลัวไดร์เป่าขน"></textarea></div>
+            <button type="submit" class="btn btn-line form-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+              ส่งข้อมูลผ่าน LINE
+            </button>
+            <div class="form-note">ข้อมูลของคุณจะถูกส่งให้ร้านทาง LINE เท่านั้น</div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>ข้อมูลร้าน</h3>
+          <p>มีที่จอดรถหน้าร้าน แวะมาดูบรรยากาศร้านก่อนได้</p>
+          <ul class="info-list">
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
+              <div><strong>ที่อยู่</strong><span>(ใส่ที่อยู่เต็ม) ต.แสนสุข อ.เมือง จ.ชลบุรี 20130</span></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div>
+              <div><strong>โทรศัพท์</strong><a href="#" class="js-tel js-tel-text">08x-xxx-xxxx</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
+              <div><strong>LINE</strong><a href="#" class="js-line js-line-text">@khonnumpetspa</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><strong>เวลาทำการ</strong><span>09:00 – 18:00 น. · หยุดทุกวันพุธ (รับน้องคิวสุดท้าย 16:00 น.)</span></div>
+            </li>
+          </ul>
+          <div class="map">
+            <!-- เปลี่ยน q= เป็นชื่อร้าน/พิกัดจริง หรือนำ embed code จาก Google Maps มาวางแทน -->
+            <iframe src="https://www.google.com/maps?q=Bang+Saen+Chonburi&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ร้าน"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot-wrap">
+      <div>© <span id="year"></span> ขนนุ่ม Pet Spa · อาบน้ำ ตัดขน รับฝากเลี้ยง บางแสน ชลบุรี</div>
+      <div>Instagram · TikTok · Facebook</div>
+    </div>
+  </footer>
+
+  <!-- ปุ่มลอยด้านล่างบนมือถือ -->
+  <div class="mobile-bar">
+    <a href="#" class="btn btn-ghost js-tel">📞 โทร</a>
+    <a href="#" class="btn btn-line js-line">แอดไลน์</a>
+  </div>
+
+  <script>
+    // ===== ตั้งค่าข้อมูลร้าน: แก้ตรงนี้ที่เดียว =====
+    const SHOP = {
+      lineId: "@khonnumpetspa", // LINE Official Account ID (มี @ นำหน้า)
+      phone: "08x-xxx-xxxx",   // เบอร์โทรร้าน
+    };
+
+    const lineUrl = "https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineId);
+    const telUrl = "tel:" + SHOP.phone.replace(/[^0-9+]/g, "");
+
+    document.querySelectorAll(".js-line").forEach(a => { a.href = lineUrl; a.target = "_blank"; a.rel = "noopener"; });
+    document.querySelectorAll(".js-tel").forEach(a => { a.href = telUrl; });
+    document.querySelectorAll(".js-line-text").forEach(el => el.textContent = SHOP.lineId);
+    document.querySelectorAll(".js-tel-text").forEach(el => el.textContent = SHOP.phone);
+    document.getElementById("year").textContent = new Date().getFullYear() + 543; // พ.ศ.
+
+    // เมนูมือถือ
+    const nav = document.getElementById("nav");
+    document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // กดเลือกแพ็กเกจ -> ตั้งค่าในฟอร์มให้อัตโนมัติ
+    document.querySelectorAll("[data-pkg]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("service").value = "แพ็กเกจ " + btn.dataset.pkg;
+      });
+    });
+
+    // ห้ามเลือกวันย้อนหลัง
+    document.getElementById("date").min = new Date().toISOString().split("T")[0];
+
+    // ส่งฟอร์ม -> เปิด LINE พร้อมข้อความ
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const msg = [
+        "🐾 จองคิวอาบน้ำ-ตัดขน",
+        "เจ้าของ: " + v("name"),
+        "เบอร์: " + v("phone"),
+        "น้อง: " + v("pet") + " (" + (v("weight") || "ไม่ระบุน้ำหนัก") + ")",
+        "บริการ: " + v("service"),
+        "วันที่สะดวก: " + (v("date") || "-"),
+        "การเดินทาง: " + v("pickup"),
+        "หมายเหตุ: " + (v("note") || "-"),
+      ].join("\n");
+      const url = "https://line.me/R/oaMessage/" + encodeURIComponent(SHOP.lineId) + "/?" + encodeURIComponent(msg);
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ผ้าหอม Laundry ชลบุรี | รับ-ส่งผ้าถึงบ้าน ซัก อบ พับ รีด ซักแห้ง</title>
+  <meta name="description" content="ผ้าหอม Laundry บริการซักผ้ารับ-ส่งถึงบ้าน ในเมืองชลบุรี บ้านสวน อมตะนคร ซัก อบ พับ รีด ซักผ้านวม ซักแห้งสูท ซักรองเท้า คิดราคาตามกิโล ได้ผ้าคืนภายใน 48 ชั่วโมง">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fd;
+      --bg-alt: #eef0fb;
+      --card: #ffffff;
+      --line: #dde1f3;
+      --text: #1d2140;
+      --muted: #5f6585;
+      --accent: #4c56d6;
+      --accent-hover: #3b44c2;
+      --accent-soft: rgba(76,86,214,.10);
+      --accent-dark: #343dae;
+      --on-accent: #ffffff;
+      --header-bg: rgba(247,248,253,.9);
+      --line-green: #06c755;
+      --radius: 16px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Sarabun", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .btn, .nav a, .price { font-family: "Kanit", sans-serif; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    section { padding: 88px 0; }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .eyebrow { color: var(--accent); font-family: "Kanit", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: .5px; }
+    .section-head h2 { font-size: clamp(28px, 4vw, 40px); margin: 6px 0 12px; }
+    .section-head p { color: var(--muted); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 17px;
+      border: 2px solid transparent; cursor: pointer; transition: .2s; white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-line { background: var(--line-green); color: #fff; }
+    .btn-line:hover { filter: brightness(1.05); transform: translateY(-2px); }
+    .btn-ghost { border-color: var(--line); color: var(--text); background: var(--card); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { font-family: "Kanit", sans-serif; font-size: 22px; font-weight: 700; }
+    .logo span { color: var(--accent); }
+    .nav { display: flex; gap: 28px; }
+    .nav a { color: var(--muted); font-size: 16px; transition: .2s; }
+    .nav a:hover { color: var(--text); }
+    .header-cta { padding: 10px 20px; font-size: 15px; }
+    .menu-btn { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
+    .menu-btn svg { width: 28px; height: 28px; }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden; padding: 110px 0 100px;
+      background:
+        radial-gradient(ellipse 60% 60% at 85% 20%, rgba(76,86,214,.14), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(80,200,230,.16), transparent 60%),
+        var(--bg);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+      border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--muted);
+      background: var(--card); margin-bottom: 20px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-green); box-shadow: 0 0 10px var(--line-green); }
+    .hero h1 { font-size: clamp(36px, 6vw, 62px); font-weight: 700; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.lead { color: var(--muted); font-size: 19px; max-width: 540px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
+    .hero-stats strong { display: block; font-family: "Kanit", sans-serif; font-size: 30px; color: var(--text); }
+    .hero-stats span { color: var(--muted); font-size: 15px; }
+
+    .hero-visual {
+      aspect-ratio: 4/3.4; border-radius: 28px; border: 1px solid var(--line);
+      background: linear-gradient(145deg, #e3e6fb, #dff4fa);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    /* แทนที่ด้วยรูปหน้าร้าน/ผ้าพับจริง: ใส่ <img src="images/hero.jpg"> ใน .hero-visual */
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-visual .hero-svg { width: 56%; color: var(--accent); }
+    .float-card {
+      position: absolute; background: rgba(255,255,255,.95); border: 1px solid var(--line);
+      border-radius: 14px; padding: 12px 16px; font-size: 14px; backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(30,35,90,.08);
+    }
+    .float-card strong { font-family: "Kanit", sans-serif; display: block; font-size: 16px; }
+    .float-card.one { top: 20px; left: 20px; }
+    .float-card.two { bottom: 20px; right: 20px; }
+    .stars { color: #f5a623; letter-spacing: 2px; }
+
+    /* How it works */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+    .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 22px; position: relative; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); color: var(--on-accent); font-family: "Kanit", sans-serif; font-weight: 600; margin-bottom: 14px;
+    }
+    .step h3 { font-size: 19px; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 15px; }
+
+    /* Services */
+    .services { background: var(--bg-alt); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 26px; transition: .25s;
+    }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(30,35,90,.08); }
+    .icon {
+      width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 18px;
+    }
+    .icon svg { width: 28px; height: 28px; }
+    .service-card h3 { font-size: 21px; margin-bottom: 8px; }
+    .service-card p { color: var(--muted); font-size: 16px; }
+    .service-card .from { margin-top: 16px; font-family: "Kanit", sans-serif; color: var(--accent-dark); font-size: 15px; }
+
+    /* Packages */
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+    .package {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+      padding: 34px 28px; display: flex; flex-direction: column; position: relative;
+    }
+    .package.featured { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--card) 40%); }
+    .package .tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--on-accent); font-family: "Kanit", sans-serif; font-size: 14px;
+      padding: 4px 16px; border-radius: 999px; white-space: nowrap;
+    }
+    .package h3 { font-size: 22px; }
+    .package .sub { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+    .price { font-size: 40px; font-weight: 700; }
+    .price small { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .price-note { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+    .package ul { list-style: none; margin-bottom: 28px; flex: 1; }
+    .package li { padding: 8px 0 8px 30px; position: relative; font-size: 16px; border-bottom: 1px dashed var(--line); }
+    .package li::before {
+      content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234c56d6' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat;
+    }
+    .package .btn { width: 100%; }
+    .packages-foot { text-align: center; color: var(--muted); font-size: 15px; margin-top: 28px; }
+
+    /* Why us */
+    .why { background: var(--bg-alt); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .why-item { text-align: center; padding: 20px 10px; }
+    .why-item .icon { margin: 0 auto 16px; width: 64px; height: 64px; border-radius: 50%; }
+    .why-item h3 { font-size: 19px; margin-bottom: 6px; }
+    .why-item p { color: var(--muted); font-size: 15px; }
+
+    /* Reviews */
+    .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .review p { margin: 12px 0 18px; font-size: 16px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "Kanit", sans-serif; font-weight: 600; }
+    .reviewer strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .reviewer span { color: var(--muted); font-size: 14px; }
+
+    /* FAQ */
+    .faq { background: var(--bg-alt); }
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
+    summary {
+      cursor: pointer; list-style: none; padding: 20px 56px 20px 22px; position: relative;
+      font-family: "Kanit", sans-serif; font-size: 18px; font-weight: 500;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+      font-size: 26px; color: var(--accent); transition: .2s;
+    }
+    details[open] summary::after { content: "−"; }
+    details p { padding: 0 22px 20px; color: var(--muted); }
+
+    /* Booking / Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px; }
+    .panel h3 { font-size: 24px; margin-bottom: 6px; }
+    .panel > p { color: var(--muted); margin-bottom: 22px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 15px; margin-bottom: 6px; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--text); font: inherit; font-size: 16px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-btn { width: 100%; margin-top: 6px; }
+    .form-note { font-size: 13px; color: var(--muted); text-align: center; margin-top: 10px; }
+
+    .info-list { list-style: none; margin-bottom: 22px; }
+    .info-list li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .info-list li:last-child { border-bottom: 0; }
+    .info-list .icon { width: 44px; height: 44px; margin: 0; flex-shrink: 0; border-radius: 12px; }
+    .info-list .icon svg { width: 22px; height: 22px; }
+    .info-list strong { display: block; font-family: "Kanit", sans-serif; font-weight: 500; }
+    .info-list span, .info-list a { color: var(--muted); font-size: 16px; }
+    .info-list a:hover { color: var(--accent); }
+    .map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--bg-alt); }
+    .map iframe { width: 100%; height: 100%; border: 0; }
+
+    /* CTA band */
+    .cta-band {
+      padding: 64px 0; text-align: center; color: #fff;
+      background: linear-gradient(120deg, #4c56d6, #2f9fd0);
+    }
+    .cta-band h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+    .cta-band p { opacity: .92; margin-bottom: 26px; }
+    .cta-band .btn-ghost { border-color: rgba(255,255,255,.7); color: #fff; background: transparent; }
+    .cta-band .btn-ghost:hover { background: #fff; color: var(--accent-dark); }
+    .cta-band .hero-actions { justify-content: center; }
+    .btn-white { background: #fff; color: var(--accent-dark); }
+    .btn-white:hover { transform: translateY(-2px); }
+
+    footer { padding: 36px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+    .foot-wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* Mobile sticky bar */
+    .mobile-bar {
+      display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: var(--header-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--line); gap: 10px;
+    }
+    .mobile-bar .btn { flex: 1; padding: 13px 10px; font-size: 16px; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { max-width: 560px; }
+      .grid-3, .packages-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid, .steps { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      section { padding: 64px 0; }
+      .nav, .header-cta { display: none; }
+      .menu-btn { display: block; }
+      .nav.open {
+        display: flex; flex-direction: column; gap: 0; position: absolute; top: 70px; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+      }
+      .nav.open a { padding: 12px 0; font-size: 18px; border-bottom: 1px solid var(--line); }
+      .hero { padding: 64px 0 72px; }
+      .grid-3, .packages-grid, .why-grid, .steps { grid-template-columns: 1fr; }
+      .packages-grid { gap: 32px; }
+      .field-row { grid-template-columns: 1fr; }
+      .panel { padding: 24px 20px; }
+      .hero-stats { gap: 24px; }
+      .mobile-bar { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">ผ้าหอม<span> Laundry</span></a>
+      <nav class="nav" id="nav">
+        <a href="#how">ขั้นตอน</a>
+        <a href="#services">บริการ</a>
+        <a href="#packages">ราคา</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary header-cta">นัดรับผ้า</a>
+      <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> รับ-ส่งผ้าทุกวัน 08:00 – 20:00 น.</div>
+        <h1>ไม่ต้องซักผ้าเอง<br><em>อีกต่อไป</em></h1>
+        <p class="lead">ผ้าหอม Laundry รับผ้าถึงหน้าบ้าน ซัก อบ พับ รีด แล้วส่งคืนภายใน 48 ชั่วโมง แยกซักทีละบ้าน ไม่ปนกับผ้าคนอื่น คิดราคาตามน้ำหนักจริง ชั่งให้ดูทุกครั้ง</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-line js-line">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+            แอดไลน์นัดรับผ้า
+          </a>
+          <a href="#packages" class="btn btn-ghost">ดูราคาต่อกิโล</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>48 ชม.</strong><span>ได้ผ้าคืน</span></div>
+          <div><strong>1 บ้าน 1 เครื่อง</strong><span>ไม่ซักรวม</span></div>
+          <div><strong>4.8 ★</strong><span>คะแนนรีวิว</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <!-- แทนที่ SVG นี้ด้วยรูปจริงได้: <img src="images/hero.jpg" alt="ผ้าพับเรียบร้อยพร้อมส่ง"> -->
+        <svg class="hero-svg" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="20" y="10" width="160" height="200" rx="16"/>
+          <path d="M20 52h160"/>
+          <circle cx="46" cy="31" r="6"/><circle cx="68" cy="31" r="6"/>
+          <path d="M132 31h28" opacity=".6"/>
+          <circle cx="100" cy="132" r="56"/>
+          <path d="M60 140c14-12 26 10 40 0s26 10 40 0" opacity=".6"/>
+        </svg>
+        <div class="float-card one"><span class="stars">★★★★★</span><strong>รับ-ส่งฟรี ครบ 5 กก.</strong></div>
+        <div class="float-card two"><strong>น้ำยาสูตรอ่อนโยน</strong>ปลอดภัยต่อผิวเด็ก</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="how">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ใช้งานง่าย 4 ขั้นตอน</div>
+        <h2>ทักไลน์ทีเดียว ที่เหลือเราจัดการ</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>นัดรับผ้า</h3><p>ทักไลน์หรือกรอกฟอร์ม เลือกวันและช่วงเวลาที่สะดวก</p></div>
+        <div class="step"><h3>รับถึงหน้าบ้าน</h3><p>พนักงานไปรับผ้า ชั่งน้ำหนักและถ่ายรูปให้ดูทันที</p></div>
+        <div class="step"><h3>ซัก อบ พับ</h3><p>แยกซักทีละบ้าน คัดผ้าขาว-สี ตามป้ายดูแลผ้าทุกชิ้น</p></div>
+        <div class="step"><h3>ส่งคืนภายใน 48 ชม.</h3><p>แพ็กถุงซีลกันฝุ่น ส่งถึงมือ จ่ายเงินตอนรับผ้า</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">บริการของเรา</div>
+        <h2>ผ้าทุกแบบ ไว้ใจเรา</h2>
+        <p>ตั้งแต่เสื้อผ้าประจำวัน ชุดทำงาน ไปจนถึงผ้านวม ม่าน และรองเท้า</p>
+      </div>
+      <div class="grid-3">
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M8 6h.01M11 6h.01"/></svg></div>
+          <h3>ซัก อบ พับ</h3>
+          <p>เสื้อผ้าทั่วไป ซักน้ำยาคุณภาพ อบแห้งอุณหภูมิเหมาะสม พับเรียบร้อยพร้อมเก็บเข้าตู้</p>
+          <div class="from">35.- / กก.</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v-2a6 6 0 00-6-6H9L3 15z"/><path d="M7 13h.01"/></svg></div>
+          <h3>ซัก + รีด</h3>
+          <p>เสื้อเชิ้ต ชุดทำงาน ชุดนักเรียน รีดเรียบด้วยเตารีดไอน้ำ แขวนไม้แขวนพร้อมใส่</p>
+          <div class="from">55.- / กก. หรือ 20.- / ตัว</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="12" rx="2"/><path d="M2 12h20M6 7V5h12v2"/></svg></div>
+          <h3>ผ้านวม / ชุดเครื่องนอน</h3>
+          <p>ผ้านวม ผ้าห่ม ปลอกหมอน ผ้าปูที่นอน ซักเครื่องใหญ่ อบฆ่าไรฝุ่นที่อุณหภูมิสูง</p>
+          <div class="from">เริ่มต้น 150.- / ผืน</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4a2 2 0 10-2-2"/><path d="M12 4v2L3 12a1 1 0 00.6 1.8h16.8A1 1 0 0021 12l-9-6"/></svg></div>
+          <h3>ซักแห้ง</h3>
+          <p>สูท ชุดราตรี ผ้าไหม เสื้อโค้ท ผ้าที่ห้ามซักน้ำ ดูแลโดยร้านซักแห้งพาร์ทเนอร์</p>
+          <div class="from">เริ่มต้น 180.- / ชิ้น</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20v-2c0-1-1-2-2-2l-6-1-3-5H5L2 12z"/><path d="M2 18v2h20v-2"/></svg></div>
+          <h3>ซักรองเท้า</h3>
+          <p>รองเท้าผ้าใบ รองเท้าหนัง ขัดทำความสะอาดด้วยมือ ขจัดกลิ่น ส่งคืนภายใน 3 วัน</p>
+          <div class="from">เริ่มต้น 190.- / คู่</div>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></div>
+          <h3>ลูกค้าธุรกิจ</h3>
+          <p>หอพัก รีสอร์ท Airbnb คลินิก ร้านนวด ผ้าขนหนู ผ้าปู ชุดยูนิฟอร์ม รับ-ส่งตามรอบ</p>
+          <div class="from">ราคาพิเศษตามปริมาณ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PACKAGES ================= -->
+  <section id="packages">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ราคา</div>
+        <h2>จ่ายตามจริง หรือรายเดือนคุ้มกว่า</h2>
+        <p>ชั่งน้ำหนักต่อหน้าลูกค้าทุกครั้ง ส่งรูปตาชั่งให้ทาง LINE</p>
+      </div>
+      <div class="packages-grid">
+        <div class="package">
+          <h3>จ่ายรายครั้ง</h3>
+          <div class="sub">ใช้บริการเมื่อไหร่ก็ได้</div>
+          <div class="price">35<small> บาท / กก.</small></div>
+          <div class="price-note">ขั้นต่ำ 3 กก. · รับ-ส่งฟรีเมื่อครบ 5 กก.</div>
+          <ul>
+            <li>ซัก อบ พับ</li>
+            <li>แยกซักผ้าขาว-ผ้าสี</li>
+            <li>แพ็กถุงซีลกันฝุ่น</li>
+            <li>ส่งคืนภายใน 48 ชั่วโมง</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="จ่ายรายครั้ง">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package featured">
+          <div class="tag">คุ้มที่สุด 🧺</div>
+          <h3>รายเดือน</h3>
+          <div class="sub">สำหรับครอบครัว / คนทำงาน</div>
+          <div class="price">990<small> บาท / เดือน</small></div>
+          <div class="price-note">ซักได้ 35 กก. (เฉลี่ย 28 บาท/กก.)</div>
+          <ul>
+            <li>ซัก อบ พับ ได้ทั้งเดือน</li>
+            <li>รับ-ส่งฟรีทุกครั้ง ไม่มีขั้นต่ำ</li>
+            <li>รีดฟรี 10 ตัว / เดือน</li>
+            <li>ส่งด่วน 24 ชม. ไม่มีค่าใช้จ่ายเพิ่ม</li>
+            <li>กิโลที่เกิน คิดเพียง 28 บาท</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" data-pkg="รายเดือน">เลือกแพ็กเกจนี้</a>
+        </div>
+        <div class="package">
+          <h3>ธุรกิจ</h3>
+          <div class="sub">หอพัก รีสอร์ท Airbnb คลินิก</div>
+          <div class="price">25<small> บาท / กก. ขึ้นไป</small></div>
+          <div class="price-note">ราคาตามปริมาณต่อเดือน</div>
+          <ul>
+            <li>รับ-ส่งตามรอบที่ตกลง</li>
+            <li>นับจำนวนชิ้นเข้า-ออกทุกรอบ</li>
+            <li>รีดผ้าปูเรียบระดับโรงแรม</li>
+            <li>ออกใบกำกับภาษี / วางบิลรายเดือน</li>
+            <li>ผู้ดูแลบัญชีเฉพาะ</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost" data-pkg="ธุรกิจ">ขอใบเสนอราคา</a>
+        </div>
+      </div>
+      <p class="packages-foot">💳 ชำระเงินสด โอน หรือ QR พร้อมเพย์ ตอนรับผ้าคืน · ไม่ต้องจ่ายล่วงหน้า (ยกเว้นแพ็กเกจรายเดือน)</p>
+    </div>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section class="why">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ทำไมต้องเรา</div>
+        <h2>ผ้าของคุณ เราดูแลเหมือนของเราเอง</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/></svg></div>
+          <h3>ไม่ซักรวม</h3>
+          <p>1 บ้าน 1 เครื่อง ผ้าไม่ปนกับลูกค้าคนอื่น</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7c3 3.6 6 7 6 10.3a6 6 0 01-12 0c0-3.3 3-6.7 6-10.3z"/></svg></div>
+          <h3>น้ำยาอ่อนโยน</h3>
+          <p>ไม่ระคายเคือง เลือกสูตรไม่มีกลิ่นสำหรับผิวแพ้ง่ายได้</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <h3>ชั่ง-ถ่ายรูปทุกครั้ง</h3>
+          <p>ส่งรูปตาชั่งและจำนวนชิ้นให้ตรวจสอบทาง LINE</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg></div>
+          <h3>รับผิดชอบทุกชิ้น</h3>
+          <p>หากเกิดความเสียหายจากการซัก ชดเชยตามเงื่อนไขของร้าน</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <!-- ⚠️ รีวิวด้านล่างเป็นข้อความตัวอย่าง กรุณาแทนที่ด้วยรีวิวจริงของลูกค้าก่อนเผยแพร่ -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">เสียงจากลูกค้า</div>
+        <h2>ลูกค้าพูดถึงเรา</h2>
+      </div>
+      <div class="grid-3">
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ทำงานเลิกดึกทุกวัน ไม่มีเวลาซักผ้าเลย สมัครรายเดือนแล้วชีวิตง่ายขึ้นมาก ผ้าหอมพับสวย”</p>
+          <div class="reviewer"><div class="avatar">ก</div><div><strong>คุณ ก.</strong><span>พนักงานบริษัท อมตะนคร</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ส่งผ้านวมไปซัก ได้คืนนุ่มฟูเหมือนใหม่ ส่งรูปตาชั่งมาให้ดูทุกครั้ง โปร่งใสดี”</p>
+          <div class="reviewer"><div class="avatar">ข</div><div><strong>คุณ ข.</strong><span>คุณแม่ลูกสอง บ้านสวน</span></div></div>
+        </div>
+        <div class="review">
+          <span class="stars">★★★★★</span>
+          <p>“ใช้กับห้องพัก Airbnb 6 ห้อง รับ-ส่งตรงรอบทุกครั้ง ผ้าปูรีดเรียบ แขกชมเรื่องความสะอาด”</p>
+          <div class="reviewer"><div class="avatar">ค</div><div><strong>คุณ ค.</strong><span>เจ้าของที่พัก บางแสน</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">คำถามที่พบบ่อย</div>
+        <h2>มีข้อสงสัย? เรามีคำตอบ</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>รับ-ส่งผ้าพื้นที่ไหนบ้าง?</summary>
+          <p>ในเมืองชลบุรี บ้านสวน บ้านโขด หนองไม้แดง อมตะนคร บางแสน และอ่างศิลา พื้นที่อื่นสอบถามทางไลน์ได้เลยครับ</p>
+        </details>
+        <details>
+          <summary>ถ้าต้องการผ้าคืนเร็วกว่า 48 ชั่วโมงได้ไหม?</summary>
+          <p>ได้ครับ บริการด่วน 24 ชั่วโมง คิดเพิ่ม 10 บาท/กก. (ฟรีสำหรับสมาชิกรายเดือน) กรุณาแจ้งตอนนัดรับผ้า</p>
+        </details>
+        <details>
+          <summary>ผ้าหาย หรือเสียหาย รับผิดชอบอย่างไร?</summary>
+          <p>เรานับจำนวนชิ้นและถ่ายรูปตอนรับผ้าทุกครั้ง หากผ้าหายหรือเสียหายจากการซัก ร้านชดเชยไม่เกิน 10 เท่าของค่าซักชิ้นนั้น ผ้าแบรนด์เนมหรือผ้าราคาสูงแนะนำให้แจ้งก่อนเพื่อแยกดูแลพิเศษ</p>
+        </details>
+        <details>
+          <summary>ผ้าสีตก หรือผ้าที่ต้องซักมือ ทำอย่างไร?</summary>
+          <p>พนักงานจะคัดแยกตามป้ายดูแลผ้า ผ้าที่สีอาจตกจะซักแยก ส่วนผ้าที่ต้องซักมือหรือซักแห้ง เราจะแจ้งราคาให้ลูกค้าอนุมัติก่อนทำ</p>
+        </details>
+        <details>
+          <summary>แพ็กเกจรายเดือน กิโลที่เหลือสะสมไปเดือนหน้าได้ไหม?</summary>
+          <p>สะสมได้ไม่เกิน 10 กก. ไปเดือนถัดไป และยกเลิกแพ็กเกจได้ทุกเมื่อ เพียงแจ้งล่วงหน้า 7 วันก่อนรอบบิลครับ</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BAND ================= -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>คืนเวลาวันหยุดให้ตัวเอง</h2>
+      <p>ลูกค้าใหม่ทักไลน์วันนี้ ซักครั้งแรกลด 20% และรับ-ส่งฟรีไม่มีขั้นต่ำ</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-white js-line">แอดไลน์รับส่วนลด</a>
+        <a href="#" class="btn btn-ghost js-tel">โทรเลย</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">นัดรับผ้า / ติดต่อเรา</div>
+        <h2>นัดรับผ้าถึงบ้าน</h2>
+        <p>กรอกข้อมูลแล้วกดส่ง ระบบจะเปิด LINE พร้อมข้อความให้อัตโนมัติ</p>
+      </div>
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>ฟอร์มนัดรับผ้า</h3>
+          <p>ทีมงานจะติดต่อกลับเพื่อยืนยันเวลาภายใน 30 นาที</p>
+          <form id="bookingForm">
+            <div class="field-row">
+              <div class="field"><label for="name">ชื่อ</label><input id="name" required placeholder="ชื่อของคุณ"></div>
+              <div class="field"><label for="phone">เบอร์โทร</label><input id="phone" type="tel" required placeholder="08x-xxx-xxxx" inputmode="tel"></div>
+            </div>
+            <div class="field"><label for="address">ที่อยู่รับผ้า</label><input id="address" required placeholder="เช่น หมู่บ้าน… ซอย… ต.บ้านสวน"></div>
+            <div class="field-row">
+              <div class="field"><label for="date">วันที่รับผ้า</label><input id="date" type="date"></div>
+              <div class="field">
+                <label for="time">ช่วงเวลา</label>
+                <select id="time">
+                  <option>เช้า (08:00–12:00)</option>
+                  <option>บ่าย (12:00–16:00)</option>
+                  <option>เย็น (16:00–20:00)</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="service">บริการ</label>
+                <select id="service">
+                  <option>แพ็กเกจ จ่ายรายครั้ง</option>
+                  <option selected>แพ็กเกจ รายเดือน</option>
+                  <option>แพ็กเกจ ธุรกิจ</option>
+                  <option>ซัก + รีด</option>
+                  <option>ผ้านวม / ชุดเครื่องนอน</option>
+                  <option>ซักแห้ง</option>
+                  <option>ซักรองเท้า</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="amount">ปริมาณผ้าโดยประมาณ</label>
+                <select id="amount">
+                  <option>ไม่เกิน 5 กก. (1 ตะกร้า)</option>
+                  <option>5–10 กก. (2 ตะกร้า)</option>
+                  <option>มากกว่า 10 กก.</option>
+                  <option>ไม่แน่ใจ</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label for="note">หมายเหตุ</label><textarea id="note" rows="3" placeholder="เช่น ฝากไว้กับ รปภ. / ขอน้ำยาสูตรไม่มีกลิ่น"></textarea></div>
+            <button type="submit" class="btn btn-line form-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+              ส่งข้อมูลผ่าน LINE
+            </button>
+            <div class="form-note">ข้อมูลของคุณจะถูกส่งให้ร้านทาง LINE เท่านั้น</div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>ข้อมูลร้าน</h3>
+          <p>นำผ้ามาส่งเองที่ร้านได้ ลดเพิ่ม 3 บาท/กก.</p>
+          <ul class="info-list">
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
+              <div><strong>ที่อยู่</strong><span>(ใส่ที่อยู่เต็ม) ต.บ้านสวน อ.เมือง จ.ชลบุรี 20000</span></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div>
+              <div><strong>โทรศัพท์</strong><a href="#" class="js-tel js-tel-text">08x-xxx-xxxx</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
+              <div><strong>LINE</strong><a href="#" class="js-line js-line-text">@phahomlaundry</a></div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div><strong>เวลาทำการ</strong><span>รับ-ส่งผ้าทุกวัน 08:00 – 20:00 น. · หน้าร้านเปิด 07:00 – 21:00 น.</span></div>
+            </li>
+          </ul>
+          <div class="map">
+            <!-- เปลี่ยน q= เป็นชื่อร้าน/พิกัดจริง หรือนำ embed code จาก Google Maps มาวางแทน -->
+            <iframe src="https://www.google.com/maps?q=Ban+Suan+Chonburi&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ร้าน"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot-wrap">
+      <div>© <span id="year"></span> ผ้าหอม Laundry · ซักผ้ารับ-ส่งถึงบ้าน ชลบุรี</div>
+      <div>Facebook · LINE</div>
+    </div>
+  </footer>
+
+  <!-- ปุ่มลอยด้านล่างบนมือถือ -->
+  <div class="mobile-bar">
+    <a href="#" class="btn btn-ghost js-tel">📞 โทร</a>
+    <a href="#" class="btn btn-line js-line">แอดไลน์</a>
+  </div>
+
+  <script>
+    // ===== ตั้งค่าข้อมูลร้าน: แก้ตรงนี้ที่เดียว =====
+    const SHOP = {
+      lineId: "@phahomlaundry", // LINE Official Account ID (มี @ นำหน้า)
+      phone: "08x-xxx-xxxx",   // เบอร์โทรร้าน
+    };
+
+    const lineUrl = "https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineId);
+    const telUrl = "tel:" + SHOP.phone.replace(/[^0-9+]/g, "");
+
+    document.querySelectorAll(".js-line").forEach(a => { a.href = lineUrl; a.target = "_blank"; a.rel = "noopener"; });
+    document.querySelectorAll(".js-tel").forEach(a => { a.href = telUrl; });
+    document.querySelectorAll(".js-line-text").forEach(el => el.textContent = SHOP.lineId);
+    document.querySelectorAll(".js-tel-text").forEach(el => el.textContent = SHOP.phone);
+    document.getElementById("year").textContent = new Date().getFullYear() + 543; // พ.ศ.
+
+    // เมนูมือถือ
+    const nav = document.getElementById("nav");
+    document.getElementById("menuBtn").addEventListener("click", () => nav.classList.toggle("open"));
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+    // กดเลือกแพ็กเกจ -> ตั้งค่าในฟอร์มให้อัตโนมัติ
+    document.querySelectorAll("[data-pkg]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("service").value = "แพ็กเกจ " + btn.dataset.pkg;
+      });
+    });
+
+    // ห้ามเลือกวันย้อนหลัง
+    document.getElementById("date").min = new Date().toISOString().split("T")[0];
+
+    // ส่งฟอร์ม -> เปิด LINE พร้อมข้อความ
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const msg = [
+        "🧺 นัดรับผ้า",
+        "ชื่อ: " + v("name"),
+        "เบอร์: " + v("phone"),
+        "ที่อยู่: " + v("address"),
+        "วันที่: " + (v("date") || "-") + " · " + v("time"),
+        "บริการ: " + v("service"),
+        "ปริมาณ: " + v("amount"),
+        "หมายเหตุ: " + (v("note") || "-"),
+      ].join("\n");
+      const url = "https://line.me/R/oaMessage/" + encodeURIComponent(SHOP.lineId) + "/?" + encodeURIComponent(msg);
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
