@@ -60,7 +60,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=7">
+  <link rel="stylesheet" href="/assets/site.css?v=8">
   <script src="/config.js"></script>
   <script src="/assets/themes.js?v=2"></script>
 </head>
@@ -74,10 +74,10 @@
     <div class="container nav-wrap">
       <a href="#" class="logo">Direk <span>Air</span></a>
       <nav class="nav" id="nav">
-        <a href="#services">Services</a>
-        <a href="#gallery" id="galleryNav" hidden>Our work</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <a href="#services" data-edit="nav-1">Services</a>
+        <a href="#gallery" id="galleryNav" hidden data-edit="nav-2">Our work</a>
+        <a href="#faq" data-edit="nav-3">FAQ</a>
+        <a href="#contact" data-edit="nav-4">Contact</a>
         <a href="/admin.html" class="nav-login" id="loginNav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg><span>Log in</span></a>
       </nav>
       <div class="head-right">
@@ -93,22 +93,20 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="badge"><span class="dot"></span> A Chonburi institution since 1987</div>
-        <h1>Car Air-Con<br><em>Carryboy Canopies</em><br>Chonburi</h1>
-        <p class="lead">Direk Air has looked after Chonburi drivers since 1987. We specialise in <b>car air-conditioning</b> (repairs, cleaning, refrigerant refills, and air-con that won't cool) and <b>Carryboy fibreglass canopies</b> for pickups, plus window tint, car audio, batteries and accessories.</p>
+        <div class="badge"><span class="dot"></span> <span data-edit="hero-1">A Chonburi institution since 1987</span></div>
+        <h1 data-edit="hero-2">Car Air-Con<br><em>Carryboy Canopies</em><br>Chonburi</h1>
+        <p class="lead" data-edit="hero-3">Direk Air has looked after Chonburi drivers since 1987. We specialise in <b>car air-conditioning</b> (repairs, cleaning, refrigerant refills, and air-con that won't cool) and <b>Carryboy fibreglass canopies</b> for pickups, plus window tint, car audio, batteries and accessories.</p>
         <div class="hero-chips">
-          <a href="#aircon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M4.9 7l14.2 10M19.1 7L4.9 17"/><path d="M9.5 4L12 6l2.5-2M9.5 20l2.5-2 2.5 2"/></svg>Car air-con</a>
-          <a href="#carryboy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17V9h11l3-4h4l2 4v8"/><path d="M2 9V6h11v3"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg>Carryboy canopies</a>
+          <a href="#aircon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M4.9 7l14.2 10M19.1 7L4.9 17"/><path d="M9.5 4L12 6l2.5-2M9.5 20l2.5-2 2.5 2"/></svg><span data-edit="hero-4">Car air-con</span></a>
+          <a href="#carryboy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17V9h11l3-4h4l2 4v8"/><path d="M2 9V6h11v3"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg><span data-edit="hero-5">Carryboy canopies</span></a>
         </div>
         <div class="hero-actions">
           <a href="#" class="btn btn-line js-line">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
-            Chat with us on LINE
-          </a>
-          <a href="#services" class="btn btn-ghost">See our services</a>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg><span data-edit="hero-6">Chat with us on LINE</span></a>
+          <a href="#services" class="btn btn-ghost" data-edit="hero-7">See our services</a>
         </div>
         <div class="hero-stats">
-          <div><strong>35+ yrs</strong><span>serving Chonburi</span></div>
+          <div><strong data-edit="hero-8">35+ yrs</strong><span data-edit="hero-9">serving Chonburi</span></div>
         </div>
       </div>
 
@@ -124,7 +122,7 @@
           <path d="M248 55h32c8 0 14 3 20 8l26 25h-78z" opacity=".55"/>
           <path d="M60 105h18M352 108h16" opacity=".7"/>
         </svg>
-        <div class="float-card one"><strong>Sukhumvit Rd, Bang Pla Soi</strong>Mueang Chon Buri</div>
+        <div class="float-card one" data-edit="hero-10"><strong>Sukhumvit Rd, Bang Pla Soi</strong>Mueang Chon Buri</div>
       </div>
     </div>
   </section>
@@ -133,69 +131,69 @@
   <section class="services" id="services">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">Our services</div>
-        <h2>Car Air-Con &amp; Carryboy Canopies in Chonburi</h2>
-        <p>Ask about prices and details for your car on LINE or by phone.</p>
+        <div class="eyebrow" data-edit="svc-1">Our services</div>
+        <h2 data-edit="svc-2">Car Air-Con &amp; Carryboy Canopies in Chonburi</h2>
+        <p data-edit="svc-3">Ask about prices and details for your car on LINE or by phone.</p>
       </div>
       <div class="featured">
         <article class="feature" id="aircon">
-          <div class="tag">Main service</div>
+          <div class="tag" data-edit="svc-4">Main service</div>
           <div class="big-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M4.9 7l14.2 10M19.1 7L4.9 17"/><path d="M9.5 4L12 6l2.5-2M9.5 20l2.5-2 2.5 2"/></svg></div>
-          <h3>Car air-con</h3>
-          <p>Air-con not cold, smelly, or weak? Our technicians will check it and fix it.</p>
+          <h3 data-edit="svc-5">Car air-con</h3>
+          <p data-edit="svc-6">Air-con not cold, smelly, or weak? Our technicians will check it and fix it.</p>
           <ul>
-            <li>Car air-con repair, including air-con that won't cool</li>
-            <li>Air-con cleaning</li>
-            <li>Refrigerant refills</li>
-            <li>Installation of all types of car air-con</li>
+            <li data-edit="svc-7">Car air-con repair, including air-con that won't cool</li>
+            <li data-edit="svc-8">Air-con cleaning</li>
+            <li data-edit="svc-9">Refrigerant refills</li>
+            <li data-edit="svc-10">Installation of all types of car air-con</li>
           </ul>
           <div class="actions">
-            <a href="#" class="btn btn-line js-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>Ask on LINE</a>
-            <a href="#" class="btn btn-ghost js-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>Call us</a>
+            <a href="#" class="btn btn-line js-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg><span data-edit="svc-11">Ask on LINE</span></a>
+            <a href="#" class="btn btn-ghost js-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg><span data-edit="svc-12">Call us</span></a>
           </div>
         </article>
         <article class="feature" id="carryboy">
-          <div class="tag">Main service</div>
+          <div class="tag" data-edit="svc-13">Main service</div>
           <div class="big-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17V9h11l3-4h4l2 4v8"/><path d="M2 9V6h11v3"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/></svg></div>
-          <h3>Carryboy canopies</h3>
-          <p>Fibreglass canopies for pickups, fitted by our own technicians.</p>
+          <h3 data-edit="svc-14">Carryboy canopies</h3>
+          <p data-edit="svc-15">Fibreglass canopies for pickups, fitted by our own technicians.</p>
           <ul>
-            <li>Carryboy fibreglass canopies for pickups</li>
-            <li>Carryboy accessories</li>
-            <li>Fitted at our shop on Sukhumvit Rd, Chonburi</li>
-            <li>Ask on LINE which model fits your truck, and the price</li>
+            <li data-edit="svc-16">Carryboy fibreglass canopies for pickups</li>
+            <li data-edit="svc-17">Carryboy accessories</li>
+            <li data-edit="svc-18">Fitted at our shop on Sukhumvit Rd, Chonburi</li>
+            <li data-edit="svc-19">Ask on LINE which model fits your truck, and the price</li>
           </ul>
           <div class="actions">
-            <a href="#" class="btn btn-line js-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>Ask on LINE</a>
-            <a href="#" class="btn btn-ghost js-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>Call us</a>
+            <a href="#" class="btn btn-line js-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg><span data-edit="svc-20">Ask on LINE</span></a>
+            <a href="#" class="btn btn-ghost js-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg><span data-edit="svc-21">Call us</span></a>
           </div>
         </article>
       </div>
-      <h3 class="others-head">Other services</h3>
+      <h3 class="others-head" data-edit="svc-22">Other services</h3>
       <div class="grid-4">
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div>
-          <h3>Window tint</h3>
-          <p>Car window tinting, and window film for homes and buildings. Film sold too.</p>
-          <div class="from">Ask for a price</div>
+          <h3 data-edit="svc-23">Window tint</h3>
+          <p data-edit="svc-24">Car window tinting, and window film for homes and buildings. Film sold too.</p>
+          <div class="from" data-edit="svc-25">Ask for a price</div>
         </div>
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="4"/><circle cx="12" cy="6.5" r="1.5"/></svg></div>
-          <h3>Car audio</h3>
-          <p>Car audio sales and installation.</p>
-          <div class="from">Ask for a price</div>
+          <h3 data-edit="svc-26">Car audio</h3>
+          <p data-edit="svc-27">Car audio sales and installation.</p>
+          <div class="from" data-edit="svc-28">Ask for a price</div>
         </div>
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M16 11.5v4M14 13.5h4"/></svg></div>
-          <h3>Batteries</h3>
-          <p>Car battery sales and replacement.</p>
-          <div class="from">Ask for a price</div>
+          <h3 data-edit="svc-29">Batteries</h3>
+          <p data-edit="svc-30">Car battery sales and replacement.</p>
+          <div class="from" data-edit="svc-31">Ask for a price</div>
         </div>
         <div class="service-card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
-          <h3>Accessories &amp; car alarms</h3>
-          <p>Car accessories fitted, such as roof racks, bonnet scoops and wheel-arch trims, plus car alarm systems.</p>
-          <div class="from">Ask for a price</div>
+          <h3 data-edit="svc-32">Accessories &amp; car alarms</h3>
+          <p data-edit="svc-33">Car accessories fitted, such as roof racks, bonnet scoops and wheel-arch trims, plus car alarm systems.</p>
+          <div class="from" data-edit="svc-34">Ask for a price</div>
         </div>
       </div>
     </div>
@@ -205,38 +203,38 @@
   <section class="why">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">Why us</div>
-        <h2>Why choose Direk Air</h2>
+        <div class="eyebrow" data-edit="why-1">Why us</div>
+        <h2 data-edit="why-2">Why choose Direk Air</h2>
       </div>
       <div class="why-grid">
         <div class="why-item">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <h3>35+ years in Chonburi</h3>
-          <p>Open since 1987</p>
+          <h3 data-edit="why-3">35+ years in Chonburi</h3>
+          <p data-edit="why-4">Open since 1987</p>
         </div>
         <div class="why-item">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
-          <h3>All in one place</h3>
-          <p>Air-con, tint, audio, batteries and accessories</p>
+          <h3 data-edit="why-5">All in one place</h3>
+          <p data-edit="why-6">Air-con, tint, audio, batteries and accessories</p>
         </div>
         <div class="why-item">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
-          <h3>Easy to find</h3>
-          <p>On Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri</p>
+          <h3 data-edit="why-7">Easy to find</h3>
+          <p data-edit="why-8">On Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri</p>
         </div>
         <div class="why-item">
           <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
-          <h3>Ask first</h3>
-          <p>Message us on LINE or call about prices and availability before you come</p>
+          <h3 data-edit="why-9">Ask first</h3>
+          <p data-edit="why-10">Message us on LINE or call about prices and availability before you come</p>
         </div>
       </div>
       <!-- Real magazine quote (not a customer review), original Thai plus translation -->
       <figure class="press">
-        <div class="label">In the press</div>
+        <div class="label" data-edit="why-11">In the press</div>
         <blockquote lang="th">“ดิเรกแอร์ เป็นร้านที่มีมาตรฐาน ด้วยแนวทางการบริหารที่ไม่เอาเปรียบผู้บริโภค เรื่องคุณภาพสินค้ากับราคานั้นสอดคล้องกัน”</blockquote>
         <p class="translation">“Direk Air keeps to a standard, run in a way that doesn't take advantage of customers. Product quality and price go hand in hand.”</p>
-        <figcaption>Autoinfo magazine, issue 409 (February 2006), shop review column · <a href="https://www.autoinfo.co.th/article/54886" target="_blank" rel="noopener">Read the article (Thai)</a></figcaption>
-        <a href="https://www.google.com/maps?cid=3062035745457644778" class="review-cta" target="_blank" rel="noopener">Read and write customer reviews on Google →</a>
+        <figcaption>Autoinfo magazine, issue 409 (February 2006), shop review column · <a href="https://www.autoinfo.co.th/article/54886" target="_blank" rel="noopener" data-edit="why-12">Read the article (Thai)</a></figcaption>
+        <a href="https://www.google.com/maps?cid=3062035745457644778" class="review-cta" target="_blank" rel="noopener" data-edit="why-13">Read and write customer reviews on Google →</a>
       </figure>
     </div>
   </section>
@@ -246,8 +244,8 @@
   <section id="gallery" hidden>
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">Our work</div>
-        <h2>Customer cars we've worked on</h2>
+        <div class="eyebrow" data-edit="gal-1">Our work</div>
+        <h2 data-edit="gal-2">Customer cars we've worked on</h2>
       </div>
       <div class="gallery-filters" id="galleryFilters" hidden></div>
       <div class="gallery-grid" id="galleryGrid"></div>
@@ -277,29 +275,29 @@
   <section id="faq">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">FAQ</div>
-        <h2>Questions? We have answers</h2>
+        <div class="eyebrow" data-edit="faq-1">FAQ</div>
+        <h2 data-edit="faq-2">Questions? We have answers</h2>
       </div>
       <div class="faq-list">
         <details>
-          <summary>How much does it cost?</summary>
-          <p>Prices depend on your car and the products you choose. Send us your car model and the service you need on LINE and we'll give you a price.</p>
+          <summary data-edit="faq-3">How much does it cost?</summary>
+          <p data-edit="faq-4">Prices depend on your car and the products you choose. Send us your car model and the service you need on LINE and we'll give you a price.</p>
         </details>
         <details>
-          <summary>Do I need to book ahead?</summary>
-          <p>We recommend messaging us on LINE or calling to check availability before you come.</p>
+          <summary data-edit="faq-5">Do I need to book ahead?</summary>
+          <p data-edit="faq-6">We recommend messaging us on LINE or calling to check availability before you come.</p>
         </details>
         <details>
-          <summary>What are your opening hours?</summary>
+          <summary data-edit="faq-7">What are your opening hours?</summary>
           <p><span data-shop="hours">Mon – Sat 08:00 – 18:00 · Closed Sunday</span>. Call <span data-shop="phone">038-285-061</span> or message us on LINE.</p>
         </details>
         <details>
-          <summary>Where are you?</summary>
-          <p>62/1-3 Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri, Chon Buri 20000. See the map in the contact section below.</p>
+          <summary data-edit="faq-8">Where are you?</summary>
+          <p data-edit="faq-9">62/1-3 Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri, Chon Buri 20000. See the map in the contact section below.</p>
         </details>
         <details>
-          <summary>Do you tint homes and buildings?</summary>
-          <p>Yes. We install window film for cars, homes and buildings. Ask us on LINE or by phone for details.</p>
+          <summary data-edit="faq-10">Do you tint homes and buildings?</summary>
+          <p data-edit="faq-11">Yes. We install window film for cars, homes and buildings. Ask us on LINE or by phone for details.</p>
         </details>
       </div>
     </div>
@@ -308,11 +306,11 @@
   <!-- ================= CTA BAND ================= -->
   <div class="cta-band">
     <div class="container">
-      <h2>Ready to give your car some care?</h2>
-      <p>Message us on LINE or call for prices and availability.</p>
+      <h2 data-edit="cta-1">Ready to give your car some care?</h2>
+      <p data-edit="cta-2">Message us on LINE or call for prices and availability.</p>
       <div class="hero-actions">
-        <a href="#" class="btn btn-white js-line">Add us on LINE</a>
-        <a href="#" class="btn btn-ghost js-tel">Call now</a>
+        <a href="#" class="btn btn-white js-line" data-edit="cta-3">Add us on LINE</a>
+        <a href="#" class="btn btn-ghost js-tel" data-edit="cta-4">Call now</a>
       </div>
     </div>
   </div>
@@ -321,47 +319,47 @@
   <section id="contact">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">Contact</div>
-        <h2>Contact us / Map</h2>
-        <p>Message us on LINE or call to ask about prices and availability, or drop by the shop on Sukhumvit Road, Chonburi.</p>
+        <div class="eyebrow" data-edit="contact-1">Contact</div>
+        <h2 data-edit="contact-2">Contact us / Map</h2>
+        <p data-edit="contact-3">Message us on LINE or call to ask about prices and availability, or drop by the shop on Sukhumvit Road, Chonburi.</p>
       </div>
       <div class="contact-grid">
         <div class="panel">
-          <h3>Shop info</h3>
-          <p>Drop by for advice, or call ahead to check availability.</p>
+          <h3 data-edit="contact-4">Shop info</h3>
+          <p data-edit="contact-5">Drop by for advice, or call ahead to check availability.</p>
           <ul class="info-list">
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
-              <div><strong>Address</strong><span>62/1-3 Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri, Chon Buri 20000</span></div>
+              <div><strong data-edit="contact-6">Address</strong><span data-edit="contact-7">62/1-3 Sukhumvit Road, Bang Pla Soi, Mueang Chon Buri, Chon Buri 20000</span></div>
             </li>
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div>
-              <div><strong>Phone</strong><span class="phones" data-shop="phones"><a href="tel:038285061">038-285-061</a>, <a href="tel:038285062">038-285-062</a><br><a href="tel:0863113117">086-311-3117</a> <span>(mobile)</span></span></div>
+              <div><strong data-edit="contact-8">Phone</strong><span class="phones" data-shop="phones"><a href="tel:038285061">038-285-061</a>, <a href="tel:038285062">038-285-062</a><br><a href="tel:0863113117">086-311-3117</a> <span>(mobile)</span></span></div>
             </li>
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg></div>
-              <div><strong>LINE</strong><a href="#" class="js-line">Add the shop on LINE (tap to add)</a></div>
+              <div><strong data-edit="contact-9">LINE</strong><a href="#" class="js-line" data-edit="contact-10">Add the shop on LINE (tap to add)</a></div>
             </li>
             <li>
               <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <div><strong>Opening hours</strong><span data-shop="hours">Mon – Sat 08:00 – 18:00 · Closed Sunday</span></div>
+              <div><strong data-edit="contact-11">Opening hours</strong><span data-shop="hours">Mon – Sat 08:00 – 18:00 · Closed Sunday</span></div>
             </li>
           </ul>
           <a href="#" class="line-qr js-line">
             <img src="/images/line-qr.png" alt="Direk Air LINE QR code" width="120" height="120" loading="lazy">
-            <div><strong>Scan to add us on LINE</strong><span>Scan the QR code or tap here to add us and chat</span></div>
+            <div><strong data-edit="contact-12">Scan to add us on LINE</strong><span data-edit="contact-13">Scan the QR code or tap here to add us and chat</span></div>
           </a>
         </div>
 
         <div class="panel">
-          <h3>Map</h3>
-          <p>On Sukhumvit Road, Bang Pla Soi, near Chonburi Hospital.</p>
+          <h3 data-edit="contact-14">Map</h3>
+          <p data-edit="contact-15">On Sukhumvit Road, Bang Pla Soi, near Chonburi Hospital.</p>
           <div class="map">
             <!-- The shop's "Direk Air" pin on Google Maps -->
             <iframe src="https://maps.google.com/maps?cid=3062035745457644778&amp;hl=en&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Shop map"></iframe>
           </div>
-          <a href="https://maps.app.goo.gl/rMBAzkuiuvV6tQLK8" class="btn btn-ghost map-link" target="_blank" rel="noopener">Open in Google Maps / Directions</a>
-          <a href="https://www.google.com/maps?cid=3062035745457644778" class="btn btn-ghost review-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg>Read or write a Google review</a>
+          <a href="https://maps.app.goo.gl/rMBAzkuiuvV6tQLK8" class="btn btn-ghost map-link" target="_blank" rel="noopener" data-edit="contact-16">Open in Google Maps / Directions</a>
+          <a href="https://www.google.com/maps?cid=3062035745457644778" class="btn btn-ghost review-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.5l7.1-.6z"/></svg><span data-edit="contact-17">Read or write a Google review</span></a>
         </div>
       </div>
     </div>
@@ -370,16 +368,16 @@
   <footer>
     <div class="container foot-wrap">
       <div>© <span id="year"></span> Direk Air (ดิเรกแอร์) · Car air-con &amp; accessories, Chonburi</div>
-      <div><a href="https://www.facebook.com/p/%E0%B8%AB%E0%B8%88%E0%B8%81%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5-100067207684848/" target="_blank" rel="noopener">Facebook</a> · <a href="/en/privacy.html" class="privacy">Privacy</a> · <a href="/admin.html">Admin</a></div>
+      <div><a href="https://www.facebook.com/p/%E0%B8%AB%E0%B8%88%E0%B8%81%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B8%94%E0%B8%B4%E0%B9%80%E0%B8%A3%E0%B8%81%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C-%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5-100067207684848/" target="_blank" rel="noopener" data-edit="foot-1">Facebook</a> · <a href="/en/privacy.html" class="privacy" data-edit="foot-2">Privacy</a> · <a href="/admin.html" data-edit="foot-3">Admin</a></div>
     </div>
   </footer>
 
   <!-- ปุ่มลอยด้านล่างบนมือถือ -->
   <div class="mobile-bar">
-    <a href="#" class="btn btn-ghost js-tel">📞 Call</a>
-    <a href="#" class="btn btn-line js-line">LINE</a>
+    <a href="#" class="btn btn-ghost js-tel" data-edit="bar-1">📞 Call</a>
+    <a href="#" class="btn btn-line js-line" data-edit="bar-2">LINE</a>
   </div>
 
-  <script src="/assets/site.js?v=6"></script>
+  <script src="/assets/site.js?v=7"></script>
 </body>
 </html>
