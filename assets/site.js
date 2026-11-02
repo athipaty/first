@@ -14,6 +14,7 @@ const T = {
     before: "ก่อนทำ", after: "หลังทำ", beforeAfter: "ก่อน / หลัง",
     heroAlt: "ผลงานของร้านดิเรกแอร์",
     closeAnnounce: "ปิดประกาศ",
+    editText: "✏️ แก้ไขข้อความ",
     yearOffset: 543, // พ.ศ.
   },
   en: {
@@ -28,6 +29,7 @@ const T = {
     before: "Before", after: "After", beforeAfter: "Before / after",
     heroAlt: "Work by Direk Air",
     closeAnnounce: "Close announcement",
+    editText: "✏️ Edit text",
     yearOffset: 0,
   },
 }[LANG];
@@ -217,6 +219,65 @@ function applyShopInfo(d) {
 }
 if (window.DirekairSettings) applyShopInfo(window.DirekairSettings);
 document.addEventListener("direkair:settings", e => applyShopInfo(e.detail));
+
+// ===== ข้อความที่แอดมินแก้เองบนหน้าเว็บ (ทุกจุดที่มี data-edit) =====
+// เก็บข้อความเดิมจาก HTML ไว้คืนค่าได้ · จำข้อความล่าสุดไว้ในเบราว์เซอร์ เพื่อไม่ให้ข้อความเก่าโผล่ก่อนตอนเปิดหน้า
+const TEXTS_KEY = "direkair_texts";
+const ORIG_TEXT = new Map();
+document.querySelectorAll("[data-edit]").forEach(el => ORIG_TEXT.set(el.dataset.edit, el.innerHTML));
+const SAFE_TAGS = new Set(["B", "STRONG", "EM", "I", "BR"]);
+// แปลงข้อความเป็น node ที่ปลอดภัย: เหลือแค่ตัวหนังสือ ตัวหนา ตัวเอียง และขึ้นบรรทัดใหม่
+function safeNodes(html) {
+  const tpl = document.createElement("template");
+  tpl.innerHTML = html;
+  const copy = (from, to) => from.childNodes.forEach(n => {
+    if (n.nodeType === 3) to.append(n.textContent);
+    else if (n.nodeType === 1 && SAFE_TAGS.has(n.tagName)) { const el = document.createElement(n.tagName); copy(n, el); to.append(el); }
+    else if (n.nodeType === 1) copy(n, to);
+  });
+  const frag = document.createDocumentFragment();
+  copy(tpl.content, frag);
+  return frag;
+}
+function setText(el, html) {
+  const box = document.createElement("div"); box.append(safeNodes(html));
+  if (el.innerHTML !== box.innerHTML) el.replaceChildren(...box.childNodes);
+}
+let pageTexts = null;
+function applyTexts(texts) {
+  pageTexts = texts || null;
+  if (document.body.classList.contains("editing")) return; // กำลังแก้อยู่ ไม่ทับสิ่งที่พิมพ์
+  const mine = (texts && texts[LANG]) || {};
+  document.querySelectorAll("[data-edit]").forEach(el => {
+    const k = el.dataset.edit;
+    setText(el, Object.prototype.hasOwnProperty.call(mine, k) ? mine[k] : ORIG_TEXT.get(k));
+  });
+}
+function rememberTexts(texts) {
+  try { texts ? localStorage.setItem(TEXTS_KEY, JSON.stringify(texts)) : localStorage.removeItem(TEXTS_KEY); } catch {}
+}
+try { const cached = JSON.parse(localStorage.getItem(TEXTS_KEY) || "null"); if (cached) applyTexts(cached); } catch {}
+const onSettingsTexts = d => { if (!d) return; applyTexts(d.texts); rememberTexts(d.texts); };
+if (window.DirekairSettings) onSettingsTexts(window.DirekairSettings);
+document.addEventListener("direkair:settings", e => onSettingsTexts(e.detail));
+// ให้ตัวแก้ข้อความ (edit.js) ใช้ร่วม
+window.DirekairText = { LANG, TOKEN_KEY, orig: ORIG_TEXT, safeNodes, setText, apply: applyTexts, remember: rememberTexts, get texts() { return pageTexts; } };
+
+// แอดมินที่ล็อกอินอยู่: ปุ่ม "แก้ไขข้อความ" (โหลดตัวแก้เฉพาะตอนใช้ ลูกค้าทั่วไปไม่ต้องโหลด)
+function startEditing() {
+  if (window.DirekairEdit) return window.DirekairEdit.start();
+  const sc = document.createElement("script");
+  sc.src = "/assets/edit.js?v=1";
+  sc.onload = () => window.DirekairEdit && window.DirekairEdit.start();
+  document.body.append(sc);
+}
+if (hasToken && !(window.DirekairThemes && window.DirekairThemes.preview)) {
+  const fab = document.createElement("button");
+  fab.type = "button"; fab.className = "edit-fab"; fab.textContent = T.editText;
+  fab.addEventListener("click", startEditing);
+  document.body.append(fab);
+  if (new URLSearchParams(location.search).has("edit")) startEditing();
+}
 
 // ===== สถิติ (นับจำนวนอย่างเดียว ไม่เก็บข้อมูลส่วนตัว) =====
 // ไม่นับตอนแอดมินล็อกอินอยู่ และไม่นับในกรอบตัวอย่างของหน้าแอดมิน
