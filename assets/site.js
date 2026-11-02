@@ -9,25 +9,12 @@ const T = {
     wrongPw: "รหัสผ่านไม่ถูกต้อง",
     tooMany: "ใส่รหัสผิดหลายครั้งเกินไป กรุณารอ 15 นาที",
     netErr: "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่",
-    sending: "กำลังส่งข้อมูลการจอง…",
-    savedTitle: "✅ ส่งข้อมูลการจองถึงร้านแล้ว",
-    savedBody: p => `ทางร้านจะติดต่อกลับที่เบอร์ ${p} เพื่อยืนยันคิว`,
-    failTitle: "ส่งข้อมูลไม่สำเร็จ",
-    failBody: () => `กรุณาส่งข้อความใน LINE ตามขั้นตอนด้านล่าง หรือโทร ${SHOP.phone}`,
     mobile: "มือถือ",
     cats: { all: "ทั้งหมด", aircon: "แอร์รถยนต์", carryboy: "หลังคา Carryboy", tint: "ฟิล์ม", audio: "เครื่องเสียง", other: "อื่น ๆ" },
     before: "ก่อนทำ", after: "หลังทำ", beforeAfter: "ก่อน / หลัง",
     heroAlt: "ผลงานของร้านดิเรกแอร์",
     closeAnnounce: "ปิดประกาศ",
-    lineOptional: "อยากได้คำตอบเร็วขึ้น? ส่งข้อความใน LINE ด้วยก็ได้",
-    lineRequired: "ส่งข้อความจองคิวใน LINE",
-    copied: "✅ คัดลอกข้อความจองคิวแล้ว",
-    copyHint: "กด \"คัดลอกข้อความ\" หรือกดค้างที่ข้อความด้านล่างเพื่อคัดลอก",
-    copiedShort: "คัดลอกข้อความแล้ว ",
-    sendThis: "กรุณาส่งข้อความนี้ในแชท LINE ของร้าน:\n\n",
-    dateLocale: "th-TH",
     yearOffset: 543, // พ.ศ.
-    msg: ["📅 จองคิวรับบริการ", "ชื่อ", "เบอร์", "รุ่นรถ", "บริการ", "วันที่สะดวก", "หมายเหตุ"],
   },
   en: {
     workAlt: "Direk Air work",
@@ -36,26 +23,12 @@ const T = {
     wrongPw: "Wrong password",
     tooMany: "Too many wrong attempts. Please wait 15 minutes.",
     netErr: "Can't reach the server. Please try again.",
-    sending: "Sending your booking…",
-    savedTitle: "✅ Your booking has been sent to the shop",
-    savedBody: p => `The shop will contact you on ${p} to confirm.`,
-    failTitle: "Couldn't send your booking",
-    failBody: () => `Please send the message on LINE using the steps below, or call ${SHOP.phone}.`,
     mobile: "mobile",
     cats: { all: "All", aircon: "Car air-con", carryboy: "Carryboy", tint: "Tint", audio: "Audio", other: "Other" },
     before: "Before", after: "After", beforeAfter: "Before / after",
     heroAlt: "Work by Direk Air",
     closeAnnounce: "Close announcement",
-    lineOptional: "Want a faster reply? You can also message us on LINE.",
-    lineRequired: "Send your booking on LINE",
-    copied: "✅ Booking message copied",
-    copyHint: "Tap \"Copy message\" or long-press the text below to copy it",
-    copiedShort: "Message copied. ",
-    sendThis: "Please send this message in the shop's LINE chat:\n\n",
-    dateLocale: "en-GB",
     yearOffset: 0,
-    // ร้านอ่านภาษาไทย จึงใส่หัวข้อทั้งสองภาษา
-    msg: ["📅 Booking request / จองคิว", "Name / ชื่อ", "Phone / เบอร์", "Car / รุ่นรถ", "Service / บริการ", "Date / วันที่", "Notes / หมายเหตุ"],
   },
 }[LANG];
 
@@ -187,100 +160,6 @@ document.getElementById("loginCardForm").addEventListener("submit", async e => {
     btn.disabled = false;
   }
 });
-
-// ปุ่ม "จองคิว" ในบริการหลัก -> เลือกบริการในฟอร์มให้
-document.querySelectorAll("[data-service]").forEach(btn => {
-  btn.addEventListener("click", () => { document.getElementById("service").value = btn.dataset.service; });
-});
-
-// ห้ามเลือกวันย้อนหลัง
-document.getElementById("date").min = new Date().toISOString().split("T")[0];
-
-// ส่งฟอร์ม -> คัดลอกข้อความทันที (ตอนลูกค้ากดปุ่ม มือถือจึงยอมให้คัดลอก) แล้วแสดงขั้นตอน
-// ลูกค้ากด "เปิด LINE" เอง (บัญชี LINE ส่วนตัวเติมข้อความในแชทให้อัตโนมัติไม่ได้)
-function copyText(text) {
-  // วิธีเก่า execCommand ทำงานทันทีภายในการกดปุ่ม ใช้ได้บน iOS/Android ส่วนใหญ่
-  const ta = document.createElement("textarea");
-  ta.value = text;
-  ta.setAttribute("readonly", "");
-  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
-  document.body.appendChild(ta);
-  ta.focus();
-  ta.setSelectionRange(0, text.length);
-  let ok = false;
-  try { ok = document.execCommand("copy"); } catch {}
-  ta.remove();
-  if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
-  return ok;
-}
-const bookingDone = document.getElementById("bookingDone");
-const bookingMsg = document.getElementById("bookingMsg");
-const copyStatus = document.getElementById("bookingCopyStatus");
-function showCopyStatus(ok) {
-  copyStatus.className = "status" + (ok ? " ok" : "");
-  copyStatus.textContent = ok ? T.copied : T.copyHint;
-}
-const fmtDate = d => d ? new Date(d + "T00:00").toLocaleDateString(T.dateLocale, { day: "numeric", month: "short", year: "numeric" }) : "-";
-// หน้าอังกฤษ: ตัวเลือกบริการแสดงภาษาอังกฤษ แต่ value เป็นภาษาไทย ส่งทั้งสองแบบให้ร้าน
-const serviceText = () => {
-  const sel = document.getElementById("service");
-  const opt = sel.selectedOptions[0];
-  return opt && opt.text.trim() !== sel.value ? opt.text.trim() + " / " + sel.value : sel.value;
-};
-document.getElementById("bookingForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const v = id => document.getElementById(id).value.trim();
-  const L = T.msg;
-  const msg = [
-    L[0],
-    L[1] + ": " + v("name"),
-    L[2] + ": " + v("phone"),
-    L[3] + ": " + (v("car") || "-"),
-    L[4] + ": " + serviceText(),
-    L[5] + ": " + fmtDate(v("date")),
-    L[6] + ": " + (v("note") || "-"),
-  ].join("\n");
-  // คัดลอกก่อน (ต้องอยู่ในจังหวะที่ลูกค้ากดปุ่ม มือถือจึงยอมให้คัดลอก) แล้วค่อยส่งข้อมูลถึงร้าน
-  const ok = copyText(msg);
-  bookingMsg.value = msg;
-  showCopyStatus(ok);
-  const hasDialog = typeof bookingDone.showModal === "function";
-  if (hasDialog) {
-    showSaveState("sending");
-    bookingDone.showModal(); bookingMsg.scrollTop = 0;
-  }
-  const form = e.target, btn = form.querySelector("[type=submit]");
-  btn.disabled = true;
-  const phone = v("phone");
-  fetch(window.DIREKAIR_API + "/bookings", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: v("name"), phone, car: v("car"), service: serviceText(), date: v("date"), note: v("note"),
-      lang: LANG, website: v("website"),
-    }),
-  })
-    .then(r => { if (!r.ok) throw new Error(r.status); })
-    .then(() => { showSaveState("saved", phone); form.reset(); })
-    .catch(() => {
-      showSaveState("failed");
-      if (!hasDialog) alert((ok ? T.copiedShort : "") + T.sendThis + msg);
-    })
-    .finally(() => { btn.disabled = false; });
-});
-function showSaveState(state, phone) {
-  const title = document.getElementById("bookingDoneTitle");
-  const body = document.getElementById("bookingSaveStatus");
-  const lineHead = document.getElementById("bookingLineHead");
-  bookingDone.dataset.state = state;
-  if (state === "sending") { title.textContent = T.sending; body.textContent = ""; lineHead.textContent = T.lineOptional; }
-  if (state === "saved") { title.textContent = T.savedTitle; body.textContent = T.savedBody(phone); lineHead.textContent = T.lineOptional; }
-  if (state === "failed") { title.textContent = T.failTitle; body.textContent = T.failBody(); lineHead.textContent = T.lineRequired; }
-}
-document.getElementById("bookingCopyAgain").addEventListener("click", () => {
-  showCopyStatus(copyText(bookingMsg.value));
-  bookingMsg.focus(); bookingMsg.select();
-});
-document.getElementById("bookingClose").addEventListener("click", () => bookingDone.close());
 
 // ===== ข้อมูลร้านที่แก้ได้จากหน้าแอดมิน (เบอร์ เวลาทำการ ประกาศ) =====
 // ถ้ายังไม่ได้ตั้งค่า หน้าเว็บใช้ข้อความเดิมใน HTML
