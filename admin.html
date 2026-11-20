@@ -142,6 +142,57 @@
     .tab:hover { color: var(--text); }
     .tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
     .tab-intro { color: var(--muted); margin-bottom: 24px; }
+    /* แจ้งผู้พัฒนา */
+    .tab .badge { background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1px 7px; margin-left: 6px; }
+    .tab .badge:empty { display: none; }
+    .chip { border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: 14px; padding: 5px 14px; border-radius: 999px; cursor: pointer; }
+    .chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+    .dev-form { display: grid; gap: 4px; }
+    .dev-form label { margin-top: 10px; }
+    .dev-form label small { font-size: 13px; }
+    .req { color: var(--danger); }
+    textarea { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 16px; resize: vertical; }
+    textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+    .dev-picked { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+    .dev-picked:empty { display: grid; }
+    .dev-actions { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+    .dev-actions .msg { margin: 0; }
+    .dev-list { display: grid; gap: 10px; }
+    .req-item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+    .req-item.open { border-color: var(--accent); }
+    .req-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; width: 100%; background: none; border: 0; color: inherit; font: inherit; text-align: left; }
+    .req-head .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .req-head .t { flex: 1; min-width: 0; }
+    .req-head .t b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .req-head .t small { color: var(--muted); font-size: 13px; }
+    .st { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; flex-shrink: 0; }
+    .st-new { background: rgba(59,130,246,.18); color: #60a5fa; } .dot.st-new { background: #3b82f6; }
+    .st-read { background: rgba(234,179,8,.18); color: #facc15; } .dot.st-read { background: #eab308; }
+    .st-done { background: rgba(34,197,94,.18); color: #4ade80; } .dot.st-done { background: #22c55e; }
+    .req-body { border-top: 1px solid var(--line); padding: 14px 16px 16px; display: grid; gap: 14px; }
+    .req-msg { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .req-link { font-size: 14px; overflow-wrap: anywhere; color: var(--accent); }
+    .req-imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+    .req-imgs img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; cursor: zoom-in; display: block; }
+    .status-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; background: var(--bg); border-radius: 10px; padding: 10px; }
+    .status-row .chip-st { border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: 13px; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+    .status-row .chip-st[aria-pressed="true"] { border-color: currentColor; font-weight: 600; }
+    .thread { display: grid; gap: 8px; }
+    .reply { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+    .reply.dev { border-left: 3px solid var(--accent); }
+    .reply .meta { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; margin-bottom: 4px; }
+    .reply .meta b { color: var(--accent); }
+    .reply .meta span { color: var(--muted); }
+    .reply p { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .reply .tools { display: flex; justify-content: flex-end; gap: 12px; margin-top: 6px; }
+    .reply .tools button, .linkish { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; padding: 0; }
+    .reply .tools button:hover, .linkish:hover { color: var(--accent); }
+    .linkish.danger:hover, .reply .tools .danger:hover { color: var(--danger); }
+    .composer { background: var(--bg); border-radius: 10px; padding: 10px; display: grid; gap: 8px; }
+    .composer .who { display: flex; gap: 6px; flex-wrap: wrap; }
+    .composer .row { display: flex; justify-content: flex-end; }
+    .img-view { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.88); display: grid; place-items: center; padding: 16px; cursor: zoom-out; }
+    .img-view img { max-width: 100%; max-height: 100%; border-radius: 8px; }
     /* ข้อความหน้าเว็บ */
     .edit-links { display: flex; gap: 10px; flex-wrap: wrap; }
     .text-group { margin-bottom: 22px; }
@@ -276,6 +327,7 @@
         <button class="tab" role="tab" id="tabBtn-texts" data-tab="texts" aria-controls="tab-texts" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>ข้อความหน้าเว็บ</button>
         <button class="tab" role="tab" id="tabBtn-theme" data-tab="theme" aria-controls="tab-theme" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.6 0-.9-.6-1.4-.6-2.3 0-1 .8-1.6 1.8-1.6H17a4 4 0 004-4c0-4.7-4-8.5-9-8.5z"/><circle cx="7.5" cy="11" r="1.3"/><circle cx="10" cy="7" r="1.3"/><circle cx="15" cy="7.5" r="1.3"/></svg>ธีมสี</button>
         <button class="tab" role="tab" id="tabBtn-stats" data-tab="stats" aria-controls="tab-stats" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>สถิติ</button>
+        <button class="tab" role="tab" id="tabBtn-dev" data-tab="dev" aria-controls="tab-dev" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>แจ้งผู้พัฒนา<span class="badge" id="devBadge"></span></button>
       </nav>
 
       <section id="tab-info" role="tabpanel" aria-labelledby="tabBtn-info" hidden>
@@ -396,6 +448,29 @@
         <div class="frame-box" id="frameBox"><iframe id="previewFrame" title="ตัวอย่างหน้าเว็บ" tabindex="-1"></iframe></div>
       </section>
       </section>
+      <section id="tab-dev" role="tabpanel" aria-labelledby="tabBtn-dev" hidden>
+      <h1>แจ้งผู้พัฒนาเว็บ</h1>
+      <p class="tab-intro">อยากให้แก้หรือเพิ่มอะไรในเว็บ พิมพ์บอกแล้วแนบรูปได้เลย ผู้พัฒนาจะได้รับแจ้งเตือนทันที และตอบกลับในรายการด้านล่าง</p>
+      <form class="panel dev-form" id="devForm">
+        <label for="devTitle">หัวข้อ <span class="req">*</span></label>
+        <input type="text" id="devTitle" maxlength="200" placeholder="เช่น อยากเปลี่ยนรูปหน้าแรก / เพิ่มบริการใหม่">
+        <label for="devMessage">รายละเอียด <span class="req">*</span></label>
+        <textarea id="devMessage" rows="5" maxlength="5000" placeholder="อธิบายสิ่งที่ต้องการให้แก้หรือเพิ่ม..."></textarea>
+        <label for="devUrl">🔗 ลิงก์หน้าที่ต้องการแก้ <small>(ถ้ามี)</small></label>
+        <input type="text" id="devUrl" maxlength="500" placeholder="https://www.direkair.com/...">
+        <label>📷 รูปภาพประกอบ <small>(ถ้ามี · ไม่เกิน 10 รูป)</small></label>
+        <div class="picked dev-picked" id="devPicked"></div>
+        <input type="file" id="devFiles" accept="image/jpeg,image/png,image/webp" multiple hidden>
+        <div class="dev-actions">
+          <button class="btn btn-primary" type="submit" id="devSend" disabled>📤 ส่งเรื่อง</button>
+          <span class="msg" id="devMsg"></span>
+        </div>
+      </form>
+      <div class="list-head" style="margin-top:28px"><h2>รายการที่ส่งไว้</h2><span class="count" id="devCount"></span></div>
+      <div class="dev-list" id="devList"></div>
+      <p class="hint" id="devRetention"></p>
+      </section>
+
       <section id="tab-stats" role="tabpanel" aria-labelledby="tabBtn-stats" hidden>
       <h1>สถิติ</h1>
       <p class="tab-intro">จำนวนผู้เข้าชมและการกดติดต่อร้านจากหน้าเว็บ</p>
@@ -452,11 +527,12 @@
       $("loginView").hidden = true; $("dashView").hidden = false; $("logoutBtn").hidden = false;
       renderSwatches();
       openTab(location.hash.slice(1));
+      if ($("tab-dev").hidden) loadRequests(); // ตัวเลขบนแท็บ "แจ้งผู้พัฒนา"
       await loadPhotos();
     }
 
     // ---------- tabs ----------
-    const TABS = ["photos", "info", "texts", "theme", "stats"];
+    const TABS = ["photos", "info", "texts", "theme", "stats", "dev"];
     function openTab(name) {
       if (!TABS.includes(name)) name = "photos";
       document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
@@ -465,6 +541,7 @@
       if (name === "theme") showPreview();
       if (name === "info") loadInfo();
       if (name === "texts") loadTexts();
+      if (name === "dev") loadRequests();
       if (name === "stats") loadStats();
     }
 
@@ -594,6 +671,181 @@
         }
         $("textsList").replaceChildren(...groups);
       } catch (err) { toast(err.message); }
+    }
+
+    // ---------- แจ้งผู้พัฒนา ----------
+    // แบบเดียวกับหน้า "แจ้งผู้ดูแลระบบ" ของเว็บ อบต.แม่ใส: ส่งหัวข้อ รายละเอียด รูป → ผู้พัฒนาได้แจ้งเตือน (ntfy) แล้วคุยกันต่อในรายการ
+    const REQ_STATUS = { new: "ใหม่", read: "รับทราบแล้ว", done: "ดำเนินการแล้ว" };
+    const REPLY_AUTHORS = ["ร้านดิเรกแอร์", "ผู้พัฒนาเว็บ"];
+    const MAX_REQ_IMAGES = 10;
+    let requests = [], openReq = null, devFiles = [], replyAuthor = REPLY_AUTHORS[0];
+    const fmtWhen = (d) => new Date(d).toLocaleString("th-TH", { day: "numeric", month: "short", year: "2-digit", hour: "2-digit", minute: "2-digit" });
+    function viewImage(src) {
+      const v = document.createElement("div"); v.className = "img-view";
+      const i = document.createElement("img"); i.src = src; i.alt = "";
+      v.append(i); v.addEventListener("click", () => v.remove()); document.body.append(v);
+    }
+    function showDevFiles() {
+      const box = $("devPicked");
+      box.querySelectorAll("img").forEach((i) => URL.revokeObjectURL(i.src));
+      const add = document.createElement("button");
+      add.type = "button"; add.className = "pic-add"; add.innerHTML = "<b>+</b>เพิ่มรูป";
+      add.disabled = devFiles.length >= MAX_REQ_IMAGES;
+      add.addEventListener("click", () => $("devFiles").click());
+      box.replaceChildren(...devFiles.map((f, i) => picTile(URL.createObjectURL(f), () => { devFiles.splice(i, 1); showDevFiles(); })), add);
+      devReady();
+    }
+    const devReady = () => { $("devSend").disabled = !$("devTitle").value.trim() || !$("devMessage").value.trim(); };
+    ["devTitle", "devMessage"].forEach((id) => $(id).addEventListener("input", devReady));
+    $("devFiles").addEventListener("change", () => {
+      const files = [...$("devFiles").files].filter((f) => IMG_TYPE.test(f.type) && f.size <= 10 * 1024 * 1024);
+      if (files.length < $("devFiles").files.length) toast("ข้ามไฟล์ที่ไม่ใช่รูป หรือใหญ่เกิน 10MB");
+      const room = MAX_REQ_IMAGES - devFiles.length;
+      if (files.length > room) toast(`แนบได้ไม่เกิน ${MAX_REQ_IMAGES} รูป`);
+      devFiles.push(...files.slice(0, room)); $("devFiles").value = ""; showDevFiles();
+    });
+    showDevFiles();
+    $("devForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData();
+      fd.append("title", $("devTitle").value); fd.append("message", $("devMessage").value); fd.append("pageUrl", $("devUrl").value);
+      devFiles.forEach((f) => fd.append("images", f));
+      $("devSend").disabled = true; $("devSend").textContent = "⏳ กำลังส่ง…";
+      $("devMsg").className = "msg"; $("devMsg").textContent = "";
+      try {
+        const item = await api("/requests", { method: "POST", body: fd });
+        $("devForm").reset(); devFiles = []; showDevFiles();
+        $("devMsg").className = "msg ok"; $("devMsg").textContent = "✅ ส่งเรื่องแล้ว ผู้พัฒนาได้รับแจ้งเตือนแล้ว";
+        requests.unshift(item); renderRequests();
+      } catch (err) { $("devMsg").className = "msg err"; $("devMsg").textContent = err.message; }
+      finally { $("devSend").textContent = "📤 ส่งเรื่อง"; devReady(); }
+    });
+    async function loadRequests() {
+      try {
+        const d = await api("/requests");
+        requests = d.requests;
+        $("devRetention").textContent = `เรื่องที่ "ดำเนินการแล้ว" จะถูกลบอัตโนมัติหลัง ${d.doneRetentionDays} วัน`;
+        renderRequests();
+      } catch (err) { toast(err.message); }
+    }
+    function setRequest(item) {
+      requests = requests.map((r) => (r.id === item.id ? item : r));
+      renderRequests();
+    }
+    function renderRequests() {
+      const open = requests.filter((r) => r.status !== "done").length;
+      $("devBadge").textContent = open || "";
+      $("devCount").textContent = requests.length ? `${requests.length} เรื่อง · ยังไม่เสร็จ ${open}` : "";
+      if (!requests.length) {
+        const e = document.createElement("div"); e.className = "empty"; e.textContent = "ยังไม่มีเรื่องที่ส่งไว้";
+        $("devList").replaceChildren(e); return;
+      }
+      $("devList").replaceChildren(...requests.map((r) => {
+        const box = document.createElement("div"); box.className = "req-item" + (openReq === r.id ? " open" : "");
+        const head = document.createElement("button"); head.type = "button"; head.className = "req-head";
+        const dot = document.createElement("span"); dot.className = "dot st-" + r.status;
+        const t = document.createElement("span"); t.className = "t";
+        const b = document.createElement("b"); b.textContent = r.title;
+        const sm = document.createElement("small");
+        sm.textContent = fmtWhen(r.createdAt) + (r.images.length ? ` · 📷 ${r.images.length} รูป` : "") + (r.replies.length ? ` · 💬 ${r.replies.length}` : "");
+        t.append(b, sm);
+        const st = document.createElement("span"); st.className = "st st-" + r.status; st.textContent = REQ_STATUS[r.status];
+        head.append(dot, t, st);
+        head.addEventListener("click", () => { openReq = openReq === r.id ? null : r.id; renderRequests(); });
+        box.append(head);
+        if (openReq === r.id) box.append(requestBody(r));
+        return box;
+      }));
+    }
+    function requestBody(r) {
+      const body = document.createElement("div"); body.className = "req-body";
+      const msg = document.createElement("p"); msg.className = "req-msg"; msg.textContent = r.message; body.append(msg);
+      if (r.pageUrl) {
+        const a = document.createElement("a"); a.className = "req-link"; a.href = r.pageUrl; a.target = "_blank"; a.rel = "noopener"; a.textContent = "🔗 " + r.pageUrl;
+        body.append(a);
+      }
+      if (r.images.length) {
+        const g = document.createElement("div"); g.className = "req-imgs";
+        r.images.forEach((u) => { const i = document.createElement("img"); i.src = u; i.alt = ""; i.loading = "lazy"; i.addEventListener("click", () => viewImage(u)); g.append(i); });
+        body.append(g);
+      }
+      // สถานะ
+      const sr = document.createElement("div"); sr.className = "status-row";
+      Object.entries(REQ_STATUS).forEach(([k, label]) => {
+        const c = document.createElement("button"); c.type = "button"; c.className = "chip-st st-" + k; c.textContent = label;
+        c.setAttribute("aria-pressed", String(r.status === k));
+        c.addEventListener("click", async () => {
+          if (r.status === k) return;
+          try { setRequest(await api("/requests/" + r.id, jsonBody("PATCH", { status: k }))); toast("เปลี่ยนสถานะเป็น " + label); }
+          catch (err) { toast(err.message); }
+        });
+        sr.append(c);
+      });
+      body.append(sr);
+      // การสนทนา
+      const th = document.createElement("div"); th.className = "thread";
+      const h = document.createElement("b"); h.textContent = "💬 การสนทนา"; th.append(h);
+      if (!r.replies.length) { const e = document.createElement("p"); e.className = "hint"; e.textContent = "ยังไม่มีการตอบกลับ"; th.append(e); }
+      r.replies.forEach((x) => {
+        const rp = document.createElement("div"); rp.className = "reply" + (x.author === "ผู้พัฒนาเว็บ" ? " dev" : "");
+        const meta = document.createElement("div"); meta.className = "meta";
+        const who = document.createElement("b"); who.textContent = x.author;
+        const when = document.createElement("span"); when.textContent = fmtWhen(x.createdAt) + (x.updatedAt !== x.createdAt ? " · แก้ไขแล้ว" : "");
+        meta.append(who, when);
+        const p = document.createElement("p"); p.textContent = x.message;
+        const tools = document.createElement("div"); tools.className = "tools";
+        const ed = document.createElement("button"); ed.type = "button"; ed.textContent = "✏️ แก้ไข";
+        const del = document.createElement("button"); del.type = "button"; del.className = "danger"; del.textContent = "🗑️ ลบ";
+        ed.addEventListener("click", () => {
+          const ta = document.createElement("textarea"); ta.rows = 3; ta.value = x.message;
+          const save = document.createElement("button"); save.type = "button"; save.className = "btn btn-primary btn-sm"; save.textContent = "💾 บันทึก";
+          const cancel = document.createElement("button"); cancel.type = "button"; cancel.className = "linkish"; cancel.textContent = "ยกเลิก";
+          save.addEventListener("click", async () => {
+            if (!ta.value.trim()) return;
+            try { setRequest(await api(`/requests/${r.id}/replies/${x.id}`, jsonBody("PUT", { message: ta.value }))); }
+            catch (err) { toast(err.message); }
+          });
+          cancel.addEventListener("click", renderRequests);
+          const row = document.createElement("div"); row.className = "tools"; row.append(cancel, save);
+          p.replaceWith(ta); tools.replaceWith(row); ta.focus();
+        });
+        del.addEventListener("click", async () => {
+          if (!confirm("ลบข้อความนี้?")) return;
+          try { setRequest(await api(`/requests/${r.id}/replies/${x.id}`, { method: "DELETE" })); } catch (err) { toast(err.message); }
+        });
+        tools.append(ed, del);
+        rp.append(meta, p, tools); th.append(rp);
+      });
+      // ช่องพิมพ์ตอบ
+      const comp = document.createElement("div"); comp.className = "composer";
+      const whoRow = document.createElement("div"); whoRow.className = "who";
+      REPLY_AUTHORS.forEach((a) => {
+        const c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.textContent = a;
+        c.setAttribute("aria-pressed", String(replyAuthor === a));
+        c.addEventListener("click", () => { replyAuthor = a; whoRow.querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c))); });
+        whoRow.append(c);
+      });
+      const ta = document.createElement("textarea"); ta.rows = 3; ta.placeholder = "พิมพ์ข้อความตอบกลับ...";
+      const send = document.createElement("button"); send.type = "button"; send.className = "btn btn-primary btn-sm"; send.textContent = "📤 ส่งข้อความ"; send.disabled = true;
+      ta.addEventListener("input", () => { send.disabled = !ta.value.trim(); });
+      send.addEventListener("click", async () => {
+        send.disabled = true;
+        try { setRequest(await api(`/requests/${r.id}/replies`, jsonBody("POST", { author: replyAuthor, message: ta.value }))); }
+        catch (err) { toast(err.message); send.disabled = false; }
+      });
+      const row = document.createElement("div"); row.className = "row"; row.append(send);
+      comp.append(whoRow, ta, row);
+      th.append(comp);
+      body.append(th);
+      const delAll = document.createElement("button"); delAll.type = "button"; delAll.className = "linkish danger"; delAll.textContent = "🗑️ ลบเรื่องนี้";
+      delAll.style.justifySelf = "end";
+      delAll.addEventListener("click", async () => {
+        if (!confirm("ลบเรื่องนี้ทั้งหมด (รวมรูปและข้อความตอบกลับ)?")) return;
+        try { await api("/requests/" + r.id, { method: "DELETE" }); requests = requests.filter((x) => x.id !== r.id); renderRequests(); toast("ลบแล้ว"); }
+        catch (err) { toast(err.message); }
+      });
+      body.append(delAll);
+      return body;
     }
 
     // ---------- stats ----------
