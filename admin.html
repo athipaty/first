@@ -73,13 +73,26 @@
     main > .wrap > p { color: var(--muted); margin-bottom: 24px; }
     .upload { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 24px; align-items: start; margin-bottom: 32px; }
     /* อัปโหลด: ช่อง "ก่อนทำ" กับ "หลังทำ" วางคู่กัน */
-    .pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: start; }
-    .pair .arrow { align-self: center; color: var(--muted); font-size: 22px; margin-top: 26px; }
-    .slot-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; font-size: 15px; }
+    .up-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .slot-head { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; font-size: 15px; }
     .slot-head small { color: var(--muted); font-size: 12px; }
     .slot-head small.req { color: var(--accent); }
-    .slot .drop.has { border-style: solid; border-color: var(--accent); }
-    .slot .clear { margin-top: 8px; width: 100%; }
+    .slot .drop { aspect-ratio: auto; min-height: 96px; }
+    .picked { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; margin-top: 8px; }
+    .picked:empty { display: none; }
+    .pic { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #111; }
+    .pic img, .photo .pic img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; display: block; }
+    .pic .x, .pic .star { position: absolute; top: 3px; width: 24px; height: 24px; border-radius: 50%; border: 0; background: rgba(0,0,0,.72); color: #fff; font-size: 14px; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+    .pic .x { right: 3px; }
+    .pic .star { left: 3px; }
+    .pic .x:hover { background: var(--danger, #e5484d); }
+    .pic .star:hover { background: var(--accent); color: var(--on-accent); }
+    .pic .cover { position: absolute; left: 3px; bottom: 3px; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 999px; background: var(--accent); color: var(--on-accent); }
+    .pic.busy::after { content: "…"; position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); color: #fff; }
+    .pic-add { aspect-ratio: 1; border-radius: 8px; border: 2px dashed var(--line); background: none; color: var(--muted); font: inherit; font-size: 12px; line-height: 1.3; cursor: pointer; display: grid; place-content: center; text-align: center; padding: 4px; }
+    .pic-add b { font-size: 20px; font-weight: 400; }
+    .pic-add:hover { color: var(--accent); border-color: var(--accent); }
+    .pic-add:disabled { opacity: .5; cursor: default; }
     .tag { position: absolute; top: 8px; left: 8px; z-index: 1; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: rgba(0,0,0,.7); color: #fff; pointer-events: none; }
     .tag.after { background: var(--accent); color: var(--on-accent); }
     .up-summary { font-size: 14px; color: var(--muted); margin-top: 12px; }
@@ -94,17 +107,11 @@
     .upload-fields .btn { margin-top: 14px; }
     .up-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
     .cat-select, .photo select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
-    .photo .thumb { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); }
-    .photo .half { position: relative; aspect-ratio: 1; background: #111; overflow: hidden; }
-    .photo .half img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
-    .photo .half .tools { position: absolute; left: 6px; right: 6px; bottom: 6px; display: flex; gap: 4px; }
-    .photo .half .tools button { flex: 1; font: inherit; font-size: 12px; padding: 4px 0; border: 0; border-radius: 6px; background: rgba(0,0,0,.72); color: #fff; cursor: pointer; }
-    .photo .half .tools button:hover { background: rgba(0,0,0,.9); }
-    .photo .add-before { width: 100%; height: 100%; display: grid; place-content: center; gap: 4px; text-align: center; font: inherit; font-size: 13px; line-height: 1.4;
-      color: var(--muted); background: var(--bg); border: 2px dashed var(--line); cursor: pointer; padding: 8px; }
-    .photo .add-before:hover { color: var(--accent); border-color: var(--accent); }
-    .photo .add-before b { font-size: 22px; font-weight: 400; }
-    .photo .half.busy::after { content: "กำลังอัปโหลด…"; position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); color: #fff; font-size: 13px; }
+    .photo .cover-img { position: relative; }
+    .photo .cover-img .count { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,.7); color: #fff; font-size: 12px; padding: 2px 9px; border-radius: 999px; }
+    .photo .pics-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-bottom: 6px; }
+    .photo .pics-head small { color: var(--muted); font-size: 12px; }
+    .photo .pics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
     .photo .flag { display: flex; gap: 6px; flex-wrap: wrap; }
     .photo .flag:empty { display: none; }
     .photo .flag span { background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
@@ -115,7 +122,7 @@
     .list-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
     .list-head h2 { font-size: 20px; }
     .count { color: var(--muted); font-size: 14px; }
-    .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
     .photo { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
     .photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #111; }
     .photo .body { padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
@@ -233,8 +240,6 @@
       .swatch .live { font-size: 11px; }
       .upload { grid-template-columns: 1fr; }
       .drop { max-width: 100%; }
-      .pair { grid-template-columns: 1fr 1fr; }
-      .pair .arrow { display: none; }
       .logo small { display: none; }
     }
   </style>
@@ -326,35 +331,32 @@
       <p class="tab-intro">รูปที่อัปโหลดจะแสดงในส่วน "ผลงานของเรา" บนหน้าเว็บทันที รูปบนสุดจะแสดงเป็นรูปแรก</p>
 
       <form class="panel upload" id="uploadForm">
-        <div class="pair">
+        <div class="up-pair">
           <div class="slot">
-            <div class="slot-head"><b>① รูปก่อนทำ</b><small>ไม่บังคับ</small></div>
+            <div class="slot-head"><b>① รูปก่อนทำ</b><small>ไม่บังคับ · เลือกได้หลายรูป</small></div>
             <label class="drop" id="dropBefore">
               <span class="tag">ก่อน</span>
-              <span id="dropTextBefore">กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
-              <img id="previewBefore" alt="" hidden>
-              <input type="file" id="before" accept="image/jpeg,image/png,image/webp">
+              <span>กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
+              <input type="file" id="before" accept="image/jpeg,image/png,image/webp" multiple>
             </label>
-            <button class="btn btn-ghost btn-sm clear" type="button" id="clearBefore" hidden>เอารูปนี้ออก</button>
+            <div class="picked" id="pickedBefore"></div>
           </div>
-          <div class="arrow" aria-hidden="true">→</div>
           <div class="slot">
-            <div class="slot-head"><b>② รูปหลังทำ</b><small class="req">ต้องมี</small></div>
+            <div class="slot-head"><b>② รูปหลังทำ</b><small class="req">ต้องมีอย่างน้อย 1 รูป</small></div>
             <label class="drop" id="drop">
               <span class="tag after">หลัง</span>
-              <span id="dropText">กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
-              <img id="preview" alt="" hidden>
-              <input type="file" id="photo" accept="image/jpeg,image/png,image/webp">
+              <span>กดเพื่อเลือกรูป<br>หรือลากมาวาง</span>
+              <input type="file" id="photo" accept="image/jpeg,image/png,image/webp" multiple>
             </label>
-            <button class="btn btn-ghost btn-sm clear" type="button" id="clearPhoto" hidden>เอารูปนี้ออก</button>
+            <div class="picked" id="pickedAfter"></div>
           </div>
         </div>
         <div class="upload-fields">
-          <label for="caption">คำอธิบายรูป (ไม่บังคับ)</label>
+          <label for="caption">คำอธิบายงาน (ไม่บังคับ)</label>
           <input type="text" id="caption" maxlength="120" placeholder="เช่น Toyota Fortuner · ติดฟิล์มรอบคัน">
           <label for="category" style="margin-top:12px">ประเภทงาน</label>
           <select id="category" class="cat-select"></select>
-          <div class="hint">รูปหลังทำคือรูปผลงานที่โชว์บนเว็บ · ถ้าใส่รูปก่อนทำด้วย ลูกค้าจะกดสลับดู ก่อน/หลัง ได้ · เพิ่มรูปก่อนทำทีหลังได้ที่การ์ดรูปด้านล่าง</div>
+          <div class="hint">ใส่ได้ไม่จำกัดจำนวน · รูปหลังทำรูปแรกเป็นรูปปกที่โชว์บนเว็บ ลูกค้ากดดูรูปอื่นต่อได้ และกดสลับดูรูปก่อนทำได้ · เพิ่ม ลบ หรือเปลี่ยนรูปปกทีหลังได้ที่การ์ดงานด้านล่าง</div>
           <div class="hint">รองรับ JPG, PNG, WebP ขนาดไม่เกิน 10MB · ระบบจะย่อรูปและลบข้อมูลตำแหน่ง GPS ออกให้อัตโนมัติ</div>
           <div class="up-summary" id="upSummary"></div>
           <button class="btn btn-primary" type="submit" id="uploadBtn" disabled>อัปโหลดรูป</button>
@@ -733,66 +735,106 @@
     });
 
     // ---------- upload ----------
-    // ช่องเลือกรูป 2 ช่อง: ก่อนทำ (ไม่บังคับ) และ หลังทำ (ต้องมี)
-    const SLOTS = {
-      before: { input: "before", drop: "dropBefore", preview: "previewBefore", text: "dropTextBefore", clear: "clearBefore" },
-      after:  { input: "photo",  drop: "drop",       preview: "preview",       text: "dropText",       clear: "clearPhoto" },
-    };
-    function showSlot(slot) {
-      const ids = SLOTS[slot], file = $(ids.input).files[0];
-      if ($(ids.preview).src.startsWith("blob:")) URL.revokeObjectURL($(ids.preview).src);
-      $(ids.preview).hidden = !file; $(ids.text).hidden = !!file; $(ids.clear).hidden = !file;
-      $(ids.drop).classList.toggle("has", !!file);
-      if (file) $(ids.preview).src = URL.createObjectURL(file); else $(ids.preview).removeAttribute("src");
+    // ช่องเลือกรูป 2 ช่อง: ก่อนทำ (ไม่บังคับ) และ หลังทำ (ต้องมีอย่างน้อย 1) · เลือกได้หลายรูป ไม่จำกัด
+    const BATCH = 4; // ส่งทีละ 4 รูป เพื่อไม่ให้แต่ละครั้งใหญ่เกินไป (เน็ตมือถือ / เซิร์ฟเวอร์)
+    const SLOTS = { before: { input: "before", drop: "dropBefore", box: "pickedBefore" }, after: { input: "photo", drop: "drop", box: "pickedAfter" } };
+    const picked = { before: [], after: [] };
+    const IMG_TYPE = /^image\/(jpeg|png|webp)$/;
+    function picTile(src, onRemove) {
+      const d = document.createElement("div"); d.className = "pic";
+      const img = document.createElement("img"); img.src = src; img.alt = ""; img.loading = "lazy";
+      const x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "×"; x.title = "เอารูปนี้ออก";
+      x.addEventListener("click", (e) => { e.preventDefault(); onRemove(); });
+      d.append(img, x);
+      return d;
+    }
+    function showPicked(slot) {
+      const box = $(SLOTS[slot].box);
+      box.querySelectorAll("img").forEach((i) => URL.revokeObjectURL(i.src));
+      box.replaceChildren(...picked[slot].map((f, i) => {
+        const t = picTile(URL.createObjectURL(f), () => { picked[slot].splice(i, 1); showPicked(slot); });
+        if (slot === "after" && i === 0) { const c = document.createElement("span"); c.className = "cover"; c.textContent = "ปก"; t.append(c); }
+        return t;
+      }));
       updateSummary();
     }
     function updateSummary() {
-      const hasAfter = !!$("photo").files[0], hasBefore = !!$("before").files[0];
-      $("uploadBtn").disabled = !hasAfter;
-      $("uploadBtn").textContent = hasBefore && hasAfter ? "อัปโหลดรูปก่อน + หลัง" : "อัปโหลดรูป";
-      $("upSummary").innerHTML = !hasAfter && !hasBefore ? "ยังไม่ได้เลือกรูป"
-        : !hasAfter ? "เลือกรูปก่อนทำแล้ว · <b>ยังต้องเลือกรูปหลังทำ</b>"
-        : hasBefore ? "จะอัปโหลด: <b>รูปก่อนทำ + รูปหลังทำ</b> (ลูกค้ากดสลับดูได้)"
-        : "จะอัปโหลด: <b>รูปหลังทำอย่างเดียว</b> (ไม่มีรูปก่อนทำ)";
+      const a = picked.after.length, b = picked.before.length;
+      $("uploadBtn").disabled = !a;
+      $("uploadBtn").textContent = a + b ? `อัปโหลด ${a + b} รูป` : "อัปโหลดรูป";
+      $("upSummary").innerHTML = !a && !b ? "ยังไม่ได้เลือกรูป"
+        : !a ? `เลือกรูปก่อนทำ ${b} รูปแล้ว · <b>ยังต้องเลือกรูปหลังทำอย่างน้อย 1 รูป</b>`
+        : `จะอัปโหลด: <b>รูปก่อนทำ ${b} รูป + รูปหลังทำ ${a} รูป</b>`;
     }
-    function pickFile(slot, file) {
-      if (!file) return;
-      const dt = new DataTransfer(); dt.items.add(file); $(SLOTS[slot].input).files = dt.files;
+    function addFiles(slot, files) {
+      const ok = [...files].filter((f) => IMG_TYPE.test(f.type));
+      if (ok.length < files.length) toast("ข้ามไฟล์ที่ไม่ใช่รูป JPG, PNG หรือ WebP");
+      const big = ok.filter((f) => f.size > 10 * 1024 * 1024);
+      if (big.length) toast(`ข้าม ${big.length} รูปที่ใหญ่เกิน 10MB`);
+      picked[slot].push(...ok.filter((f) => f.size <= 10 * 1024 * 1024));
       $("uploadMsg").textContent = "";
-      showSlot(slot);
+      showPicked(slot);
     }
     function resetUpload() {
-      $("uploadForm").reset(); showSlot("before"); showSlot("after");
+      $("uploadForm").reset(); picked.before = []; picked.after = []; showPicked("before"); showPicked("after");
     }
     Object.entries(SLOTS).forEach(([slot, ids]) => {
-      const drop = $(ids.drop);
-      $(ids.input).addEventListener("change", () => showSlot(slot));
-      $(ids.clear).addEventListener("click", () => { $(ids.input).value = ""; showSlot(slot); });
+      const drop = $(ids.drop), input = $(ids.input);
+      input.addEventListener("change", () => { addFiles(slot, input.files); input.value = ""; });
       ["dragover", "dragenter"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
       ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, () => drop.classList.remove("over")));
-      drop.addEventListener("drop", (e) => { e.preventDefault(); pickFile(slot, e.dataTransfer.files[0]); });
+      drop.addEventListener("drop", (e) => { e.preventDefault(); addFiles(slot, e.dataTransfer.files); });
     });
     updateSummary();
 
+    // ส่งรูปทีละชุด: ชุดแรกสร้างงาน (มีรูปหลังทำรูปแรก = รูปปก) ชุดต่อไปเพิ่มเข้างานเดิม
+    const batchForm = (items, fields = {}) => {
+      const fd = new FormData();
+      Object.entries(fields).forEach(([k, v]) => fd.append(k, v));
+      items.forEach(({ file, kind }) => fd.append(kind === "before" ? "before" : "photo", file));
+      return fd;
+    };
+    async function uploadMore(id, items, onProgress) {
+      let done = 0, last = null;
+      for (let i = 0; i < items.length; i += BATCH) {
+        const part = items.slice(i, i + BATCH);
+        last = await api("/gallery/" + id + "/images", { method: "POST", body: batchForm(part) });
+        done += part.length; if (onProgress) onProgress(done);
+      }
+      return last;
+    }
     $("uploadForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const file = $("photo").files[0];
-      if (!file) return;
-      const fd = new FormData();
-      fd.append("caption", $("caption").value);
-      fd.append("category", $("category").value);
-      fd.append("photo", file);
-      if ($("before").files[0]) fd.append("before", $("before").files[0]);
-      $("uploadBtn").disabled = true; $("uploadBtn").textContent = "กำลังอัปโหลด…";
+      if (!picked.after.length) return;
+      const queue = [
+        { file: picked.after[0], kind: "after" },
+        ...picked.before.map((file) => ({ file, kind: "before" })),
+        ...picked.after.slice(1).map((file) => ({ file, kind: "after" })),
+      ];
+      const total = queue.length;
+      const progress = (n) => { $("uploadBtn").textContent = `กำลังอัปโหลด ${n}/${total} รูป…`; };
+      $("uploadBtn").disabled = true; progress(0);
       $("uploadMsg").className = "msg"; $("uploadMsg").textContent = "";
+      let job = null, sent = 0;
       try {
-        await api("/gallery", { method: "POST", body: fd });
+        const first = queue.slice(0, BATCH);
+        job = await api("/gallery", { method: "POST", body: batchForm(first, { caption: $("caption").value, category: $("category").value }) });
+        sent = first.length; progress(sent);
+        await uploadMore(job.id, queue.slice(BATCH), (n) => { progress(sent + n); });
+        sent = total;
         resetUpload();
-        $("uploadMsg").className = "msg ok"; $("uploadMsg").textContent = "อัปโหลดเรียบร้อย ✅";
+        $("uploadMsg").className = "msg ok"; $("uploadMsg").textContent = `อัปโหลดเรียบร้อย ${total} รูป ✅`;
         await loadPhotos();
       } catch (err) {
-        $("uploadMsg").className = "msg err"; $("uploadMsg").textContent = err.message;
-        $("uploadBtn").disabled = false;
+        $("uploadMsg").className = "msg err";
+        if (job) {
+          // งานถูกสร้างแล้ว แต่บางรูปส่งไม่สำเร็จ: เอารูปที่ส่งแล้วออกจากรายการ เหลือแต่รูปที่ยังไม่ได้ส่ง
+          const left = new Set(queue.slice(sent).map((q) => q.file));
+          picked.before = picked.before.filter((f) => left.has(f)); picked.after = picked.after.filter((f) => left.has(f));
+          showPicked("before"); showPicked("after");
+          $("uploadMsg").textContent = `${err.message} · ส่งแล้ว ${sent}/${total} รูป รูปที่เหลือเพิ่มได้ที่การ์ดงาน "${job.caption || "งานล่าสุด"}" ด้านล่าง`;
+          await loadPhotos();
+        } else $("uploadMsg").textContent = err.message;
       } finally { updateSummary(); }
     });
 
@@ -807,49 +849,63 @@
       render();
     }
 
-    // ครึ่งซ้ายของการ์ด: รูปก่อนทำ (มีปุ่มเปลี่ยน/ลบ) หรือปุ่มเพิ่มรูปก่อนทำ
-    function renderBefore(card, p) {
-      const half = card.querySelector(".half.before");
-      const fileInput = card.querySelector(".before-file");
-      half.querySelectorAll(":scope > :not(.tag)").forEach((el) => el.remove());
-      if (p.beforeUrl) {
-        const img = document.createElement("img");
-        img.loading = "lazy"; img.alt = "รูปก่อนทำ"; img.src = p.beforeUrl;
-        const tools = document.createElement("div");
-        tools.className = "tools";
-        tools.innerHTML = '<button type="button" data-b="change">เปลี่ยน</button><button type="button" data-b="remove">ลบ</button>';
-        tools.querySelector('[data-b="change"]').onclick = () => fileInput.click();
-        tools.querySelector('[data-b="remove"]').onclick = async () => {
-          if (!confirm("ลบรูปก่อนทำของงานนี้? (รูปหลังทำยังอยู่)")) return;
-          try { const u = await api("/gallery/" + p.id + "/before", { method: "DELETE" }); p.beforeUrl = u.beforeUrl; renderBefore(card, p); toast("ลบรูปก่อนทำแล้ว"); }
-          catch (err) { toast(err.message); }
-        };
-        half.append(img, tools);
-      } else {
+    // รูปทั้งหมดของงานในการ์ด: แยกแถวรูปหลังทำ / รูปก่อนทำ · ★ = ตั้งเป็นรูปปก · × = ลบ · + = เพิ่มรูป
+    const picsOf = (p) => p.images && p.images.length ? p.images
+      : [{ url: p.url, kind: "after" }, ...(p.beforeUrl ? [{ url: p.beforeUrl, kind: "before" }] : [])];
+    function renderPics(card, p) {
+      const pics = picsOf(p);
+      card.querySelector(".cover-img img").src = p.url;
+      const count = card.querySelector(".cover-img .count");
+      count.hidden = pics.length < 2; count.textContent = "📷 " + pics.length;
+      const update = (u) => { Object.assign(p, { url: u.url, beforeUrl: u.beforeUrl, images: u.images }); renderPics(card, p); updateCount(); };
+      ["after", "before"].forEach((kind) => {
+        const list = pics.filter((x) => (x.kind === "before") === (kind === "before"));
+        const sec = card.querySelector(`[data-kind="${kind}"]`);
+        sec.querySelector(".n").textContent = list.length ? `(${list.length})` : "";
+        const grid = sec.querySelector(".pics");
+        const input = sec.querySelector("input[type=file]");
+        const tiles = list.map((x, i) => {
+          const t = picTile(x.url, async () => {
+            if (!confirm(kind === "before" ? "ลบรูปก่อนทำรูปนี้?" : "ลบรูปหลังทำรูปนี้?")) return;
+            t.classList.add("busy");
+            try { update(await api("/gallery/" + p.id + "/images", jsonBody("DELETE", { url: x.url }))); toast("ลบรูปแล้ว"); }
+            catch (err) { toast(err.message); t.classList.remove("busy"); }
+          });
+          if (kind === "after" && i === 0) { const c = document.createElement("span"); c.className = "cover"; c.textContent = "ปก"; t.append(c); }
+          if (kind === "after" && i > 0) {
+            const star = document.createElement("button"); star.type = "button"; star.className = "star"; star.textContent = "★"; star.title = "ตั้งเป็นรูปปก";
+            star.addEventListener("click", async () => {
+              const urls = [x.url, ...pics.map((q) => q.url).filter((u) => u !== x.url)];
+              try { update(await api("/gallery/" + p.id + "/images/order", jsonBody("PUT", { urls }))); toast("ตั้งเป็นรูปปกแล้ว ✅"); }
+              catch (err) { toast(err.message); }
+            });
+            t.append(star);
+          }
+          return t;
+        });
         const add = document.createElement("button");
-        add.type = "button"; add.className = "add-before";
-        add.innerHTML = "<b>+</b>เพิ่มรูปก่อนทำ<small>(ไม่บังคับ)</small>";
-        add.onclick = () => fileInput.click();
-        half.append(add);
-      }
-      fileInput.onchange = async () => {
-        const file = fileInput.files[0];
-        if (!file) return;
-        const fd = new FormData(); fd.append("before", file);
-        half.classList.add("busy");
-        try {
-          const had = !!p.beforeUrl;
-          const u = await api("/gallery/" + p.id + "/before", { method: "PUT", body: fd });
-          p.beforeUrl = u.beforeUrl; renderBefore(card, p);
-          toast(had ? "เปลี่ยนรูปก่อนทำแล้ว ✅" : "เพิ่มรูปก่อนทำแล้ว ✅");
-        } catch (err) { toast(err.message); }
-        finally { half.classList.remove("busy"); fileInput.value = ""; }
-      };
-      updateCount();
+        add.type = "button"; add.className = "pic-add";
+        add.innerHTML = list.length ? "<b>+</b>เพิ่ม" : (kind === "before" ? "<b>+</b>เพิ่มรูปก่อนทำ" : "<b>+</b>เพิ่ม");
+        add.addEventListener("click", () => input.click());
+        input.onchange = async () => {
+          const files = [...input.files].filter((f) => IMG_TYPE.test(f.type) && f.size <= 10 * 1024 * 1024);
+          if (files.length < input.files.length) toast("ข้ามไฟล์ที่ไม่ใช่รูป หรือใหญ่เกิน 10MB");
+          input.value = "";
+          if (!files.length) return;
+          add.disabled = true;
+          const items = files.map((file) => ({ file, kind }));
+          const label = (n) => { add.innerHTML = `${n}/${items.length}<br>กำลังอัปโหลด…`; };
+          label(0);
+          try { update(await uploadMore(p.id, items, label)); toast(`เพิ่มรูป${kind === "before" ? "ก่อนทำ" : "หลังทำ"} ${items.length} รูปแล้ว ✅`); }
+          catch (err) { toast(err.message); await loadPhotos(); }
+        };
+        grid.replaceChildren(...tiles, add);
+      });
     }
     function updateCount() {
-      const pairs = photos.filter((p) => p.beforeUrl).length;
-      $("count").textContent = photos.length ? `${photos.length} งาน · มีรูปก่อน/หลัง ${pairs} งาน` : "";
+      const pairs = photos.filter((p) => picsOf(p).some((x) => x.kind === "before")).length;
+      const pics = photos.reduce((n, p) => n + picsOf(p).length, 0);
+      $("count").textContent = photos.length ? `${photos.length} งาน · ${pics} รูป · มีรูปก่อน/หลัง ${pairs} งาน` : "";
     }
     function render() {
       $("empty").hidden = photos.length > 0;
@@ -857,27 +913,32 @@
         const card = document.createElement("div");
         card.className = "photo";
         card.innerHTML = `
-          <div class="thumb">
-            <div class="half before"><span class="tag">ก่อน</span></div>
-            <div class="half after"><span class="tag after">หลัง</span><img loading="lazy" alt="รูปหลังทำ"></div>
-          </div>
-          <input type="file" class="before-file" accept="image/jpeg,image/png,image/webp" hidden>
+          <div class="cover-img"><img loading="lazy" alt="รูปปก"><span class="count"></span></div>
           <div class="body">
             <div class="flag"></div>
-            <input type="text" maxlength="120" placeholder="คำอธิบายรูป">
+            <div data-kind="after">
+              <div class="pics-head"><b>รูปหลังทำ <span class="n"></span></b><small>★ = ตั้งเป็นรูปปก</small></div>
+              <div class="pics"></div>
+              <input type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            </div>
+            <div data-kind="before">
+              <div class="pics-head"><b>รูปก่อนทำ <span class="n"></span></b><small>ไม่บังคับ</small></div>
+              <div class="pics"></div>
+              <input type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+            </div>
+            <input type="text" maxlength="120" placeholder="คำอธิบายงาน">
             <select aria-label="ประเภทงาน"></select>
             <button class="btn btn-ghost btn-sm hero-btn" data-act="hero"></button>
             <div class="actions">
               <button class="btn btn-ghost btn-sm" data-act="up" title="เลื่อนขึ้น" ${i === 0 ? "disabled" : ""}>↑</button>
               <button class="btn btn-ghost btn-sm" data-act="down" title="เลื่อนลง" ${i === photos.length - 1 ? "disabled" : ""}>↓</button>
               <button class="btn btn-ghost btn-sm grow" data-act="save" disabled>บันทึก</button>
-              <button class="btn btn-danger btn-sm" data-act="delete">ลบ</button>
+              <button class="btn btn-danger btn-sm" data-act="delete">ลบงาน</button>
             </div>
           </div>`;
-        card.querySelector(".after img").src = p.url;
         const flag = card.querySelector(".flag");
         if (p.id === heroId) { const f = document.createElement("span"); f.textContent = "★ รูปหน้าแรก"; flag.append(f); }
-        renderBefore(card, p);
+        renderPics(card, p);
         const cat = card.querySelector("select");
         CATS.forEach(([v, l]) => { const o = document.createElement("option"); o.value = v; o.textContent = l; o.selected = (p.category || "other") === v; cat.append(o); });
         cat.addEventListener("change", async () => {
@@ -911,14 +972,16 @@
           } catch (err) { toast(err.message); }
         });
         card.querySelector('[data-act="delete"]').addEventListener("click", async () => {
-          if (!confirm(p.beforeUrl ? "ลบงานนี้ออกจากหน้าเว็บ? (ลบทั้งรูปก่อนและหลังทำ)" : "ลบรูปนี้ออกจากหน้าเว็บ?")) return;
-          try { await api("/gallery/" + p.id, { method: "DELETE" }); toast("ลบรูปแล้ว"); await loadPhotos(); }
+          const n = picsOf(p).length;
+          if (!confirm(n > 1 ? `ลบงานนี้ออกจากหน้าเว็บ? (ลบรูปทั้งหมด ${n} รูป)` : "ลบงานนี้ออกจากหน้าเว็บ?")) return;
+          try { await api("/gallery/" + p.id, { method: "DELETE" }); toast("ลบงานแล้ว"); await loadPhotos(); }
           catch (err) { toast(err.message); }
         });
         card.querySelector('[data-act="up"]').addEventListener("click", () => move(i, -1));
         card.querySelector('[data-act="down"]').addEventListener("click", () => move(i, 1));
         return card;
       }));
+      updateCount();
     }
 
     async function move(i, dir) {
