@@ -60,7 +60,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=8">
+  <link rel="stylesheet" href="/assets/site.css?v=9">
   <script src="/config.js"></script>
   <script src="/assets/themes.js?v=2"></script>
 </head>
@@ -267,7 +267,12 @@
   <dialog class="lightbox" id="lightbox">
     <form method="dialog"><button aria-label="Close">×</button></form>
     <div class="ba" id="lightboxBA" hidden><button type="button" data-ba="before">Before</button><button type="button" data-ba="after">After</button></div>
-    <img alt="">
+    <div class="lb-stage">
+      <img alt="">
+      <button type="button" class="lb-nav prev" id="lightboxPrev" aria-label="Previous photo" hidden>‹</button>
+      <button type="button" class="lb-nav next" id="lightboxNext" aria-label="Next photo" hidden>›</button>
+    </div>
+    <div class="lb-count" id="lightboxCount"></div>
     <p></p>
   </dialog>
 
@@ -378,6 +383,6 @@
     <a href="#" class="btn btn-line js-line" data-edit="bar-2">LINE</a>
   </div>
 
-  <script src="/assets/site.js?v=7"></script>
+  <script src="/assets/site.js?v=8"></script>
 </body>
 </html>

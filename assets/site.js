@@ -53,7 +53,7 @@ document.getElementById("menuBtn").addEventListener("click", () => nav.classList
 nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
 // แกลเลอรีผลงาน: โหลดรูปจากเซิร์ฟเวอร์ (จัดการรูปที่ /admin)
-// กรองตามประเภทงานได้ และรูปที่มี "ก่อนทำ" สลับดูก่อน/หลังในหน้าต่างรูปใหญ่
+// กรองตามประเภทงานได้ · แต่ละงานมีได้หลายรูป ดูทีละรูปในหน้าต่างรูปใหญ่ และสลับดูรูปก่อนทำ/หลังทำ
 const GALLERY_INITIAL = 6;
 const CAT_ORDER = ["aircon", "carryboy", "tint", "audio", "other"];
 fetch(window.DIREKAIR_API + "/gallery").then(r => r.ok ? r.json() : []).then(photos => {
@@ -65,16 +65,44 @@ fetch(window.DIREKAIR_API + "/gallery").then(r => r.ok ? r.json() : []).then(pho
   const more = document.getElementById("galleryMore");
   let filter = "all", expanded = false;
 
+  // รูปของงาน: รูปหลังทำก่อน (รูปปก) แล้วสลับไปดูรูปก่อนทำได้ · งานเก่ามีแค่ url (+ beforeUrl)
+  const picsOf = p => p.images && p.images.length ? p.images
+    : [{ url: p.url, kind: "after" }, ...(p.beforeUrl ? [{ url: p.beforeUrl, kind: "before" }] : [])];
+  const prev = document.getElementById("lightboxPrev"), next = document.getElementById("lightboxNext");
+  const counter = document.getElementById("lightboxCount");
+  let set = [], idx = 0;
+  function show() {
+    boxImg.src = set[idx].url;
+    counter.textContent = set.length > 1 ? `${idx + 1} / ${set.length}` : "";
+    prev.hidden = next.hidden = set.length < 2;
+  }
+  const step = d => { if (set.length > 1) { idx = (idx + d + set.length) % set.length; show(); } };
+  prev.addEventListener("click", () => step(-1));
+  next.addEventListener("click", () => step(1));
+  box.addEventListener("keydown", e => { if (e.key === "ArrowLeft") step(-1); if (e.key === "ArrowRight") step(1); });
+  let touchX = null;
+  boxImg.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+  boxImg.addEventListener("touchend", e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+    if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+  });
   function openPhoto(p, alt) {
-    const show = which => {
-      boxImg.src = which === "before" ? p.beforeUrl : p.url;
+    const pics = picsOf(p);
+    const sets = { after: pics.filter(x => x.kind !== "before"), before: pics.filter(x => x.kind === "before") };
+    const pick = which => {
+      set = sets[which]; idx = 0; show();
       ba.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ba === which)));
     };
     boxImg.alt = alt;
     boxCap.textContent = p.caption || "";
-    ba.hidden = !p.beforeUrl;
-    ba.querySelectorAll("button").forEach(b => { b.onclick = () => show(b.dataset.ba); });
-    show("after");
+    ba.hidden = !sets.before.length;
+    ba.querySelectorAll("button").forEach(b => {
+      const n = sets[b.dataset.ba].length;
+      b.textContent = (b.dataset.ba === "before" ? T.before : T.after) + (n > 1 ? ` (${n})` : "");
+      b.onclick = () => pick(b.dataset.ba);
+    });
+    pick("after");
     box.showModal();
   }
   function render() {
@@ -87,10 +115,16 @@ fetch(window.DIREKAIR_API + "/gallery").then(r => r.ok ? r.json() : []).then(pho
       const img = document.createElement("img");
       img.src = p.url; img.alt = p.caption || T.workAlt; img.loading = "lazy";
       item.append(img);
-      if (p.beforeUrl) {
+      const pics = picsOf(p);
+      if (pics.some(x => x.kind === "before")) {
         const tag = document.createElement("span");
         tag.className = "ba-tag"; tag.textContent = T.beforeAfter;
         item.append(tag);
+      }
+      if (pics.length > 1) {
+        const n = document.createElement("span");
+        n.className = "pic-count"; n.textContent = "📷 " + pics.length;
+        item.append(n);
       }
       if (p.caption) {
         const cap = document.createElement("div");

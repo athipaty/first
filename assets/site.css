@@ -386,3 +386,17 @@ body.editing [data-edit].edit-dirty:focus { outline-color: var(--accent); }
   .edit-actions .btn { flex: 1; padding: 10px 8px; }
   .edit-toast { bottom: 150px; }
 }
+
+/* แกลเลอรี: หลายรูปต่องาน */
+.g-item .pic-count { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.65); color: #fff; font-size: 13px; padding: 2px 9px; border-radius: 999px; }
+.lightbox .lb-stage { position: relative; }
+.lightbox .lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 0;
+  background: rgba(0,0,0,.55); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; display: grid; place-items: center; padding-bottom: 4px;
+}
+.lightbox .lb-nav:hover { background: rgba(0,0,0,.8); }
+.lightbox .lb-nav[hidden] { display: none; }
+.lightbox .lb-nav.prev { left: 8px; }
+.lightbox .lb-nav.next { right: 8px; }
+.lightbox .lb-count { text-align: center; margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.75); }
+.lightbox .lb-count:empty { display: none; }
